@@ -20,23 +20,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhangdi2062.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.10.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="收集一杯雾">
-<meta property="og:url" content="https://zhangdi2062.github.io/index.html">
+  <meta name="description" content="背景：产品中访问静态文件（如js、json）不需要身份验证，但在项目中有安全性要求，需要所有请求都加入身份验证 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051&#x2F;&#x2F; 处理fetch请求function hookFetch() &amp;#123;    var fet">
+<meta property="og:type" content="website">
+<meta property="og:title" content="给所有请求加token">
+<meta property="og:url" content="https://zhangdi2062.github.io/2023/07/22/%E7%BB%99%E6%89%80%E6%9C%89%E8%AF%B7%E6%B1%82%E5%8A%A0token/index.html">
 <meta property="og:site_name" content="收集一杯雾">
+<meta property="og:description" content="背景：产品中访问静态文件（如js、json）不需要身份验证，但在项目中有安全性要求，需要所有请求都加入身份验证 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051&#x2F;&#x2F; 处理fetch请求function hookFetch() &amp;#123;    var fet">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-22T14:23:31.000Z">
+<meta property="article:modified_time" content="2023-07-22T14:56:32.692Z">
 <meta property="article:author" content="Zhang Di">
+<meta property="article:tag" content="javaScript">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://zhangdi2062.github.io/">
+<link rel="canonical" href="https://zhangdi2062.github.io/2023/07/22/%E7%BB%99%E6%89%80%E6%9C%89%E8%AF%B7%E6%B1%82%E5%8A%A0token/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zhangdi2062.github.io/2023/07/22/%E7%BB%99%E6%89%80%E6%9C%89%E8%AF%B7%E6%B1%82%E5%8A%A0token/","path":"2023/07/22/给所有请求加token/","title":"给所有请求加token"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>收集一杯雾</title>
+<title>给所有请求加token | 收集一杯雾</title>
   
 
 
@@ -66,7 +71,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">收集一杯雾</h1>
+      <p class="site-title">收集一杯雾</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -161,82 +166,17 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://zhangdi2062.github.io/2023/07/22/%E4%BD%BF%E7%94%A8hexo%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhang Di">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="收集一杯雾">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/07/22/%E4%BD%BF%E7%94%A8hexo%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">使用hexo遇到的问题</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-07-22 22:33:51 / 修改时间：23:05:18" itemprop="dateCreated datePublished" datetime="2023-07-22T22:33:51+08:00">2023-07-22</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="多台电脑使用同一个hexo项目提交、更新"><a href="#多台电脑使用同一个hexo项目提交、更新" class="headerlink" title="多台电脑使用同一个hexo项目提交、更新"></a>多台电脑使用同一个hexo项目提交、更新</h1><p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/K1052176873/article/details/122879462">Hexo在多台电脑上提交和更新</a></p>
-<h1 id="hexo-next主题无法显示数学公式"><a href="#hexo-next主题无法显示数学公式" class="headerlink" title="hexo next主题无法显示数学公式"></a>hexo next主题无法显示数学公式</h1><p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44489823/article/details/105028860">hexo next主题解决无法显示数学公式</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://zhangdi2062.github.io/2023/07/22/%E7%BB%99%E6%89%80%E6%9C%89%E8%AF%B7%E6%B1%82%E5%8A%A0token/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -249,9 +189,9 @@
       <meta itemprop="name" content="收集一杯雾">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/07/22/%E7%BB%99%E6%89%80%E6%9C%89%E8%AF%B7%E6%B1%82%E5%8A%A0token/" class="post-title-link" itemprop="url">给所有请求加token</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          给所有请求加token
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -275,9 +215,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>背景：产品中访问静态文件（如js、json）不需要身份验证，但在项目中有安全性要求，需要所有请求都加入身份验证</p>
+        <p>背景：产品中访问静态文件（如js、json）不需要身份验证，但在项目中有安全性要求，需要所有请求都加入身份验证</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 处理fetch请求</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">hookFetch</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> fet = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertyDescriptor</span>(<span class="variable language_">window</span>, <span class="string">&quot;fetch&quot;</span>);</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(<span class="variable language_">window</span>, <span class="string">&quot;fetch&quot;</span>, &#123;</span><br><span class="line">        <span class="attr">value</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> [url, content] = <span class="variable language_">arguments</span>;</span><br><span class="line">            <span class="keyword">const</span> tk = <span class="string">&#x27;token&#x27;</span>;</span><br><span class="line">            <span class="keyword">if</span> (url.<span class="title function_">includes</span>(<span class="string">&quot;/xxx/&quot;</span>) &amp;&amp; tk) &#123;</span><br><span class="line">                <span class="keyword">if</span> (content) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (content.<span class="property">headers</span>) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (!content.<span class="property">headers</span>.<span class="property">tk</span>) &#123;</span><br><span class="line">                            content.<span class="property">headers</span>.<span class="property">tk</span> = tk;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="title class_">Object</span>.<span class="title function_">assign</span>(content, &#123;</span><br><span class="line">                            <span class="attr">headers</span>: &#123; tk &#125;,</span><br><span class="line">                        &#125;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="variable language_">arguments</span>.<span class="property">length</span> = <span class="number">2</span>;</span><br><span class="line">                    <span class="variable language_">arguments</span>[<span class="number">1</span>] = &#123;</span><br><span class="line">                        <span class="attr">headers</span>: &#123; tk &#125;,</span><br><span class="line">                    &#125;;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (!tk) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;token不存在&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> fet.<span class="property">value</span>.<span class="title function_">apply</span>(<span class="variable language_">this</span>, <span class="variable language_">arguments</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理XMLHttpRequest请求</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">hookXml</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> re = <span class="title class_">XMLHttpRequest</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">open</span>;</span><br><span class="line">    <span class="title class_">XMLHttpRequest</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">open</span> = <span class="keyword">function</span> (<span class="params">method, url</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> res = re.<span class="title function_">apply</span>(<span class="variable language_">this</span>, [].<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>));</span><br><span class="line">        <span class="keyword">const</span> tk = <span class="string">&#x27;token&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span> (url.<span class="title function_">includes</span>(<span class="string">&quot;/xxx/&quot;</span>) &amp;&amp; tk) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">setRequestHeader</span>(<span class="string">&quot;tk&quot;</span>, tk);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!tk) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;token不存在&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">hookXml</span>();</span><br><span class="line"><span class="title function_">hookFetch</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
     </div>
 
     
@@ -285,84 +224,28 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-tags">
+              <a href="/tags/javaScript/" rel="tag"># javaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/07/22/hello-world/" rel="prev" title="Hello World">
+                  <i class="fa fa-chevron-left"></i> Hello World
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/07/22/%E4%BD%BF%E7%94%A8hexo%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" rel="next" title="使用hexo遇到的问题">
+                  使用hexo遇到的问题 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
     </footer>
   </article>
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://zhangdi2062.github.io/2023/07/22/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhang Di">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="收集一杯雾">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/07/22/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-07-22 22:12:27 / 修改时间：22:56:20" itemprop="dateCreated datePublished" datetime="2023-07-22T22:12:27+08:00">2023-07-22</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
 
 
