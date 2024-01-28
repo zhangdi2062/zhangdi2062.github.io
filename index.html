@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title> 收集一杯雾</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      
+<section class="cover">
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover4.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">收集一杯雾</a></h1>
+      <div id="subtitle-box">
+        
+          <span id="subtitle">面朝大海，春暖花开</span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+
+<!-- Subtitle -->
+
+<div id="main">
+  <section class="outer">
+  
+  
+  
+
+<div class="notice" style="margin-top:50px">
+    <i class="ri-heart-fill"></i>
+    <div class="notice-content" id="broad"></div>
+</div>
+<script type="text/javascript">
+    fetch('https://v1.hitokoto.cn')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("broad").innerHTML = data.hitokoto;
+        })
+        .catch(console.error)
+</script>
+
+<style>
+    .notice {
+        padding: 20px;
+        border: 1px dashed #e6e6e6;
+        color: #969696;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        background: #fbfbfb50;
+        border-radius: 10px;
+    }
+
+    .notice i {
+        float: left;
+        color: #999;
+        font-size: 16px;
+        padding-right: 10px;
+        vertical-align: middle;
+        margin-top: -2px;
+    }
+
+    .notice-content {
+        display: initial;
+        vertical-align: middle;
+    }
+</style>
+  
+  <article class="articles">
+    
+    
+    
+    
+    <article
+  id="post-使用bing-chat"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/12/27/%E4%BD%BF%E7%94%A8bing-chat/"
+    >使用bing chat</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/12/27/%E4%BD%BF%E7%94%A8bing-chat/" class="article-date">
+  <time datetime="2023-12-27T05:35:13.000Z" itemprop="datePublished">2023-12-27</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="使用必应聊天遇到的问题"><a href="#使用必应聊天遇到的问题" class="headerlink" title="使用必应聊天遇到的问题"></a>使用必应聊天遇到的问题</h1><h2 id="1-没有聊天选项"><a href="#1-没有聊天选项" class="headerlink" title="1. 没有聊天选项"></a>1. 没有聊天选项</h2><p>浏览器插件方式（需开启科学代理）</p>
+<ol>
+<li>安装Chrome Unlock New Bing AI扩展程序</li>
+</ol>
+<p>在Chrome或其他Chromium内核浏览器中使用 New Bing AI</p>
+<ol>
+<li><p>采用全局代理，或者走给名单方式 代理所有Bing相关的请求： <em>://</em>.bing.com/*</p>
+</li>
+<li><p>访问 bing.com/new</p>
+</li>
+<li><p>将设置中的国家/地区改为代理地区</p>
+</li>
+<li><p>访问 bing.com/new，出现聊天界面</p>
+</li>
+</ol>
+<h2 id="2-一直提示登录以继续你的聊天"><a href="#2-一直提示登录以继续你的聊天" class="headerlink" title="2. 一直提示登录以继续你的聊天"></a>2. 一直提示登录以继续你的聊天</h2><ol>
+<li><p>说明账号被封，需要使用Gmail邮箱重新注册一个账号，地点选节点所在地区</p>
+</li>
+<li><p>将设置中的国家/地区改为代理地区</p>
+</li>
+</ol>
+<h2 id="3-设置里的国家-地区自动变为中国"><a href="#3-设置里的国家-地区自动变为中国" class="headerlink" title="3. 设置里的国家/地区自动变为中国"></a>3. 设置里的国家/地区自动变为中国</h2><ol>
+<li><p>浏览器设置——隐私、搜索和服务——服务——地址栏和搜索——管理搜索引擎</p>
+</li>
+<li><p>添加搜索引擎 </p>
+</li>
+</ol>
+<p>名称自定义</p>
+<p>快捷方式是在地址栏快捷唤醒的值</p>
+<p>以 %s 代替查询的 URL填入<code>&#123;bing:baseURL&#125;search?q=%s&amp;&#123;bing:cvid&#125;&#123;bing:msb&#125;&#123;google:assistedQueryStats&#125;</code></p>
+<ol>
+<li>将添加的搜索引擎设为默认值</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GPT/" rel="tag">GPT</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-hello-world"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/12/27/hello-world/"
+    >Hello World</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/12/27/hello-world/" class="article-date">
+  <time datetime="2023-12-27T05:31:43.423Z" itemprop="datePublished">2023-12-27</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-一台电脑配置多个git"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/07/22/%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AAgit/"
+    >一台电脑配置多个git</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/07/22/%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AAgit/" class="article-date">
+  <time datetime="2023-07-22T15:02:39.000Z" itemprop="datePublished">2023-07-22</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39127371/article/details/126692664">一台电脑配置多个Git</a></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%87%AA%E7%94%A8/" rel="tag">自用</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-markdown语法介绍"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/07/22/markdown%E8%AF%AD%E6%B3%95%E4%BB%8B%E7%BB%8D/"
+    >markdown语法介绍</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/07/22/markdown%E8%AF%AD%E6%B3%95%E4%BB%8B%E7%BB%8D/" class="article-date">
+  <time datetime="2023-07-22T14:37:53.000Z" itemprop="datePublished">2023-07-22</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>Markdown 是一种轻量级的标记语言，常用于文本编辑和格式化。下面是一些常见的 Markdown 语法：</p>
+<h1 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h1><ol>
+<li><p>标题：使用 “#” 符号表示，1 个 “#” 表示一级标题，2 个 “#” 表示二级标题，以此类推。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br></pre></td></tr></table></figure>
+<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3></li>
+<li><p>段落和换行：段落之间用空行分隔，如果需要换行，可以在当前行的末尾添加两个空格。</p>
+</li>
+<li><p>强调和斜体：使用 “<em>“ 或 “_” 包围的文本会被呈现为斜体；使用 “*</em>“ 或 “__” 包围的文本会被呈现为加粗样式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*斜体*</span><br><span class="line">_斜体_</span><br><span class="line">**加粗**</span><br><span class="line">__加粗__</span><br></pre></td></tr></table></figure>
+<p><em>斜体</em><br><em>斜体</em><br><strong>加粗</strong><br><strong>加粗</strong></p>
+</li>
+<li><p>链接：使用方括号（[]）包裹链接文本，紧接着使用圆括号（()）包裹链接地址。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[链接文本](链接地址)</span><br></pre></td></tr></table></figure>
+<p><a href="链接地址">链接文本</a></p>
+</li>
+<li><p>图片：与链接类似，使用 “!” 前缀可以将链接转换为图片。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![图片描述](图片地址)</span><br></pre></td></tr></table></figure>
+<p><img src="图片地址" alt="图片描述"></p>
+</li>
+<li><p>列表：无序列表使用 “-“ 或 “+” 或 “*” 开头，有序列表使用数字编号。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- 无序列表项 1</span><br><span class="line">- 无序列表项 2</span><br><span class="line"></span><br><span class="line">1. 有序列表项 1</span><br><span class="line">2. 有序列表项 2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>无序列表项 1</li>
+<li>无序列表项 2</li>
+</ul>
+<ol>
+<li>有序列表项 1</li>
+<li>有序列表项 2</li>
+</ol>
+</li>
+<li><p>引用：使用 “&gt;” 符号来表示引用，可以嵌套使用多个 “&gt;” 来表示多层引用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 引用文本</span><br><span class="line">&gt;&gt; 嵌套引用文本</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>引用文本</p>
+<blockquote>
+<p>嵌套引用文本</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>代码块：使用 “```” 包裹起来的文本会被呈现为代码块。</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">代码内容...</span><br></pre></td></tr></table></figure>
+<p> 请注意，不同的 Markdown 解析器在语言名称和语法高亮方面可能有不同的支持程度。有些解析器可能只支持少数编程语言的语法高亮显示。</p>
+</li>
+</ol>
+<h1 id="高级语法"><a href="#高级语法" class="headerlink" title="高级语法"></a>高级语法</h1><p>除了基本的语法，Markdown 还支持一些高级功能，使得文本的格式更加丰富和灵活。以下是一些常见的 Markdown 高级功能：</p>
+<ol>
+<li><p>表格：使用管道符和短划线来创建表格，并使用冒号指定对齐方式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">| 标题1 | 标题2 | 标题3 |</span><br><span class="line">|:------|:-----:|------:|</span><br><span class="line">| 内容1 | 内容2 | 内容3 |</span><br><span class="line">| 内容4 | 内容5 | 内容6 |</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">标题1</th>
+<th style="text-align:center">标题2</th>
+<th style="text-align:right">标题3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">内容1</td>
+<td style="text-align:center">内容2</td>
+<td style="text-align:right">内容3</td>
+</tr>
+<tr>
+<td style="text-align:left">内容4</td>
+<td style="text-align:center">内容5</td>
+<td style="text-align:right">内容6</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li><p>任务列表：使用短划线、加号或星号后跟空格来创建任务列表。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- [x] 完成任务1</span><br><span class="line">- [ ] 完成任务2</span><br><span class="line">- [ ] 完成任务3</span><br></pre></td></tr></table></figure>
+<ul>
+<li>[x] 完成任务1</li>
+<li>[ ] 完成任务2</li>
+<li>[ ] 完成任务3</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p>水平线：使用三个或更多的连续短划线、连字符或星号创建水平线。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">---</span><br></pre></td></tr></table></figure>
+<hr>
+</li>
+<li><p>注释：使用 HTML 注释的语法 <code>&lt;!-- 注释内容 --&gt;</code> 可以在 Markdown 文档中添加注释。</p>
+</li>
+<li><p>脚注：使用脚注语法，在需要添加脚注的文本后使用尖括号<code>[^脚注编号]</code>，并在文档的其它位置定义脚注。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这是一个需要脚注的句子。[^1]</span><br><span class="line"></span><br><span class="line">[^1]: 这是一个脚注的示例。</span><br></pre></td></tr></table></figure>
+<p>这是一个需要脚注的句子。<sup><a href="#fn_1" id="reffn_1">1</a></sup></p>
+</li>
+</ol>
+<ol>
+<li><p>删除线：使用双波浪线 <code>~~</code> 包裹的文本会被显示为删除线。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~~删除线~~</span><br></pre></td></tr></table></figure>
+<p><del>删除线</del></p>
+</li>
+<li><p>LaTeX 公式：使用美元符号 <code>$</code> 来包裹 LaTeX 公式，在 Markdown 中渲染为数学公式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$E=mc^2$</span><br><span class="line"></span><br><span class="line">// 或者</span><br><span class="line">$$</span><br><span class="line">E=mc^2</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
+<p>$E=mc^2$</p>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+   E=mc^2</script><p>请注意，不同的 Markdown 解析器在语言名称和语法高亮方面可能有不同的支持程度。有些解析器可能只支持少数编程语言的语法高亮显示。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%87%AA%E7%94%A8/" rel="tag">自用</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-使用hexo遇到的问题"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/07/22/%E4%BD%BF%E7%94%A8hexo%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"
+    >使用hexo遇到的问题</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/07/22/%E4%BD%BF%E7%94%A8hexo%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
+  <time datetime="2023-07-22T14:33:51.000Z" itemprop="datePublished">2023-07-22</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="多台电脑使用同一个hexo项目提交、更新"><a href="#多台电脑使用同一个hexo项目提交、更新" class="headerlink" title="多台电脑使用同一个hexo项目提交、更新"></a>多台电脑使用同一个hexo项目提交、更新</h1><p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/K1052176873/article/details/122879462">Hexo在多台电脑上提交和更新</a></p>
+<h1 id="hexo-next主题无法显示数学公式"><a href="#hexo-next主题无法显示数学公式" class="headerlink" title="hexo next主题无法显示数学公式"></a>hexo next主题无法显示数学公式</h1><p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44489823/article/details/105028860">hexo next主题解决无法显示数学公式</a></p>
+<h1 id="hexo一篇博客添加多个标签"><a href="#hexo一篇博客添加多个标签" class="headerlink" title="hexo一篇博客添加多个标签"></a>hexo一篇博客添加多个标签</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tags:</span><br><span class="line">- js</span><br><span class="line">- Array</span><br></pre></td></tr></table></figure>
+<h1 id="没有标签和分类页"><a href="#没有标签和分类页" class="headerlink" title="没有标签和分类页"></a>没有标签和分类页</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-给所有请求加token"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/07/22/%E7%BB%99%E6%89%80%E6%9C%89%E8%AF%B7%E6%B1%82%E5%8A%A0token/"
+    >给所有请求加token</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/07/22/%E7%BB%99%E6%89%80%E6%9C%89%E8%AF%B7%E6%B1%82%E5%8A%A0token/" class="article-date">
+  <time datetime="2023-07-22T14:23:31.000Z" itemprop="datePublished">2023-07-22</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>背景：产品中访问静态文件（如js、json）不需要身份验证，但在项目中有安全性要求，需要所有请求都加入身份验证</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 处理fetch请求</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">hookFetch</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> fet = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertyDescriptor</span>(<span class="variable language_">window</span>, <span class="string">&quot;fetch&quot;</span>);</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(<span class="variable language_">window</span>, <span class="string">&quot;fetch&quot;</span>, &#123;</span><br><span class="line">        <span class="attr">value</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> [url, content] = <span class="variable language_">arguments</span>;</span><br><span class="line">            <span class="keyword">const</span> tk = <span class="string">&#x27;token&#x27;</span>;</span><br><span class="line">            <span class="keyword">if</span> (url.<span class="title function_">includes</span>(<span class="string">&quot;/xxx/&quot;</span>) &amp;&amp; tk) &#123;</span><br><span class="line">                <span class="keyword">if</span> (content) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (content.<span class="property">headers</span>) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (!content.<span class="property">headers</span>.<span class="property">tk</span>) &#123;</span><br><span class="line">                            content.<span class="property">headers</span>.<span class="property">tk</span> = tk;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="title class_">Object</span>.<span class="title function_">assign</span>(content, &#123;</span><br><span class="line">                            <span class="attr">headers</span>: &#123; tk &#125;,</span><br><span class="line">                        &#125;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="variable language_">arguments</span>.<span class="property">length</span> = <span class="number">2</span>;</span><br><span class="line">                    <span class="variable language_">arguments</span>[<span class="number">1</span>] = &#123;</span><br><span class="line">                        <span class="attr">headers</span>: &#123; tk &#125;,</span><br><span class="line">                    &#125;;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (!tk) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;token不存在&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> fet.<span class="property">value</span>.<span class="title function_">apply</span>(<span class="variable language_">this</span>, <span class="variable language_">arguments</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理XMLHttpRequest请求</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">hookXml</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> re = <span class="title class_">XMLHttpRequest</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">open</span>;</span><br><span class="line">    <span class="title class_">XMLHttpRequest</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">open</span> = <span class="keyword">function</span> (<span class="params">method, url</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> res = re.<span class="title function_">apply</span>(<span class="variable language_">this</span>, [].<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>));</span><br><span class="line">        <span class="keyword">const</span> tk = <span class="string">&#x27;token&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span> (url.<span class="title function_">includes</span>(<span class="string">&quot;/xxx/&quot;</span>) &amp;&amp; tk) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">setRequestHeader</span>(<span class="string">&quot;tk&quot;</span>, tk);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!tk) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;token不存在&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">hookXml</span>();</span><br><span class="line"><span class="title function_">hookFetch</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaScript/" rel="tag">javaScript</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+  </article>
+  
+
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2024
+        <i class="ri-heart-fill heart_icon"></i> Zhang Di
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="收集一杯雾"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
