@@ -1,7 +1,8 @@
 ---
 title: 使用hexo遇到的问题
 date: 2023-07-22 22:33:51
-tags: hexo
+tags: 
+- hexo
 ---
 
 
@@ -22,3 +23,19 @@ tags:
 - js
 - Array
 ```
+
+# 没有标签和分类页
+
+1. 执行下方命令在source目录下创建出categories目录和index.md文件
+    ```
+    hexo new page categories
+    ```
+
+2. 打开index.md文件，加入
+
+    ```
+    type: categories
+    layout: "categories"
+    ```
+
+3. _config.yml中category_dir设置为categories，`category_dir: categories`
