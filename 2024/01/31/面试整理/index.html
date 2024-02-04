@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>使用bing chat |  收集一杯雾</title>
+      <title>面试整理 |  收集一杯雾</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -53,7 +53,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-使用bing-chat"
+  id="post-面试整理"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -64,7 +64,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  使用bing chat
+  面试整理
 </h1>
  
 
@@ -72,15 +72,19 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/12/27/%E4%BD%BF%E7%94%A8bing-chat/" class="article-date">
-  <time datetime="2023-12-27T05:35:13.000Z" itemprop="datePublished">2023-12-27</time>
-</a>   
+      <a href="/2024/01/31/%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/" class="article-date">
+  <time datetime="2024-01-31T02:20:31.000Z" itemprop="datePublished">2024-01-31</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a>
+  </div>
+  
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">285</span>
+            <span class="post-count">446</span>
         </span>
     </span>
 
@@ -104,40 +108,50 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="使用必应聊天遇到的问题"><a href="#使用必应聊天遇到的问题" class="headerlink" title="使用必应聊天遇到的问题"></a>使用必应聊天遇到的问题</h1><h2 id="1-没有聊天选项"><a href="#1-没有聊天选项" class="headerlink" title="1. 没有聊天选项"></a>1. 没有聊天选项</h2><p>浏览器插件方式（需开启科学代理）</p>
-<ol>
-<li>安装Chrome Unlock New Bing AI扩展程序</li>
+  <h1 id="面试题目"><a href="#面试题目" class="headerlink" title="面试题目"></a>面试题目</h1><h2 id="奇点浩瀚-2024-1-31"><a href="#奇点浩瀚-2024-1-31" class="headerlink" title="奇点浩瀚 2024.1.31"></a>奇点浩瀚 2024.1.31</h2><h3 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h3><h4 id="介绍一下零代码平台"><a href="#介绍一下零代码平台" class="headerlink" title="介绍一下零代码平台"></a>介绍一下零代码平台</h4><h4 id="图表对接数据怎么实现的"><a href="#图表对接数据怎么实现的" class="headerlink" title="图表对接数据怎么实现的"></a>图表对接数据怎么实现的</h4><h4 id="产品版本更新技术架构有哪些变化"><a href="#产品版本更新技术架构有哪些变化" class="headerlink" title="产品版本更新技术架构有哪些变化"></a>产品版本更新技术架构有哪些变化</h4><h3 id="css"><a href="#css" class="headerlink" title="css"></a>css</h3><h4 id="实现一个垂直水平居中对齐"><a href="#实现一个垂直水平居中对齐" class="headerlink" title="实现一个垂直水平居中对齐"></a>实现一个垂直水平居中对齐</h4><ol>
+<li>flex</li>
+<li>grid: <code>place-items: center;</code></li>
+<li>table:  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: table;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: table-cell;</span><br><span class="line">    <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>absolute/fixed + translate</li>
 </ol>
-<p>在Chrome或其他Chromium内核浏览器中使用 New Bing AI</p>
-<ol>
-<li><p>采用全局代理，或者走给名单方式 代理所有Bing相关的请求： <em>://</em>.bing.com/*</p>
+<h4 id="align-item-和-align-content-的区别"><a href="#align-item-和-align-content-的区别" class="headerlink" title="align-item 和 align-content 的区别"></a>align-item 和 align-content 的区别</h4><p><code>align-item</code>是所有项目(子元素)在交叉轴上的对齐方式</p>
+<p><code>align-content</code>是多根轴线的对齐方式，是多行项目的对齐方式，影响的是行与行之间的间距，如果只有一行，则不生效</p>
+<h4 id="flex中如何调整item间距"><a href="#flex中如何调整item间距" class="headerlink" title="flex中如何调整item间距"></a>flex中如何调整item间距</h4><p><code>gap: 10px 20px;</code></p>
+<p><code>row-gap</code> 和 <code>column-gap</code>，行间距和列间距，只写一个值，则两个值相同</p>
+<h4 id="如何实现宽度0-5px的一条线"><a href="#如何实现宽度0-5px的一条线" class="headerlink" title="如何实现宽度0.5px的一条线"></a>如何实现宽度0.5px的一条线</h4><ol>
+<li><p>阴影</p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.line</span> &#123;</span><br><span class="line">    <span class="comment">/* inset 向内(可选) | x 偏移量 | y 偏移量 | 阴影模糊半径 | 阴影扩散半径 | 阴影颜色 */</span></span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0.5px</span> <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>访问 bing.com/new</p>
+<li><p>使用伪元素 + transform缩放</p>
 </li>
-<li><p>将设置中的国家/地区改为代理地区</p>
+<li><p>线性渐变</p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.line</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">1px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(to bottom, transparent <span class="number">50%</span>, <span class="number">#000</span> <span class="number">50%</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>访问 bing.com/new，出现聊天界面</p>
-</li>
-</ol>
-<h2 id="2-一直提示登录以继续你的聊天"><a href="#2-一直提示登录以继续你的聊天" class="headerlink" title="2. 一直提示登录以继续你的聊天"></a>2. 一直提示登录以继续你的聊天</h2><ol>
-<li><p>说明账号被封，需要使用Gmail邮箱重新注册一个账号，地点选节点所在地区</p>
-</li>
-<li><p>将设置中的国家/地区改为代理地区</p>
-</li>
-</ol>
-<h2 id="3-设置里的国家-地区自动变为中国"><a href="#3-设置里的国家-地区自动变为中国" class="headerlink" title="3. 设置里的国家/地区自动变为中国"></a>3. 设置里的国家/地区自动变为中国</h2><ol>
-<li><p>浏览器设置——隐私、搜索和服务——服务——地址栏和搜索——管理搜索引擎</p>
-</li>
-<li><p>添加搜索引擎 </p>
+<li><p>border-bottom + transform缩放</p>
 </li>
 </ol>
-<p>名称自定义</p>
-<p>快捷方式是在地址栏快捷唤醒的值</p>
-<p>以 %s 代替查询的 URL填入<code>&#123;bing:baseURL&#125;search?q=%s&amp;&#123;bing:cvid&#125;&#123;bing:msb&#125;&#123;google:assistedQueryStats&#125;</code></p>
-<ol>
-<li>将添加的搜索引擎设为默认值</li>
+<h4 id="用过哪些动画"><a href="#用过哪些动画" class="headerlink" title="用过哪些动画"></a>用过哪些动画</h4><ol>
+<li><p>@keyframes + animation</p>
+</li>
+<li><p>transtion</p>
+</li>
 </ol>
- 
+<h4 id="用animation实现绕x轴旋转"><a href="#用animation实现绕x轴旋转" class="headerlink" title="用animation实现绕x轴旋转"></a>用animation实现绕x轴旋转</h4><ol>
+<li><p>2D, rotateX, 使用transform-origin定义基准</p>
+</li>
+<li><p>3D, </p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent-dom</span> &#123;</span><br><span class="line">    <span class="attribute">perspective</span>: <span class="number">10000px</span>; <span class="comment">/* 调整这个值可以改变3D效果的深度 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.child-dom</span> &#123;</span><br><span class="line">    <span class="attribute">animation</span>: rotate3d <span class="number">2s</span> infinite linear; <span class="comment">/* 动画持续2秒，无限循环，线性速度 */</span></span><br><span class="line">    <span class="attribute">transform-origin</span>: bottom; <span class="comment">/* 设置旋转基点为底部 */</span></span><br><span class="line">    <span class="attribute">transform-style</span>: preserve-<span class="number">3</span>d; <span class="comment">/* 确保子元素保持3D位置 */</span>    </span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="js"><a href="#js" class="headerlink" title="js"></a>js</h3><h4 id="补全下方代码"><a href="#补全下方代码" class="headerlink" title="补全下方代码"></a>补全下方代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">doPadStart</span>(<span class="params">str, maxLength, fillString</span>) &#123;</span><br><span class="line">    <span class="comment">// 判断str长度，用fillString补齐maxLength</span></span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> str</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> str = <span class="string">&#x27;123&#x27;</span></span><br><span class="line"><span class="title function_">doPadStart</span>(str, <span class="number">5</span>, <span class="string">&#x27;0&#x27;</span>) === <span class="string">&#x27;00123&#x27;</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>补充 <code>fillString.repeat(maxLength - str.length)</code></p>
+<h4 id="call-apply-bind的区别"><a href="#call-apply-bind的区别" class="headerlink" title="call/apply/bind的区别"></a>call/apply/bind的区别</h4><h4 id="Vue3和Vue2的区别"><a href="#Vue3和Vue2的区别" class="headerlink" title="Vue3和Vue2的区别"></a>Vue3和Vue2的区别</h4><ol>
+<li><p>diff算法</p>
+</li>
+<li><p>api</p>
+</li>
+</ol>
+<h4 id="Vue3的虚拟dom"><a href="#Vue3的虚拟dom" class="headerlink" title="Vue3的虚拟dom"></a>Vue3的虚拟dom</h4> 
       <!-- reward -->
       
       <div id="reword-out">
@@ -207,32 +221,30 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://zhangdi2062.github.io/2023/12/27/%E4%BD%BF%E7%94%A8bing-chat/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://zhangdi2062.github.io/2024/01/31/%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GPT/" rel="tag">GPT</a></li></ul>
-
     </footer>
   </div>
 
    
   <nav class="article-nav">
     
-      <a href="/2024/01/28/git%E7%9B%B8%E5%85%B3/" class="article-nav-link">
+      <a href="/2024/02/03/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            git相关
+            事件循环
           
         </div>
       </a>
     
     
-      <a href="/2023/12/27/hello-world/" class="article-nav-link">
+      <a href="/2024/01/28/ts%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Hello World</div>
+        <div class="article-nav-title">ts基础知识</div>
       </a>
     
   </nav>

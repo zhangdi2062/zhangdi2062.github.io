@@ -80,7 +80,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">87</span>
+            <span class="post-count">128</span>
         </span>
     </span>
 
@@ -107,7 +107,17 @@
   <h1 id="多台电脑使用同一个hexo项目提交、更新"><a href="#多台电脑使用同一个hexo项目提交、更新" class="headerlink" title="多台电脑使用同一个hexo项目提交、更新"></a>多台电脑使用同一个hexo项目提交、更新</h1><p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/K1052176873/article/details/122879462">Hexo在多台电脑上提交和更新</a></p>
 <h1 id="hexo-next主题无法显示数学公式"><a href="#hexo-next主题无法显示数学公式" class="headerlink" title="hexo next主题无法显示数学公式"></a>hexo next主题无法显示数学公式</h1><p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44489823/article/details/105028860">hexo next主题解决无法显示数学公式</a></p>
 <h1 id="hexo一篇博客添加多个标签"><a href="#hexo一篇博客添加多个标签" class="headerlink" title="hexo一篇博客添加多个标签"></a>hexo一篇博客添加多个标签</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tags:</span><br><span class="line">- js</span><br><span class="line">- Array</span><br></pre></td></tr></table></figure>
-<h1 id="没有标签和分类页"><a href="#没有标签和分类页" class="headerlink" title="没有标签和分类页"></a>没有标签和分类页</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure> 
+<h1 id="没有标签和分类页"><a href="#没有标签和分类页" class="headerlink" title="没有标签和分类页"></a>没有标签和分类页</h1><ol>
+<li><p>执行下方命令在source目录下创建出categories目录和index.md文件</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开index.md文件，加入</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">type: categories</span><br><span class="line">layout: &quot;categories&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>_config.yml中category_dir设置为categories，<code>category_dir: categories</code></p>
+</li>
+</ol>
+ 
       <!-- reward -->
       
       <div id="reword-out">
@@ -331,7 +341,7 @@
 <!-- #reward -->
 <div id="reward">
   <span class="close"><i class="ri-close-line"></i></span>
-  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯奶茶吧~</p>
   <div class="reward-box">
     
     <div class="reward-item">

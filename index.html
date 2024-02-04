@@ -131,6 +131,323 @@
     
     
     <article
+  id="post-事件循环"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/02/03/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/"
+    >事件循环</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/02/03/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" class="article-date">
+  <time datetime="2024-02-03T03:38:50.000Z" itemprop="datePublished">2024-02-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a> / <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E8%AF%95/">面试</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h1><h2 id="浏览器的进程模型"><a href="#浏览器的进程模型" class="headerlink" title="浏览器的进程模型"></a>浏览器的进程模型</h2><h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>分配一块内存空间</p>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>一个进程包含多个线程，进程开启后会自动创建一个线程运行代码，这个线程叫主线程，主线程再启动更多的线程</p>
+<h3 id="浏览器有哪些进程和线程？"><a href="#浏览器有哪些进程和线程？" class="headerlink" title="浏览器有哪些进程和线程？"></a>浏览器有哪些进程和线程？</h3><h4 id="浏览器进程"><a href="#浏览器进程" class="headerlink" title="浏览器进程"></a>浏览器进程</h4><p>浏览器页签、界面展示、用户交互、子进程管理等等</p>
+<h4 id="网络进程"><a href="#网络进程" class="headerlink" title="网络进程"></a>网络进程</h4><p>加载网络资源</p>
+<h4 id="渲染进程"><a href="#渲染进程" class="headerlink" title="渲染进程"></a>渲染进程</h4><p>渲染进程启动后，会开启渲染主进程，负责执行HTML、CSS、JS代码</p>
+<p>默认情况下，每一个标签页就是一个进程，以保证不同标签页之间不受影响</p>
+<p>未来可能会改变，参考文档<a target="_blank" rel="noopener" href="https://chromium.googlesource.com/chromium/src/+/main/docs/process_model_and_site_isolation.md#Modes-and-Availability">chrome更新文档</a></p>
+<h4 id="渲染主线程是如何工作的"><a href="#渲染主线程是如何工作的" class="headerlink" title="渲染主线程是如何工作的"></a>渲染主线程是如何工作的</h4><p>1. 主线程会进入无限循环<br>2. 每一次循环会检查消息队列，有就取出第一个任务，完成后再进行下一次循环，如果没有，则进入休眠<br>3. 其他线程（包括其他线程的进程）都可以随时向消息队列添加任务，并加入到消息队列的末尾，如果此时是休眠状态，则唤醒继续循环拿任务</p>
+<h4 id="面试：如何理解js的异步"><a href="#面试：如何理解js的异步" class="headerlink" title="面试：如何理解js的异步"></a>面试：如何理解js的异步</h4><p>js是一门单线程语言，因为它运行中浏览器的渲染主线程中，而渲染主线程只有一个。</p>
+<p>而渲染主线程承担着诸多工作，如渲染页面、执行js、解析css都在其中。</p>
+<p>如果使用同步方式，就极有可能导致主线程产生阻塞，从而导致消息队列中很多其他任务无法执行。这样一来，一方面会导致繁忙的主线程白白消耗时间，另一方面会导致页面无法及时更新，给用户造成卡死现象。</p>
+<p>所以浏览器采用异步的方式来避免，具体做法是当某些任务发生时，比如计时器、网络、事件监听，主线程将任务交给其他线程去处理，自身立即结束任务的执行，转而继续执行后续代码。当其他线程完成后，将事先传递的回调函数包装成任务，添加到消息队列的末尾，等待主线程调度执行。</p>
+<p>这种异步模式下，浏览器永不阻塞，从而最大程度的保证了单线程的流畅进行。</p>
+<h4 id="任务有优先级吗？"><a href="#任务有优先级吗？" class="headerlink" title="任务有优先级吗？"></a>任务有优先级吗？</h4><p>任务没有优先级，在消息队列中先进先出</p>
+<p><strong>消息队列有优先级</strong></p>
+<ul>
+<li><p>每一个任务都有任务类型，同一个类型的任务必须在一个队列，不同类型的任务可以在不同的队列。</p>
+</li>
+<li><p>在一次事件循环中，浏览器可以根据实际情况从不同的队列中取出任务执行</p>
+</li>
+<li><p>浏览器必须准备好一个微队列，微队列中的任务优先于所有其他任务执行<a target="_blank" rel="noopener" href="https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint">查看文档</a></p>
+</li>
+</ul>
+<blockquote>
+<p>随着浏览器复杂度急剧提升，W3C不再使用宏队列的说法</p>
+</blockquote>
+<p>在目前chrome的实现中，至少包含了下面的队列：</p>
+<p>延时队列：用于存放计时器到达后的回调任务，优先级【中】，如三个定时器<br>交互队列：用于存放用户操作后产生的事件处理任务，优先级【高】，如click事件<br>微队列：用于存放需要最快执行的任务，优先级【最高】，如Promise、MutationObserver</p>
+<h4 id="面试：阐述一下“事件循环”"><a href="#面试：阐述一下“事件循环”" class="headerlink" title="面试：阐述一下“事件循环”"></a>面试：阐述一下“事件循环”</h4><p>事件循环又叫消息循环，是浏览器渲染主线程的工作方式。</p>
+<p>在chrome源码中，它开启一个不会结束的for循环，每次循环从消息队列中取出一个任务执行，而其他线程只需要在合适的时候将任务加入到消息队列的末尾即可。</p>
+<p>过去把消息队列分为宏队列和微队列，但这种说法目前已无法满足复杂的浏览器环境，取而代之的是一种更灵活多变的处理方式。</p>
+<p>根据W3C官方解释，每个任务都有任务类型，同一类型的任务必须在一个队列，不同类型的任务可以在不同的队列。不同任务队列有不同的优先级，由浏览器自行决定取哪一个队列的任务，但浏览器必须有一个微队列，并且有最高的优先级，必须优先调度执行。</p>
+<h4 id="面试：JS中的计时器能做到精确计时吗？为什么？"><a href="#面试：JS中的计时器能做到精确计时吗？为什么？" class="headerlink" title="面试：JS中的计时器能做到精确计时吗？为什么？"></a>面试：JS中的计时器能做到精确计时吗？为什么？</h4><p>不能做到。<br>1. 计算机硬件没有原子钟，无法做到精确计时；<br>2. 操作系统的计时函数本身就有少量偏差，由于JS的计时器最终调用的是操作系统的函数，也就有这些偏差；<br>3. 按照W3C的标准，浏览器实现计时器时，如果嵌套层级超过5层，则会带有4毫秒的最少时间，这样在计时时间少于4毫秒时又带来了偏差；<br>4. 受事件循环的影响，计时器的回调函数只能在主线程空闲时运行，因此又带来了偏差</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong><em>单线程是异步产生的原因</em></strong></p>
+<p><strong><em>事件循环是异步的实现方式</em></strong></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-面试整理"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/01/31/%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/"
+    >面试整理</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/01/31/%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86/" class="article-date">
+  <time datetime="2024-01-31T02:20:31.000Z" itemprop="datePublished">2024-01-31</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="面试题目"><a href="#面试题目" class="headerlink" title="面试题目"></a>面试题目</h1><h2 id="奇点浩瀚-2024-1-31"><a href="#奇点浩瀚-2024-1-31" class="headerlink" title="奇点浩瀚 2024.1.31"></a>奇点浩瀚 2024.1.31</h2><h3 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h3><h4 id="介绍一下零代码平台"><a href="#介绍一下零代码平台" class="headerlink" title="介绍一下零代码平台"></a>介绍一下零代码平台</h4><h4 id="图表对接数据怎么实现的"><a href="#图表对接数据怎么实现的" class="headerlink" title="图表对接数据怎么实现的"></a>图表对接数据怎么实现的</h4><h4 id="产品版本更新技术架构有哪些变化"><a href="#产品版本更新技术架构有哪些变化" class="headerlink" title="产品版本更新技术架构有哪些变化"></a>产品版本更新技术架构有哪些变化</h4><h3 id="css"><a href="#css" class="headerlink" title="css"></a>css</h3><h4 id="实现一个垂直水平居中对齐"><a href="#实现一个垂直水平居中对齐" class="headerlink" title="实现一个垂直水平居中对齐"></a>实现一个垂直水平居中对齐</h4><ol>
+<li>flex</li>
+<li>grid: <code>place-items: center;</code></li>
+<li>table:  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: table;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: table-cell;</span><br><span class="line">    <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>absolute/fixed + translate</li>
+</ol>
+<h4 id="align-item-和-align-content-的区别"><a href="#align-item-和-align-content-的区别" class="headerlink" title="align-item 和 align-content 的区别"></a>align-item 和 align-content 的区别</h4><p><code>align-item</code>是所有项目(子元素)在交叉轴上的对齐方式</p>
+<p><code>align-content</code>是多根轴线的对齐方式，是多行项目的对齐方式，影响的是行与行之间的间距，如果只有一行，则不生效</p>
+<h4 id="flex中如何调整item间距"><a href="#flex中如何调整item间距" class="headerlink" title="flex中如何调整item间距"></a>flex中如何调整item间距</h4><p><code>gap: 10px 20px;</code></p>
+<p><code>row-gap</code> 和 <code>column-gap</code>，行间距和列间距，只写一个值，则两个值相同</p>
+<h4 id="如何实现宽度0-5px的一条线"><a href="#如何实现宽度0-5px的一条线" class="headerlink" title="如何实现宽度0.5px的一条线"></a>如何实现宽度0.5px的一条线</h4><ol>
+<li><p>阴影</p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.line</span> &#123;</span><br><span class="line">    <span class="comment">/* inset 向内(可选) | x 偏移量 | y 偏移量 | 阴影模糊半径 | 阴影扩散半径 | 阴影颜色 */</span></span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0.5px</span> <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用伪元素 + transform缩放</p>
+</li>
+<li><p>线性渐变</p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.line</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">1px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(to bottom, transparent <span class="number">50%</span>, <span class="number">#000</span> <span class="number">50%</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>border-bottom + transform缩放</p>
+</li>
+</ol>
+<h4 id="用过哪些动画"><a href="#用过哪些动画" class="headerlink" title="用过哪些动画"></a>用过哪些动画</h4><ol>
+<li><p>@keyframes + animation</p>
+</li>
+<li><p>transtion</p>
+</li>
+</ol>
+<h4 id="用animation实现绕x轴旋转"><a href="#用animation实现绕x轴旋转" class="headerlink" title="用animation实现绕x轴旋转"></a>用animation实现绕x轴旋转</h4><ol>
+<li><p>2D, rotateX, 使用transform-origin定义基准</p>
+</li>
+<li><p>3D, </p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent-dom</span> &#123;</span><br><span class="line">    <span class="attribute">perspective</span>: <span class="number">10000px</span>; <span class="comment">/* 调整这个值可以改变3D效果的深度 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.child-dom</span> &#123;</span><br><span class="line">    <span class="attribute">animation</span>: rotate3d <span class="number">2s</span> infinite linear; <span class="comment">/* 动画持续2秒，无限循环，线性速度 */</span></span><br><span class="line">    <span class="attribute">transform-origin</span>: bottom; <span class="comment">/* 设置旋转基点为底部 */</span></span><br><span class="line">    <span class="attribute">transform-style</span>: preserve-<span class="number">3</span>d; <span class="comment">/* 确保子元素保持3D位置 */</span>    </span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="js"><a href="#js" class="headerlink" title="js"></a>js</h3><h4 id="补全下方代码"><a href="#补全下方代码" class="headerlink" title="补全下方代码"></a>补全下方代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">doPadStart</span>(<span class="params">str, maxLength, fillString</span>) &#123;</span><br><span class="line">    <span class="comment">// 判断str长度，用fillString补齐maxLength</span></span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> str</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> str = <span class="string">&#x27;123&#x27;</span></span><br><span class="line"><span class="title function_">doPadStart</span>(str, <span class="number">5</span>, <span class="string">&#x27;0&#x27;</span>) === <span class="string">&#x27;00123&#x27;</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>补充 <code>fillString.repeat(maxLength - str.length)</code></p>
+<h4 id="call-apply-bind的区别"><a href="#call-apply-bind的区别" class="headerlink" title="call/apply/bind的区别"></a>call/apply/bind的区别</h4><h4 id="Vue3和Vue2的区别"><a href="#Vue3和Vue2的区别" class="headerlink" title="Vue3和Vue2的区别"></a>Vue3和Vue2的区别</h4><ol>
+<li><p>diff算法</p>
+</li>
+<li><p>api</p>
+</li>
+</ol>
+<h4 id="Vue3的虚拟dom"><a href="#Vue3的虚拟dom" class="headerlink" title="Vue3的虚拟dom"></a>Vue3的虚拟dom</h4> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-ts基础知识"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/01/28/ts%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"
+    >ts基础知识</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/01/28/ts%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="article-date">
+  <time datetime="2024-01-28T03:44:41.000Z" itemprop="datePublished">2024-01-28</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ts/">ts</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><code>npm install -g typescript</code></p>
+<h1 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h1><p><code>hello.ts</code></p>
+<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p><code>tsc hello.ts</code></p>
+<h1 id="报错不编译"><a href="#报错不编译" class="headerlink" title="报错不编译"></a>报错不编译</h1><p><code>tsc --noEmitOnError hello.ts</code></p>
+<h1 id="编译成es5的版本-默认是es3"><a href="#编译成es5的版本-默认是es3" class="headerlink" title="编译成es5的版本(默认是es3)"></a>编译成es5的版本(默认是es3)</h1><p><code>tsc --target es2015 hello.ts</code></p>
+<h1 id="联合类型"><a href="#联合类型" class="headerlink" title="联合类型"></a>联合类型</h1><p>表示值可能是这些类型中的任意一个</p>
+<h1 id="类型别名type"><a href="#类型别名type" class="headerlink" title="类型别名type"></a>类型别名type</h1><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="variable constant_">ID</span> = <span class="built_in">number</span> | <span class="built_in">string</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">Point</span> &#123;</span><br><span class="line">    <span class="attr">x</span>: <span class="built_in">number</span>;</span><br><span class="line">    <span class="attr">y</span>: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">printCoord</span>(<span class="params">pt: Point</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;The coordinate&#x27;s x value is &quot;</span> + pt.<span class="property">x</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;The coordinate&#x27;s y value is &quot;</span> + pt.<span class="property">y</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="title function_">printCoord</span>(&#123; <span class="attr">x</span>: <span class="number">100</span>, <span class="attr">y</span>: <span class="number">100</span> &#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="接口interface"><a href="#接口interface" class="headerlink" title="接口interface"></a>接口interface</h1><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Point</span> &#123;</span><br><span class="line">    <span class="attr">x</span>: <span class="built_in">number</span>;</span><br><span class="line">    <span class="attr">y</span>: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">printCoord</span>(<span class="params">pt: Point</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;The coordinate&#x27;s x value is &quot;</span> + pt.<span class="property">x</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;The coordinate&#x27;s y value is &quot;</span> + pt.<span class="property">y</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="title function_">printCoord</span>(&#123; <span class="attr">x</span>: <span class="number">100</span>, <span class="attr">y</span>: <span class="number">100</span> &#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="类型和接口的相同和不同"><a href="#类型和接口的相同和不同" class="headerlink" title="类型和接口的相同和不同"></a>类型和接口的相同和不同</h1><p>两者用法上基本相同，最关键的差别在于类型别名本身无法添加新的属性，而接口是可以扩展的。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Interface</span></span><br><span class="line"><span class="comment">// 通过继承扩展类型</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Bear</span> <span class="keyword">extends</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">  <span class="attr">honey</span>: <span class="built_in">boolean</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bear = <span class="title function_">getBear</span>() </span><br><span class="line">bear.<span class="property">name</span></span><br><span class="line">bear.<span class="property">honey</span></span><br><span class="line">        </span><br><span class="line"><span class="comment">// Type</span></span><br><span class="line"><span class="comment">// 通过交集扩展类型</span></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">Animal</span> = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">Bear</span> = <span class="title class_">Animal</span> &amp; &#123; </span><br><span class="line">  <span class="attr">honey</span>: <span class="built_in">boolean</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bear = <span class="title function_">getBear</span>();</span><br><span class="line">bear.<span class="property">name</span>;</span><br><span class="line">bear.<span class="property">honey</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Interface</span></span><br><span class="line"><span class="comment">// 对一个已经存在的接口添加新的字段</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Window</span> &#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Window</span> &#123;</span><br><span class="line">  <span class="attr">ts</span>: <span class="title class_">TypeScriptAPI</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> src = <span class="string">&#x27;const a = &quot;Hello World&quot;&#x27;</span>;</span><br><span class="line"><span class="variable language_">window</span>.<span class="property">ts</span>.<span class="title function_">transpileModule</span>(src, &#123;&#125;);</span><br><span class="line">        </span><br><span class="line"><span class="comment">// Type</span></span><br><span class="line"><span class="comment">// 创建后不能被改变</span></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">Window</span> = &#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">Window</span> = &#123;</span><br><span class="line">  <span class="attr">ts</span>: <span class="title class_">TypeScriptAPI</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Error: Duplicate identifier &#x27;Window&#x27;.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h1><p>使用 <code>as</code> 或者 尖括号 语法，强制类型转换会报错，可以双重断言</p>
+<h1 id="字面量类型"><a href="#字面量类型" class="headerlink" title="字面量类型"></a>字面量类型</h1><p>常结合联合类型使用</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">printText</span>(<span class="params">s: <span class="built_in">string</span>, alignment: <span class="string">&quot;left&quot;</span> | <span class="string">&quot;right&quot;</span> | <span class="string">&quot;center&quot;</span></span>) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Options</span> &#123;</span><br><span class="line">  <span class="attr">width</span>: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">configure</span>(<span class="params">x: Options | <span class="string">&quot;auto&quot;</span></span>) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="非空断言操作符（后缀-）"><a href="#非空断言操作符（后缀-）" class="headerlink" title="非空断言操作符（后缀 !）"></a>非空断言操作符（后缀 !）</h1><p>只有明确的知道这个值不可能是 null 或者 undefined 时才使用</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ts/" rel="tag">ts</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-git相关"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/01/28/git%E7%9B%B8%E5%85%B3/"
+    >git相关</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/01/28/git%E7%9B%B8%E5%85%B3/" class="article-date">
+  <time datetime="2024-01-28T02:37:25.000Z" itemprop="datePublished">2024-01-28</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/git/">git</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="一台电脑配置多个git"><a href="#一台电脑配置多个git" class="headerlink" title="一台电脑配置多个git"></a>一台电脑配置多个git</h1><p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39127371/article/details/126692664">一台电脑配置多个Git</a></p>
+<h1 id="clone或push-超时"><a href="#clone或push-超时" class="headerlink" title="clone或push 超时"></a>clone或push 超时</h1><h3 id="背景："><a href="#背景：" class="headerlink" title="背景："></a>背景：</h3><p>家里的网访问不了github，所以开了代理，结果在<code>hexo deploy</code>时提示<code>Failed to connect to github.com port 443 after 21096 ms: Timed out</code> <code>FATAL &#123; err: Error: Spawn failed</code></p>
+<h3 id="参考链接：解决-Github-port-443-Timed-out"><a href="#参考链接：解决-Github-port-443-Timed-out" class="headerlink" title="参考链接：解决 Github port 443 : Timed out"></a>参考链接：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/636418854">解决 Github port 443 : Timed out</a></h3><h3 id="问题原因：git-所设端口与系统代理不一致，需重新设置"><a href="#问题原因：git-所设端口与系统代理不一致，需重新设置" class="headerlink" title="问题原因：git 所设端口与系统代理不一致，需重新设置"></a>问题原因：git 所设端口与系统代理不一致，需重新设置</h3><h3 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h3><ol>
+<li><p>查看系统代理的ip和端口号：设置 —&gt; 网络和Internet —&gt; 代理 —&gt; 手动设置代理  中的地址和端口</p>
+</li>
+<li><p>修改git的网络设置</p>
+ <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 换成自己的ip和端口</span></span><br><span class="line">git config --<span class="keyword">global</span> http.proxy http:<span class="comment">//127.0.0.1:7890 </span></span><br><span class="line">git config --<span class="keyword">global</span> https.proxy http:<span class="comment">//127.0.0.1:7890</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重新尝试clone或push</p>
+</li>
+</ol>
+<h3 id="后续："><a href="#后续：" class="headerlink" title="后续："></a>后续：</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 取消代理</span></span><br><span class="line">git config --<span class="keyword">global</span> --unset http.proxy</span><br><span class="line">git config --<span class="keyword">global</span> --unset https.proxy</span><br><span class="line"></span><br><span class="line"><span class="meta"># 查看代理</span></span><br><span class="line">git config --<span class="keyword">global</span> --<span class="keyword">get</span> http.proxy</span><br><span class="line">git config --<span class="keyword">global</span> --<span class="keyword">get</span> https.proxy</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-使用bing-chat"
   class="article article-type-post"
   itemscope
@@ -260,56 +577,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-一台电脑配置多个git"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/07/22/%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AAgit/"
-    >一台电脑配置多个git</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/07/22/%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AAgit/" class="article-date">
-  <time datetime="2023-07-22T15:02:39.000Z" itemprop="datePublished">2023-07-22</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39127371/article/details/126692664">一台电脑配置多个Git</a></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%87%AA%E7%94%A8/" rel="tag">自用</a></li></ul>
 
     </footer>
   </div>
@@ -507,7 +774,17 @@
   <h1 id="多台电脑使用同一个hexo项目提交、更新"><a href="#多台电脑使用同一个hexo项目提交、更新" class="headerlink" title="多台电脑使用同一个hexo项目提交、更新"></a>多台电脑使用同一个hexo项目提交、更新</h1><p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/K1052176873/article/details/122879462">Hexo在多台电脑上提交和更新</a></p>
 <h1 id="hexo-next主题无法显示数学公式"><a href="#hexo-next主题无法显示数学公式" class="headerlink" title="hexo next主题无法显示数学公式"></a>hexo next主题无法显示数学公式</h1><p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44489823/article/details/105028860">hexo next主题解决无法显示数学公式</a></p>
 <h1 id="hexo一篇博客添加多个标签"><a href="#hexo一篇博客添加多个标签" class="headerlink" title="hexo一篇博客添加多个标签"></a>hexo一篇博客添加多个标签</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tags:</span><br><span class="line">- js</span><br><span class="line">- Array</span><br></pre></td></tr></table></figure>
-<h1 id="没有标签和分类页"><a href="#没有标签和分类页" class="headerlink" title="没有标签和分类页"></a>没有标签和分类页</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure> 
+<h1 id="没有标签和分类页"><a href="#没有标签和分类页" class="headerlink" title="没有标签和分类页"></a>没有标签和分类页</h1><ol>
+<li><p>执行下方命令在source目录下创建出categories目录和index.md文件</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开index.md文件，加入</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">type: categories</span><br><span class="line">layout: &quot;categories&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>_config.yml中category_dir设置为categories，<code>category_dir: categories</code></p>
+</li>
+</ol>
+ 
       <!-- reward -->
       
     </div>
@@ -694,7 +971,7 @@
 <!-- #reward -->
 <div id="reward">
   <span class="close"><i class="ri-close-line"></i></span>
-  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯奶茶吧~</p>
   <div class="reward-box">
     
     <div class="reward-item">
