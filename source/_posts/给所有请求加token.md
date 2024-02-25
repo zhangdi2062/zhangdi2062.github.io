@@ -1,7 +1,12 @@
 ---
 title: 给所有请求加token
 date: 2023-07-22 22:23:31
-tags: javaScript
+tags:
+- js
+- fetch
+- xhr
+categories:
+- 前端
 ---
 
 背景：产品中访问静态文件（如js、json）不需要身份验证，但在项目中有安全性要求，需要所有请求都加入身份验证

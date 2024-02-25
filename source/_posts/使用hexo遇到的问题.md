@@ -3,6 +3,8 @@ title: 使用hexo遇到的问题
 date: 2023-07-22 22:33:51
 tags: 
 - hexo
+categories:
+- 博客
 ---
 
 

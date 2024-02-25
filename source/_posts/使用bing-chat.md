@@ -3,6 +3,10 @@ title: 使用bing chat
 date: 2023-12-27 13:35:13
 tags: 
 - GPT
+- bing
+- 必应
+categories:
+- AI
 ---
 
 # 使用必应聊天遇到的问题

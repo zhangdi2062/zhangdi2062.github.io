@@ -1,0 +1,42 @@
+user:
+  name: Zhdy
+  first_name: 一杯雾
+  last_name: 收集
+  email: 
+  domain: 站点域名
+  avatar: /img/avatar.jpg
+  describe: 网站简介。
+  ruleText: 暂不接受个人博客以外的友链申请，确保您的网站内容积极向上，文章至少30篇，原创70%以上，部署HTTPS。
+
+
+top_bars:
+  - title: menu.home
+    url: /
+  - title: 列表
+    url: /archives/
+  - title: 分类
+    url: /categories/
+  - title: 标签
+    url: /tags/
+
+sidebar:
+  typedTextPrefix: 世界这么大
+  typedText: ["我想去看看", "攒到500万就退休", "路在脚下"]
+  info: # 个人信息
+    - key: 地址
+      val: 北京
+    - key: 年龄
+      val: 而立之时
+
+# 文章目录
+toc:
+  enable: true
+  list_number: true
+  post_title: false
+  max_depth: 5
+  min_depth: 1
+
+# 上下篇文章
+post_pagination:
+  enable: true
+  type: small

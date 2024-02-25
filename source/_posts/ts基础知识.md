@@ -4,7 +4,7 @@ date: 2024-01-28 11:44:41
 tags:
 - ts
 categories:
-- ts
+- 前端
 ---
 
 # 安装
@@ -154,3 +154,73 @@ function configure(x: Options | "auto") {
 # 非空断言操作符（后缀 !）
 
 只有明确的知道这个值不可能是 null 或者 undefined 时才使用
+
+# 协变和逆变
+
+只需保证 **__类型安全：所有成员可用__**
+
+```ts
+interface Fans {
+    call():void
+}
+
+interface IKun extends Fans {
+    sing(): void,
+    dance(): void,
+    basketball(): void,
+}
+
+interface SuperIKun extends IKun {
+    rap(): void
+}
+
+const superIKun: SuperIKun = {
+    call(){},
+    sing(){},
+    dance(){},
+    basketball(){},
+    rap(){}
+}
+
+const ikun: IKun = superIKun;
+// 类型安全，所有成员可用
+ikun.call();
+
+const fans: Fans = {
+    call(){}
+} 
+
+// 报错
+// const kun:IKun = fans
+
+// 协变：子类型给父类型，因为子类型中的属性一定是包含父类型的，所以类型一定安全
+```
+
+# 实现optional
+
+```ts
+type Article = {
+    title: String,
+    date: Date,
+    author: String,
+    readCount: Number
+}
+// 需求是实现文章的保存，date、readCount等字段如果没传则使用默认值
+// 如果再创建下方的类型，会有代码重复、后期修改麻烦的问题
+// type CreateArticle = {
+//     title: String,
+//     date?: Date,
+//     author?: String,
+//     readCount?: Number
+// }
+
+// 创建可选类型
+// Omit T中排除掉K类型
+// Pick T中获取K类型
+// Partial将值变为可选的
+type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+
+type CreateArticleOptions = Optional<Article, 'author' | 'date' | 'readCount'>;
+
+function createArticle(options: CreateArticleOptions) {}
+```
