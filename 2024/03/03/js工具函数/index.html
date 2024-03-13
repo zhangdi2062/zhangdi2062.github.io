@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="给fetch和xhr请求加token应用场景：产品中访问静态文件（如js、json）不需要身份验证，但在项目中有安全性要求，需要所有请求都加入身份验证 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051&#x2F;&#x2F; 处理fetch请求function hookFetch(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js工具函数">
+<meta property="og:url" content="https://zhangdi2062.github.io/2024/03/03/js%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="收集一杯雾">
+<meta property="og:description" content="给fetch和xhr请求加token应用场景：产品中访问静态文件（如js、json）不需要身份验证，但在项目中有安全性要求，需要所有请求都加入身份验证 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051&#x2F;&#x2F; 处理fetch请求function hookFetch(">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-03T08:26:01.000Z">
+<meta property="article:modified_time" content="2024-03-03T08:30:54.286Z">
+<meta property="article:author" content="Zhang Di">
+<meta property="article:tag" content="js">
+<meta name="twitter:card" content="summary">
+
+
+<title >js工具函数</title>
+
+<!-- Favicon -->
+
+    <link href='/img/favicon.svg?v=2.1.10' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/favicon.svg?v=2.1.10' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"zhangdi2062.github.io","author":"Zhang Di","root":"/","typed_text":["我想去看看","攒到500万就退休","路在脚下"],"theme_version":"2.1.10","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":false},"live_time":{"start_time":"","prefix":"博客已萌萌哒运行 undefined 天"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-03 16:30:54"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.10" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/favicon.svg">
+    
+    
+        <div class="trm-logo-text">
+            收集<span>一杯雾</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    首页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    列表
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/tags/" target="">
+                    标签
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            js工具函数
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2024
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card"> 
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        Zhdy
+    </h5>
+    
+        <div class="trm-label">
+            世界这么大
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                北京
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                而立之时
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            03/03
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            16:26
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Zhang Di
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h2 id="给fetch和xhr请求加token"><a href="#给fetch和xhr请求加token" class="headerlink" title="给fetch和xhr请求加token"></a>给fetch和xhr请求加token</h2><p>应用场景：产品中访问静态文件（如js、json）不需要身份验证，但在项目中有安全性要求，需要所有请求都加入身份验证</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 处理fetch请求</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">hookFetch</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> fet = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertyDescriptor</span>(<span class="variable language_">window</span>, <span class="string">&quot;fetch&quot;</span>);</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(<span class="variable language_">window</span>, <span class="string">&quot;fetch&quot;</span>, &#123;</span><br><span class="line">        <span class="attr">value</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> [url, content] = <span class="variable language_">arguments</span>;</span><br><span class="line">            <span class="keyword">const</span> tk = <span class="string">&#x27;token&#x27;</span>;</span><br><span class="line">            <span class="keyword">if</span> (url.<span class="title function_">includes</span>(<span class="string">&quot;/xxx/&quot;</span>) &amp;&amp; tk) &#123;</span><br><span class="line">                <span class="keyword">if</span> (content) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (content.<span class="property">headers</span>) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (!content.<span class="property">headers</span>.<span class="property">tk</span>) &#123;</span><br><span class="line">                            content.<span class="property">headers</span>.<span class="property">tk</span> = tk;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="title class_">Object</span>.<span class="title function_">assign</span>(content, &#123;</span><br><span class="line">                            <span class="attr">headers</span>: &#123; tk &#125;,</span><br><span class="line">                        &#125;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="variable language_">arguments</span>.<span class="property">length</span> = <span class="number">2</span>;</span><br><span class="line">                    <span class="variable language_">arguments</span>[<span class="number">1</span>] = &#123;</span><br><span class="line">                        <span class="attr">headers</span>: &#123; tk &#125;,</span><br><span class="line">                    &#125;;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (!tk) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;token不存在&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> fet.<span class="property">value</span>.<span class="title function_">apply</span>(<span class="variable language_">this</span>, <span class="variable language_">arguments</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理XMLHttpRequest请求</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">hookXml</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> re = <span class="title class_">XMLHttpRequest</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">open</span>;</span><br><span class="line">    <span class="title class_">XMLHttpRequest</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">open</span> = <span class="keyword">function</span> (<span class="params">method, url</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> res = re.<span class="title function_">apply</span>(<span class="variable language_">this</span>, [].<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>));</span><br><span class="line">        <span class="keyword">const</span> tk = <span class="string">&#x27;token&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span> (url.<span class="title function_">includes</span>(<span class="string">&quot;/xxx/&quot;</span>) &amp;&amp; tk) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">setRequestHeader</span>(<span class="string">&quot;tk&quot;</span>, tk);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!tk) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;token不存在&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">hookXml</span>();</span><br><span class="line"><span class="title function_">hookFetch</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="函数重载"><a href="#函数重载" class="headerlink" title="函数重载"></a>函数重载</h2><p>应用场景：同一个函数支持多种参数的调用，并返回对应的结果</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getUsers</span>(<span class="params">...args</span>)&#123;&#125;</span><br><span class="line"><span class="title function_">getUsers</span>(); <span class="comment">// 得到全部数据</span></span><br><span class="line"><span class="title function_">getUsers</span>(<span class="number">1</span>); <span class="comment">// 获取第一页数据</span></span><br><span class="line"><span class="title function_">getUsers</span>(<span class="number">1</span>,<span class="number">20</span>); <span class="comment">// 获取第一页前20条数据</span></span><br><span class="line"><span class="title function_">getUsers</span>(<span class="string">&#x27;男&#x27;</span>); <span class="comment">// 获取性别为男的数据</span></span><br></pre></td></tr></table></figure>
+<p>具体实现：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 封装</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createOverload</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> map = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">overload</span>(<span class="params">...keys</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> types = keys.<span class="title function_">map</span>(<span class="function"><span class="params">it</span> =&gt;</span> <span class="keyword">typeof</span> it).<span class="title function_">join</span>(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">        <span class="keyword">const</span> fn = map.<span class="title function_">get</span>(types);</span><br><span class="line">        <span class="keyword">if</span> (!fn) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TypeError</span>(<span class="string">&#x27;未找到对应实现&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> fn.<span class="title function_">apply</span>(<span class="variable language_">this</span>, keys);</span><br><span class="line">    &#125;</span><br><span class="line">    overload.<span class="property">addImpl</span> = <span class="keyword">function</span>(<span class="params">...args</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> fn = args.<span class="title function_">pop</span>();</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> fn !== <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TypeError</span>(<span class="string">&#x27;最后一个参数必须是处理函数&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 将参数拼接形成key</span></span><br><span class="line">        map.<span class="title function_">set</span>(args.<span class="title function_">join</span>(<span class="string">&#x27;,&#x27;</span>), fn);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> overload;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现</span></span><br><span class="line"><span class="keyword">const</span> getUsers = <span class="title function_">createOverload</span>();</span><br><span class="line">getUsers.<span class="title function_">addImpl</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;返回所有数据&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line">getUsers.<span class="title function_">addImpl</span>(<span class="string">&#x27;number&#x27;</span>, <span class="function">(<span class="params">n</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;返回第一页数据&#x27;</span>, n)</span><br><span class="line">&#125;)</span><br><span class="line">getUsers.<span class="title function_">addImpl</span>(<span class="string">&#x27;number&#x27;</span>, <span class="string">&#x27;number&#x27;</span>, <span class="function">(<span class="params">n1, n2</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;返回第一页前20条数据&#x27;</span>, n1, n2)</span><br><span class="line">&#125;)</span><br><span class="line">getUsers.<span class="title function_">addImpl</span>(<span class="string">&#x27;string&#x27;</span>, <span class="function">(<span class="params">str</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;返回xx数据&#x27;</span>, str)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="title function_">getUsers</span>(); <span class="comment">// 得到全部数据</span></span><br><span class="line"><span class="title function_">getUsers</span>(<span class="number">1</span>); <span class="comment">// 获取第一页数据</span></span><br><span class="line"><span class="title function_">getUsers</span>(<span class="number">1</span>,<span class="number">20</span>); <span class="comment">// 获取第一页前20条数据</span></span><br><span class="line"><span class="title function_">getUsers</span>(<span class="string">&#x27;男&#x27;</span>); <span class="comment">// 获取性别为男的数据</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="封装v-resize自定义指令"><a href="#封装v-resize自定义指令" class="headerlink" title="封装v-resize自定义指令"></a>封装v-resize自定义指令</h2><p>应用场景：监控元素尺寸的变化，拖拽重新渲染图表，</p>
+<p>具体实现：封装vue自定义指令</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// WeakMap不影响垃圾回收</span></span><br><span class="line"><span class="keyword">const</span> map = <span class="keyword">new</span> <span class="title class_">WeakMap</span>();</span><br><span class="line"><span class="comment">// 尺寸观察者</span></span><br><span class="line"><span class="keyword">const</span> ob = <span class="keyword">new</span> <span class="title class_">ResizeObserver</span>(<span class="function"><span class="params">entries</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> entry <span class="keyword">of</span> entries) &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; target &#125; = entry;</span><br><span class="line">        <span class="comment">// 获取dom的回调函数</span></span><br><span class="line">        <span class="keyword">const</span> handler = map.<span class="title function_">get</span>(target);</span><br><span class="line">        <span class="keyword">if</span> (handler) &#123;</span><br><span class="line">            <span class="comment">// 以下代码可按需求扩展</span></span><br><span class="line">            <span class="keyword">const</span> box = entry.<span class="property">borderBoxSize</span>[<span class="number">0</span>];</span><br><span class="line">            <span class="title function_">handler</span>(&#123;<span class="attr">width</span>: box.<span class="property">inlineSize</span>, <span class="attr">height</span>: box.<span class="property">blockSize</span>&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="title function_">mounted</span>(<span class="params">el, binding</span>) &#123;</span><br><span class="line">        <span class="comment">// 监视尺寸变化</span></span><br><span class="line">        ob.<span class="title function_">observe</span>(el);</span><br><span class="line">        map.<span class="title function_">set</span>(el, binding.<span class="property">value</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">unmounted</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="comment">// 取消监听</span></span><br><span class="line">        ob.<span class="title function_">unobserve</span>(dom);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line">&lt;div v-size-ob=<span class="string">&quot;change&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">change</span>(<span class="params">w,h</span>) &#123;</span><br><span class="line">    <span class="title function_">updateChart</span>(w, h)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="触发迅雷下载"><a href="#触发迅雷下载" class="headerlink" title="触发迅雷下载"></a>触发迅雷下载</h2><p>应用场景：调用迅雷的下载</p>
+<p>具体实现：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 前提，a标签的href值为普通下载链接地址</span></span><br><span class="line"><span class="comment">// 给a元素加个data-thunder属性，以便筛选需要训练下载的标签</span></span><br><span class="line"><span class="keyword">const</span> links = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;a[data-thunder]&#x27;</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> link <span class="keyword">of</span> links) &#123;</span><br><span class="line">    <span class="keyword">const</span> href = <span class="string">`AA<span class="subst">$&#123;link.href&#125;</span>ZZ`</span>;</span><br><span class="line">    <span class="keyword">const</span> base64 = <span class="title function_">btoa</span>(href);</span><br><span class="line">    link.<span class="property">href</span> = <span class="string">`thunder://<span class="subst">$&#123;base64&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="消除异步的传染性"><a href="#消除异步的传染性" class="headerlink" title="消除异步的传染性"></a>消除异步的传染性</h2><p>应用场景：当函数A为异步请求时，函数B使用了函数A则函数B也需异步，函数C使用函数B也需要异步，导致所有依赖函数都要加上async await</p>
+<p>解决思路：消除始作俑函数的异步，参考react中做法，在异步函数中抛出错误，等待异步完成后，将结果缓存下来，重新执行一开始的函数</p>
+<p>具体实现：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原代码</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getUser</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&#x27;https://api.github.com/users/1&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">m</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">getUser</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> user = <span class="keyword">await</span> <span class="title function_">m</span>();</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(user);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">main</span>()</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现代码</span></span><br><span class="line"> <span class="keyword">function</span> <span class="title function_">getUser</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">fetch</span>(<span class="string">&#x27;https://api.github.com/users/1&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">function</span> <span class="title function_">m</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">getUser</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;打印&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> user = <span class="title function_">m</span>();</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(user);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">run</span>(<span class="params">func</span>) &#123;</span><br><span class="line">    <span class="comment">// 1. 改动fetch</span></span><br><span class="line">    <span class="comment">// 2. 执行func</span></span><br><span class="line">    <span class="comment">// 3. 还原fetch</span></span><br><span class="line">    <span class="keyword">const</span> _fetch = <span class="variable language_">window</span>.<span class="property">fetch</span>;</span><br><span class="line">    <span class="keyword">let</span> catchData = &#123;</span><br><span class="line">        <span class="attr">status</span>: <span class="string">&#x27;pending&#x27;</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="literal">null</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">newFetch</span>(<span class="params">...args</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (catchData.<span class="property">status</span> === <span class="string">&#x27;fulfilled&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> catchData.<span class="property">value</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (catchData.<span class="property">status</span> === <span class="string">&#x27;rejected&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> catchData.<span class="property">value</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> promise = <span class="title function_">_fetch</span>(...args).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> res.<span class="title function_">json</span>()).<span class="title function_">then</span>(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">            catchData = &#123; </span><br><span class="line">                <span class="attr">status</span>: <span class="string">&#x27;fulfilled&#x27;</span>,</span><br><span class="line">                <span class="attr">value</span>: data</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">            catchData = &#123; </span><br><span class="line">                <span class="attr">status</span>: <span class="string">&#x27;rejected&#x27;</span>,</span><br><span class="line">                <span class="attr">value</span>: err</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">throw</span> promise;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">fetch</span> = newFetch;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="title function_">func</span>();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e <span class="keyword">instanceof</span> <span class="title class_">Promise</span>) &#123;</span><br><span class="line">            e.<span class="title function_">finally</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="variable language_">window</span>.<span class="property">fetch</span> = newFetch;</span><br><span class="line">                <span class="title function_">func</span>();</span><br><span class="line">                <span class="variable language_">window</span>.<span class="property">fetch</span> = _fetch;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">fetch</span> = _fetch;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">run</span>(main);</span><br></pre></td></tr></table></figure>
+<h2 id="给fetch添加超时功能"><a href="#给fetch添加超时功能" class="headerlink" title="给fetch添加超时功能"></a>给fetch添加超时功能</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createRequestWithTimeout</span>(<span class="params">time = <span class="number">5000</span></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">url, options</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 因为promise的状态只会改变一次，所以fetch和setTimeout并列即可</span></span><br><span class="line">            <span class="comment">// 超时后取消请求</span></span><br><span class="line">            <span class="keyword">const</span> controller = <span class="keyword">new</span> <span class="title class_">AbortController</span>();</span><br><span class="line">            options = options || &#123;&#125;;</span><br><span class="line">            <span class="keyword">if</span> (options.<span class="property">signal</span>) &#123;</span><br><span class="line">                <span class="keyword">const</span> &#123; signal &#125; = options;</span><br><span class="line">                signal.<span class="title function_">addEventListener</span>(<span class="string">&#x27;abort&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">                    controller.<span class="title function_">abort</span>();</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                options.<span class="property">signal</span> = controller.<span class="property">signal</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="title function_">fetch</span>(url, options).<span class="title function_">then</span>(resolve, reject);</span><br><span class="line">            <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="title function_">reject</span>(<span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;请求超时&#x27;</span>));</span><br><span class="line">                controller.<span class="title function_">abort</span>();</span><br><span class="line">            &#125;, time);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="keyword">const</span> request= <span class="title function_">createRequestWithTimeout</span>(<span class="number">3000</span>);</span><br><span class="line"><span class="title function_">request</span>(<span class="string">&#x27;url&#x27;</span>, &#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+</article>
+    
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2024/03/03/js%E6%89%8B%E5%86%99%E4%B8%93%E8%BE%91/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">js手写专辑</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/03/03</li>
+                <li>16:32</li>
+                <li>前端</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2024/03/03/vue%E7%9F%A5%E8%AF%86/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">vue知识</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/03/03</li>
+                <li>16:21</li>
+                <li>前端</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.0.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.1.10
+            </span>
+        </div>
+      
+
+     
+
+     
+</footer>
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+    <div id="post-toc" class="trm-post-toc">
+      <div class="trm-post-toc-header">
+        目录导航
+				<span id="post-toc-top">
+					置顶
+				</span>
+      </div>
+      <div class="trm-post-toc-content">
+        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-2" title="给fetch和xhr请求加token"><a rel="nofollow" class="trm-toc-link" href="#给fetch和xhr请求加token"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">给fetch和xhr请求加token</span></a></li><li class="trm-toc-item trm-toc-level-2" title="函数重载"><a rel="nofollow" class="trm-toc-link" href="#函数重载"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">函数重载</span></a></li><li class="trm-toc-item trm-toc-level-2" title="封装v-resize自定义指令"><a rel="nofollow" class="trm-toc-link" href="#封装v-resize自定义指令"><span class="trm-toc-number">3.</span> <span class="trm-toc-text">封装v-resize自定义指令</span></a></li><li class="trm-toc-item trm-toc-level-2" title="触发迅雷下载"><a rel="nofollow" class="trm-toc-link" href="#触发迅雷下载"><span class="trm-toc-number">4.</span> <span class="trm-toc-text">触发迅雷下载</span></a></li><li class="trm-toc-item trm-toc-level-2" title="消除异步的传染性"><a rel="nofollow" class="trm-toc-link" href="#消除异步的传染性"><span class="trm-toc-number">5.</span> <span class="trm-toc-text">消除异步的传染性</span></a></li><li class="trm-toc-item trm-toc-level-2" title="给fetch添加超时功能"><a rel="nofollow" class="trm-toc-link" href="#给fetch添加超时功能"><span class="trm-toc-number">6.</span> <span class="trm-toc-text">给fetch添加超时功能</span></a></li></ol>
+      </div>
+    </div>
+
+            
+<div class="trm-fixed-container">
+    
+        <div class="trm-fixed-btn post-toc-btn" data-title="目录">
+            <i class="iconfont fas fa-th-list"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.1.10"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.1.10"></script>
+
+</body>
+
+</html>

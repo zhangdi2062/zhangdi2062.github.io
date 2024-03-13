@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="效率提升 静态提升 模板转字符串 缓存事件函数 Block Tree PatchFlag  vue2和vue3的区别作为一名高级前端开发者，我可以为您详细解释Vue 2和Vue 3之间的一些主要区别。Vue 3是Vue.js的下一个主要版本，它在Vue 2的基础上进行了许多改进和新功能的添加。以下是Vue 2和Vue 3之间的一些关键区别：  Composition API：  Vue 3引入了C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue知识">
+<meta property="og:url" content="https://zhangdi2062.github.io/2024/03/03/vue%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="收集一杯雾">
+<meta property="og:description" content="效率提升 静态提升 模板转字符串 缓存事件函数 Block Tree PatchFlag  vue2和vue3的区别作为一名高级前端开发者，我可以为您详细解释Vue 2和Vue 3之间的一些主要区别。Vue 3是Vue.js的下一个主要版本，它在Vue 2的基础上进行了许多改进和新功能的添加。以下是Vue 2和Vue 3之间的一些关键区别：  Composition API：  Vue 3引入了C">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-03T08:21:57.000Z">
+<meta property="article:modified_time" content="2024-03-13T07:17:43.961Z">
+<meta property="article:author" content="Zhang Di">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+
+
+<title >vue知识</title>
+
+<!-- Favicon -->
+
+    <link href='/img/favicon.svg?v=2.1.10' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/favicon.svg?v=2.1.10' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"zhangdi2062.github.io","author":"Zhang Di","root":"/","typed_text":["我想去看看","攒到500万就退休","路在脚下"],"theme_version":"2.1.10","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":false},"live_time":{"start_time":"","prefix":"博客已萌萌哒运行 undefined 天"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-13 15:17:43"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.10" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/favicon.svg">
+    
+    
+        <div class="trm-logo-text">
+            收集<span>一杯雾</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    首页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    列表
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/tags/" target="">
+                    标签
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            vue知识
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2024
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card"> 
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        Zhdy
+    </h5>
+    
+        <div class="trm-label">
+            世界这么大
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                北京
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                而立之时
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            03/03
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            16:21
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Zhang Di
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h2 id="效率提升"><a href="#效率提升" class="headerlink" title="效率提升"></a>效率提升</h2><ol>
+<li>静态提升</li>
+<li>模板转字符串</li>
+<li>缓存事件函数</li>
+<li>Block Tree</li>
+<li>PatchFlag</li>
+</ol>
+<h1 id="vue2和vue3的区别"><a href="#vue2和vue3的区别" class="headerlink" title="vue2和vue3的区别"></a>vue2和vue3的区别</h1><p>作为一名高级前端开发者，我可以为您详细解释Vue 2和Vue 3之间的一些主要区别。Vue 3是Vue.js的下一个主要版本，它在Vue 2的基础上进行了许多改进和新功能的添加。以下是Vue 2和Vue 3之间的一些关键区别：</p>
+<ol>
+<li><p><strong>Composition API</strong>：</p>
+<ul>
+<li>Vue 3引入了Composition API，这是一组新的API，允许开发者更灵活地组织和重用逻辑。这与Vue 2中的Options API（选项API）形成对比，后者要求开发者在组件的<code>data</code>、<code>methods</code>、<code>computed</code>和<code>watch</code>等选项中组织代码。</li>
+</ul>
+</li>
+<li><p><strong>性能提升</strong>：</p>
+<ul>
+<li>Vue 3在性能上进行了显著优化，包括更快的虚拟DOM算法、更小的体积以及更好的类型推断，这使得Vue 3在渲染大型应用时更加高效。</li>
+</ul>
+</li>
+<li><p><strong>更好的TypeScript支持</strong>：</p>
+<ul>
+<li>Vue 3从一开始就设计了对TypeScript的更好支持，而不是像Vue 2那样需要额外的类型定义文件。</li>
+</ul>
+</li>
+<li><p><strong>Fragment, Teleport, Suspense</strong>：</p>
+<ul>
+<li>Vue 3允许组件返回多个根节点（Fragment），这是Vue 2所不支持的。</li>
+<li>Teleport组件允许将子节点传送到DOM的另一个位置，而不是默认的父组件内部。</li>
+<li>Suspense组件提供了一种处理异步操作的方式，它允许开发者在等待异步操作完成时显示加载状态。</li>
+</ul>
+</li>
+<li><p><strong>响应式系统的重写</strong>：</p>
+<ul>
+<li>Vue 3使用Proxy重写了响应式系统，这使得Vue 3在追踪依赖和更新视图时更加高效。</li>
+</ul>
+</li>
+<li><p><strong>更小的体积</strong>：</p>
+<ul>
+<li>Vue 3的体积比Vue 2更小，这有助于提高页面加载速度。</li>
+</ul>
+</li>
+<li><p><strong>更好的模块化</strong>：</p>
+<ul>
+<li>Vue 3的代码库更加模块化，这使得开发者可以根据需要导入特定的功能，从而优化最终的打包大小。</li>
+</ul>
+</li>
+<li><p><strong>全局API的变化</strong>：</p>
+<ul>
+<li>Vue 3对全局API进行了一些调整，例如，<code>Vue.config</code>和<code>Vue.util</code>等。</li>
+</ul>
+</li>
+<li><p><strong>自定义渲染器API</strong>：</p>
+<ul>
+<li>Vue 3提供了创建自定义渲染器的能力，这意味着开发者可以为Vue创建不同的渲染环境，比如服务器端渲染或原生移动应用。</li>
+</ul>
+</li>
+<li><p><strong>生命周期钩子的改进</strong>：</p>
+<ul>
+<li>Vue 3中的生命周期钩子更加一致，例如，<code>onBeforeMount</code>、<code>onMounted</code>、<code>onBeforeUpdate</code>、<code>onUpdated</code>、<code>onBeforeUnmount</code>和<code>onUnmounted</code></li>
+<li>Vue 3还引入了新的生命周期钩子，例如<code>onRenderTracked</code>和<code>onRenderTriggered</code>，它们允许开发者在追踪和触发渲染时执行自定义逻辑。</li>
+<li>Vue 2生命周期为<code>beforeCreate</code>和<code>created</code>，Vue 3中改为<code>setup</code>。<code>beforeMount</code>、<code>mounted</code>、<code>beforeDestroy</code>、<code>destroyed</code></li>
+</ul>
+</li>
+</ol>
+<p>这些区别使得Vue 3在许多方面都比Vue 2更加强大和灵活。然而，值得注意的是，Vue 3的这些新特性和改进也意味着从Vue 2迁移到Vue 3可能需要一些代码重构。</p>
+<h1 id="vue响应式原理"><a href="#vue响应式原理" class="headerlink" title="vue响应式原理"></a>vue响应式原理</h1><p>Vue.js 的响应式原理是其核心特性之一，它允许开发者以声明式的方式将数据与视图绑定。Vue 的响应式系统主要依赖于两个关键技术：观察者模式（Observer Pattern）和依赖收集（Dependency Collection）。</p>
+<p>以下是Vue响应式原理的详细介绍：</p>
+<ol>
+<li><p><strong>数据劫持（Data Proxy）</strong>：</p>
+<ul>
+<li>Vue.js 通过使用 ES5 的 <code>Object.defineProperty</code> 函数，将数据对象的所有属性转换为 getter/setter。这样，每当属性被访问（getter 被调用）或属性值被修改（setter 被调用）时，Vue 都能够知道。</li>
+</ul>
+</li>
+<li><p><strong>依赖收集（Dependency Collection）</strong>：</p>
+<ul>
+<li>当组件渲染时，它会访问响应式数据的属性，这时 Vue 会记录当前正在渲染的组件作为依赖。这个过程称为依赖收集。每个组件都会维护一个依赖项列表，这些依赖项是组件需要观察的响应式数据。</li>
+</ul>
+</li>
+<li><p><strong>观察者模式（Observer Pattern）</strong>：</p>
+<ul>
+<li>Vue 实现了一个观察者模式，其中每个组件实例都是一个观察者。当响应式数据发生变化时，Vue 会通知所有订阅了这些数据的组件，触发它们的更新。</li>
+</ul>
+</li>
+<li><p><strong>发布-订阅（Pub-Sub）</strong>：</p>
+<ul>
+<li>Vue 的响应式系统内部实现了一个发布-订阅模式。当响应式数据的 setter 被调用，即数据发生变化时，Vue 会遍历该数据的所有订阅者（即依赖于该数据的组件），并通知它们进行更新。</li>
+</ul>
+</li>
+<li><p><strong>批量异步更新（Async Queue）</strong>：</p>
+<ul>
+<li>Vue 在检测到数据变化时并不会立即更新DOM，而是把这些变化放到一个异步队列中。在下一个事件循环（tick）中，Vue 会清空队列，并执行实际的DOM更新。这种机制可以避免不必要的重复渲染，提高性能。</li>
+</ul>
+</li>
+<li><p><strong>Vue 3中的Proxy</strong>：</p>
+<ul>
+<li>在Vue 3中，响应式系统使用了 ES6 的 Proxy 替代了 Vue 2 中的 <code>Object.defineProperty</code>。Proxy 提供了更全面的拦截特性，允许 Vue 监听更多类型的数据变化，如数组索引和长度的变化，以及更复杂的对象属性变化。</li>
+</ul>
+</li>
+</ol>
+<p>通过这些机制，Vue 能够确保视图与数据保持同步。当数据发生变化时，Vue 会自动更新DOM，而开发者无需手动操作DOM。这种数据驱动的视图更新方式大大简化了复杂应用的开发。</p>
+<h1 id="vue的路由模式"><a href="#vue的路由模式" class="headerlink" title="vue的路由模式"></a>vue的路由模式</h1><h2 id="hash"><a href="#hash" class="headerlink" title="hash"></a><code>hash</code></h2><p>优点：</p>
+<ul>
+<li>路由切换不会向服务器发送请求</li>
+<li>页面切换不会刷新页面，用户体验好</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>有#号不美观</li>
+</ul>
+<p>实现：通过监听<code>hashChange</code>事件来实现前端路由。</p>
+<p>触发：浏览器的前进后退；<code>location.hash</code>的改变；<code>a</code>标签的点击事件。</p>
+<h2 id="history"><a href="#history" class="headerlink" title="history"></a><code>history</code></h2><p>优点：</p>
+<ul>
+<li>URL更美观，没有#号</li>
+<li>不会有#号</li>
+<li>可以通过<code>pushState</code>和<code>replaceState</code>来实现前端路由</li>
+<li>可以通过<code>popstate</code>事件来监听路由变化</li>
+<li>可以通过<code>history.back()</code>和<code>history.forward()</code>来实现前进和后退</li>
+<li>可以通过<code>history.go()</code>来实现任意页面跳转</li>
+<li>可以通过<code>history.replaceState()</code>来实现页面跳转后不留下历史记录</li>
+<li>可以通过<code>history.pushState()</code>来实现页面跳转后留下历史记录</li>
+<li>可以通过<code>history.state</code>来获取当前页面的状态</li>
+<li>可以通过<code>history.length</code>来获取历史记录的长度</li>
+<li>可以通过<code>history.scrollRestoration</code>来设置页面跳转后滚动条的位置</li>
+<li>可以通过<code>history.onpopstate</code>来监听<code>popstate</code>事件</li>
+<li>可以通过<code>history.onpushstate</code>来监听<code>pushstate</code>事件</li>
+<li>可以通过<code>history.onreplacestate</code>来监听<code>replacestate</code>事件</li>
+<li>可以通过<code>history.onbeforeunload</code>来监听页面关闭事件</li>
+<li>可以通过<code>history.onunload</code>来监听页面卸载事件</li>
+<li>可以通过<code>history.onpageshow</code>来监听页面显示事件</li>
+<li>可以通过<code>history.onpagehide</code>来监听页面隐藏事件</li>
+</ul>
+<h2 id="abstract"><a href="#abstract" class="headerlink" title="abstract:"></a><code>abstract</code>:</h2><h1 id="vue3"><a href="#vue3" class="headerlink" title="vue3"></a>vue3</h1><h2 id="父子组件传参"><a href="#父子组件传参" class="headerlink" title="父子组件传参"></a>父子组件传参</h2><ul>
+<li>Vue3</li>
+</ul>
+<h3 id="defineProps"><a href="#defineProps" class="headerlink" title="defineProps"></a>defineProps</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件接收父组件传过来的值</span></span><br><span class="line"><span class="keyword">const</span> props = <span class="title function_">defineProps</span>(&#123;</span><br><span class="line">   <span class="attr">title</span>: &#123;</span><br><span class="line">      <span class="attr">type</span>: <span class="title class_">String</span>,</span><br><span class="line">      <span class="attr">default</span>: <span class="string">&#x27;默认标题&#x27;</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line">props.<span class="property">title</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="defineEmits"><a href="#defineEmits" class="headerlink" title="defineEmits"></a>defineEmits</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件给父组件传值</span></span><br><span class="line"><span class="comment">// const emit = defineEmits([ &#x27;changeTitle&#x27;, &#x27;on-click&#x27; ]);</span></span><br><span class="line"><span class="comment">// ts写法</span></span><br><span class="line"><span class="keyword">const</span> emit = defineEmits&lt;&#123;</span><br><span class="line">   (<span class="attr">e</span>: <span class="string">&#x27;changeTitle&#x27;</span>, <span class="attr">title</span>: string): <span class="keyword">void</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="title function_">emit</span>(<span class="string">&#x27;changeTitle&#x27;</span>, <span class="string">&#x27;新标题&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="defineExpose"><a href="#defineExpose" class="headerlink" title="defineExpose"></a>defineExpose</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件暴露方法或属性给父组件调用</span></span><br><span class="line"><span class="keyword">const</span> methods = <span class="title function_">defineExpose</span>(&#123;</span><br><span class="line">   <span class="title function_">changeTitle</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 父组件接收</span></span><br><span class="line">&lt;<span class="title class_">Child</span> ref=<span class="string">&quot;child&quot;</span> /&gt;</span><br><span class="line"><span class="comment">// ts写法</span></span><br><span class="line"><span class="keyword">const</span> child = ref&lt;<span class="title class_">InstanceType</span>&lt;<span class="keyword">typeof</span> <span class="title class_">Child</span>&gt;&gt;();</span><br><span class="line">child.<span class="property">value</span>.<span class="property">changeTitle</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Vue2</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">   <span class="attr">props</span>: &#123;</span><br><span class="line">      <span class="attr">title</span>: &#123;&#125;</span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="attr">methods</span>: &#123;</span><br><span class="line">      <span class="comment">// 使用</span></span><br><span class="line">      <span class="title function_">changeTitle</span>(<span class="params"></span>) &#123;</span><br><span class="line">         <span class="variable language_">this</span>.<span class="property">title</span></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed, ref &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">let</span> firstName = <span class="title function_">ref</span>(<span class="string">&#x27;张&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> lastName = <span class="title function_">ref</span>(<span class="string">&#x27;三&#x27;</span>)</span><br><span class="line"><span class="comment">// 第一种 选项式写法</span></span><br><span class="line"><span class="title function_">computed</span>(&#123;</span><br><span class="line">   <span class="title function_">get</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> firstName.<span class="property">value</span> + <span class="string">&#x27;-&#x27;</span> + lastName.<span class="property">value</span></span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="title function_">set</span>(<span class="params">val</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> names = val.<span class="title function_">split</span>(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">      [firstName.<span class="property">value</span>, lastName.<span class="property">value</span>] = names</span><br><span class="line">   &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种 函数式写法，只支持getter函数，不能修改name的值</span></span><br><span class="line"><span class="keyword">const</span> name = <span class="title function_">computed</span>(<span class="function">() =&gt;</span> firstName.<span class="property">value</span> + <span class="string">&#x27;-&#x27;</span> + lastName.<span class="property">value</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="watch监听器"><a href="#watch监听器" class="headerlink" title="watch监听器"></a>watch监听器</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; watch, ref &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">let</span> message = <span class="title function_">ref</span>(<span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line"><span class="title function_">watch</span>(message, <span class="function">(<span class="params">newValue, oldValue</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(newValue, oldValue)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 监听多个值</span></span><br><span class="line"><span class="title function_">watch</span>([message, other], <span class="function">(<span class="params">newValue, oldValue</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(newValue, oldValue) <span class="comment">// [message的新值, other的新值], [message的旧值, other的旧值]</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 深度监听，如果是ref对象，需要加上deep:true，而reactive对象默认就是深度监听的</span></span><br><span class="line"><span class="title function_">watch</span>(message, <span class="function">(<span class="params">newValue, oldValue</span>) =&gt;</span> &#123;&#125;, &#123; <span class="attr">deep</span>: <span class="literal">true</span> &#125;)</span><br><span class="line"><span class="comment">// 监听一个对象的某个属性，变成函数返回值</span></span><br><span class="line"><span class="title function_">watch</span>(<span class="function">() =&gt;</span> message.<span class="property">value</span>.<span class="property">name</span>, <span class="function">(<span class="params">newValue, oldValue</span>) =&gt;</span> &#123;&#125;)</span><br><span class="line"><span class="comment">// 立即执行</span></span><br><span class="line"><span class="title function_">watch</span>(message, <span class="function">(<span class="params">newValue, oldValue</span>) =&gt;</span> &#123;&#125;, &#123; <span class="attr">immediate</span>: <span class="literal">true</span> &#125;)</span><br><span class="line"><span class="comment">// 调用时机，pre表示在组件更新之前同步触发回调，sync表示同步执行，Vue 进行任何更新之前触发，post表示在组件更新之后同步触发回调</span></span><br><span class="line"><span class="title function_">watch</span>(message, <span class="function">(<span class="params">newValue, oldValue</span>) =&gt;</span> &#123;&#125;, &#123; <span class="attr">flush</span>: <span class="string">&#x27;pre&#x27;</span> &#125;) <span class="comment">// 在依赖变更之后同步触发回调</span></span><br></pre></td></tr></table></figure>
+<h2 id="watchEffect-侦听器"><a href="#watchEffect-侦听器" class="headerlink" title="watchEffect 侦听器"></a>watchEffect 侦听器</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; watchEffect, ref &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">let</span> message = <span class="title function_">ref</span>(<span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line"><span class="comment">// 监听message的变化，自动执行回调函数，不需要手动调用</span></span><br><span class="line"><span class="title function_">watchEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="property">value</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 侦听器回调中能访问被 Vue 更新之后的所属组件的 DOM</span></span><br><span class="line"><span class="title function_">watchPosEffect</span>(<span class="function">() =&gt;</span> &#123;&#125;)</span><br><span class="line"><span class="comment">// 停止监听器，同步创建监听器时，无需手动停止，异步创建时，需要手动停止</span></span><br><span class="line"><span class="keyword">const</span> stop = <span class="title function_">watchEffect</span>(<span class="function">() =&gt;</span> &#123;&#125;)</span><br><span class="line"><span class="title function_">stop</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 开发环境上使用</span></span><br><span class="line"><span class="comment">// onTrack 将在响应属性或引用作为依赖项被跟踪时被调用。</span></span><br><span class="line"><span class="comment">// onTrigger 将在侦听器回调被依赖项的变更触发时被调用。</span></span><br><span class="line"><span class="title function_">watchEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;, &#123;</span><br><span class="line">   <span class="title function_">onTrack</span>(<span class="params"></span>) &#123;&#125;,</span><br><span class="line">   <span class="title function_">onTrigger</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="局部组件和递归组件和全局组件"><a href="#局部组件和递归组件和全局组件" class="headerlink" title="局部组件和递归组件和全局组件"></a>局部组件和递归组件和全局组件</h2><h3 id="局部组件"><a href="#局部组件" class="headerlink" title="局部组件"></a>局部组件</h3><p>直接在组件中引用</p>
+<h3 id="递归组件"><a href="#递归组件" class="headerlink" title="递归组件"></a>递归组件</h3><p>组件内部引用自己<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Tree.vue，递归组件内部使用名称和组件名相同</span></span><br><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">   <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;item in data&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;item.id&quot;</span> <span class="attr">:data</span>=<span class="string">&quot;item&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">span</span>&gt;</span>item.name<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Tree</span> <span class="attr">v-if</span>=<span class="string">&quot;item?.children?.length&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Tree</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果想改名，可以使用name属性</span></span><br><span class="line"><span class="title function_">defineOptions</span>(&#123;</span><br><span class="line">   <span class="attr">name</span>: <span class="string">&#x27;MyTree&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+
+</article>
+    
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2024/03/03/js%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">js工具函数</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/03/03</li>
+                <li>16:26</li>
+                <li>前端</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2024/03/01/canvas%E5%AD%A6%E4%B9%A0/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">Canvas学习</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/03/01</li>
+                <li>21:11</li>
+                <li>前端</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.0.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.1.10
+            </span>
+        </div>
+      
+
+     
+
+     
+</footer>
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+    <div id="post-toc" class="trm-post-toc">
+      <div class="trm-post-toc-header">
+        目录导航
+				<span id="post-toc-top">
+					置顶
+				</span>
+      </div>
+      <div class="trm-post-toc-content">
+        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-2" title="效率提升"><a rel="nofollow" class="trm-toc-link" href="#效率提升"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">效率提升</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-1" title="vue2和vue3的区别"><a rel="nofollow" class="trm-toc-link" href="#vue2和vue3的区别"><span class="trm-toc-number"></span> <span class="trm-toc-text">vue2和vue3的区别</span></a></li><li class="trm-toc-item trm-toc-level-1" title="vue响应式原理"><a rel="nofollow" class="trm-toc-link" href="#vue响应式原理"><span class="trm-toc-number"></span> <span class="trm-toc-text">vue响应式原理</span></a></li><li class="trm-toc-item trm-toc-level-1" title="vue的路由模式"><a rel="nofollow" class="trm-toc-link" href="#vue的路由模式"><span class="trm-toc-number"></span> <span class="trm-toc-text">vue的路由模式</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title="hash"><a rel="nofollow" class="trm-toc-link" href="#hash"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">hash</span></a></li><li class="trm-toc-item trm-toc-level-2" title="history"><a rel="nofollow" class="trm-toc-link" href="#history"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">history</span></a></li><li class="trm-toc-item trm-toc-level-2" title="abstract:"><a rel="nofollow" class="trm-toc-link" href="#abstract"><span class="trm-toc-number">3.</span> <span class="trm-toc-text">abstract:</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-1" title="vue3"><a rel="nofollow" class="trm-toc-link" href="#vue3"><span class="trm-toc-number"></span> <span class="trm-toc-text">vue3</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title="父子组件传参"><a rel="nofollow" class="trm-toc-link" href="#父子组件传参"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">父子组件传参</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="defineProps"><a rel="nofollow" class="trm-toc-link" href="#defineProps"><span class="trm-toc-number">1.1.</span> <span class="trm-toc-text">defineProps</span></a></li><li class="trm-toc-item trm-toc-level-3" title="defineEmits"><a rel="nofollow" class="trm-toc-link" href="#defineEmits"><span class="trm-toc-number">1.2.</span> <span class="trm-toc-text">defineEmits</span></a></li><li class="trm-toc-item trm-toc-level-3" title="defineExpose"><a rel="nofollow" class="trm-toc-link" href="#defineExpose"><span class="trm-toc-number">1.3.</span> <span class="trm-toc-text">defineExpose</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-2" title="计算属性"><a rel="nofollow" class="trm-toc-link" href="#计算属性"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">计算属性</span></a></li><li class="trm-toc-item trm-toc-level-2" title="watch监听器"><a rel="nofollow" class="trm-toc-link" href="#watch监听器"><span class="trm-toc-number">3.</span> <span class="trm-toc-text">watch监听器</span></a></li><li class="trm-toc-item trm-toc-level-2" title="watchEffect 侦听器"><a rel="nofollow" class="trm-toc-link" href="#watchEffect-侦听器"><span class="trm-toc-number">4.</span> <span class="trm-toc-text">watchEffect 侦听器</span></a></li><li class="trm-toc-item trm-toc-level-2" title="局部组件和递归组件和全局组件"><a rel="nofollow" class="trm-toc-link" href="#局部组件和递归组件和全局组件"><span class="trm-toc-number">5.</span> <span class="trm-toc-text">局部组件和递归组件和全局组件</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="局部组件"><a rel="nofollow" class="trm-toc-link" href="#局部组件"><span class="trm-toc-number">5.1.</span> <span class="trm-toc-text">局部组件</span></a></li><li class="trm-toc-item trm-toc-level-3" title="递归组件"><a rel="nofollow" class="trm-toc-link" href="#递归组件"><span class="trm-toc-number">5.2.</span> <span class="trm-toc-text">递归组件</span></a></li></ol></li></ol>
+      </div>
+    </div>
+
+            
+<div class="trm-fixed-container">
+    
+        <div class="trm-fixed-btn post-toc-btn" data-title="目录">
+            <i class="iconfont fas fa-th-list"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.1.10"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.1.10"></script>
+
+</body>
+
+</html>
