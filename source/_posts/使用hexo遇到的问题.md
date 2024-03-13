@@ -41,3 +41,17 @@ tags:
     ```
 
 3. _config.yml中category_dir设置为categories，`category_dir: categories`
+
+# 新建博客时，信息头自定义
+
+默认信息
+
+```
+---
+title: {{ title }}
+date: {{ date }}
+tags:
+---
+```
+
+修改`scaffolds\post.md`中的内容即可

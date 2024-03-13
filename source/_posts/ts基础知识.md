@@ -19,13 +19,19 @@ categories:
 
 `tsc hello.ts`
 
-# 报错不编译
+## 报错不编译
 
-`tsc --noEmitOnError hello.ts`
+`tsc --noEmitOnError hello.ts`    
 
-# 编译成es5的版本(默认是es3)
+## 编译成es5的版本(默认是es3)
 
 `tsc --target es2015 hello.ts`
+
+# 初始化&运行ts项目
+
+`tsc init`
+
+`npx tsc`
 
 # 联合类型
 
@@ -223,4 +229,51 @@ type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 type CreateArticleOptions = Optional<Article, 'author' | 'date' | 'readCount'>;
 
 function createArticle(options: CreateArticleOptions) {}
+```
+
+# 泛型
+
+动态类型，在定义函数时不明确类型，在调用时才明确
+
+```javascript
+function fn<T>(a: T, b: T):Array<T> {
+  return [a, b];
+}
+
+fn(1, 2);
+fn('x', 'y')
+```
+
+# 定义默认值 withDefaults
+
+```ts
+withDefaults(defineProps<{
+  title: String,
+  arr:Number[],
+}>(), {
+  arr: () => [666]
+})
+```
+
+# 函数重载
+
+类似`new Date()`会提示不同的参数类型
+而普通函数如果可以接收不同的参数，可以用ts的函数重载来实现
+```ts
+function message(option: Object): void;
+function message(text: string): void;
+function message(text: string, duration: number): void;
+
+function message(
+    param1: String | Object,
+    param2?: number
+    ): void {}
+
+message({
+    mode: 'mode',
+    duration: 3000
+})
+
+message('text');
+message('text', 3000);
 ```

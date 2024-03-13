@@ -47,3 +47,9 @@ git config --global --get http.proxy
 git config --global --get https.proxy
 ```
 
+
+# git区分文件大小写
+
+背景：git默认是不区分文件大小写的，这会使改文件的大小写后git提交不上去，造成后续引用上的问题
+
+解决：`git config core.ignorecase false`
