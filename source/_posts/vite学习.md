@@ -21,3 +21,6 @@ date: 2024-03-03 21:45:00
  - 拦截浏览器不识别的模块，并处理
 - HMR，通过WebSocket实现
 
+## 创建项目
+
+`npm install vite@latest`

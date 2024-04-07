@@ -304,3 +304,31 @@ function createRequestWithTimeout(time = 5000) {
 const request= createRequestWithTimeout(3000);
 request('url', {})
 ```
+
+## 判断当前浏览器环境
+
+```javascript
+// 是否是mac系统
+export const isMac = navigator.userAgent.includes('Mac OS X')
+// 判断是否是safair浏览器
+const ua = navigator.userAgent.toLowerCase();
+export const isSafari = /safari/.test(ua) && !/chrome/.test(ua);
+// 判断是否是谷歌浏览器 
+const isChrome = ua.match(/chrome\/([\d\.]+) safari\/([\d\.]+)$/);
+export function isChrome() {
+    // 其他浏览器特有的mimeTypes
+  const mimeTypeList = [
+    'application/vnd.chromium.remoting-viewer', // 360
+    'application/vnd.adobe.pdfxml', // 360,2345
+    'application/hwpta.itrushwpta', // 360
+    'application/sogou-native-widget-plugin', // 搜狗
+    'application/x-shockwave-flash', // 猎豹
+    'application/futuresplas'// 猎豹
+  ];
+  return isChrome && !![...navigator.mimeTypes].find((item) =>mimeTypeList.find((type) => item.type.toLowerCase() === type));
+}
+// 判断是否是edge浏览器
+const isOtherChrome = ua.match(/chrome\/([\d\.]+) safari\/([\d\.]+) \S+/);
+export const isEdge = isOtherChrome && isOtherChrome && isOtherChrome[0].indexOf('edg') > -1;
+```
+

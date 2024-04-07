@@ -277,3 +277,19 @@ message({
 message('text');
 message('text', 3000);
 ```
+
+# 报错
+
+## 类型“ImportMeta”上不存在属性“glob”
+
+在vite项目中使用`import.meta.glob`报错  
+
+解决：tsconfig.json加入
+
+```javascript
+{
+  "compilerOptions": {
+    "types": ["vite/client"]
+  }
+}
+```

@@ -70,18 +70,31 @@ npm_mirror: https://npmmirror.com/mirrors/npm/
 
 ### 更新淘宝镜像
 
-npm config set registry https://registry.npmmirror.com
+`npm config set registry https://registry.npmmirror.com`
+
+### 切换镜像
+
+`mmp use`
 
 ### 清空缓存
 
-npm cache clean --force
+`npm cache clean --force`
 
+### 创建用户
+
+`npm adduser`
+
+### 发布包
+
+修改package.json中的version、main、files: []、module:"esm/index"
+`npm login`
+`npm publish`
 
 ## yarn 
 
 ### 更新淘宝镜像
 
-yarn config set registry https://registry.npmmirror.com
+`yarn config set registry https://registry.npmmirror.com`
 
 ### 报错
 
@@ -97,3 +110,41 @@ yarn config set registry https://registry.npmmirror.com
     },
 }
 ```
+
+## pnpm
+
+### 安装
+
+`npm install -g pnpm`
+
+### 获取仓库路径
+
+`pnpm store path`
+
+### 所有项目安装node_modules
+
+根路径下新建`pnpm-workspace.yaml`
+
+文件内容参考[pnpm-workspace.yaml](https://www.pnpm.cn/pnpm-workspace_yaml)
+
+```yaml
+packages:
+  # all packages in direct subdirs of packages/
+  - 'main'
+  # all packages in subdirs of web/
+  - 'web/**'
+```
+
+执行`pnpm install`
+
+将公共依赖安装到根目录下，然后每个项目只安装自己的依赖
+
+### 启动子应用
+
+`pnpm -F react-demo dev`
+
+### 应用安装公共依赖
+
+`pnpm -F main add common`
+
+## swc 替代ts-loader babel-loader

@@ -8,6 +8,28 @@ categories:
 date: 2024-03-01 21:11:20
 ---
 
+## 基础知识
+
+### 画线
+
+```javascript
+ctx.beginPath();
+ctx.moveTo(0,0);
+ctx.lineTo(10, 10);
+// 画
+ctx.stroke();
+// 样式
+ctx.strokeStyle = 'red';
+```
+
+### 画矩形
+
+```javascript
+ctx.rect(0, 0, 100, 100);
+// 填充
+ctx.fill();
+```
+
 ## 在画布上绘制矩形并拖动
 
 ```javascript
@@ -212,3 +234,4 @@ class Graph {
 }
 new Graph().draw();
 ```
+

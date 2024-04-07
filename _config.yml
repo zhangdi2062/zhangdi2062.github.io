@@ -40,7 +40,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:
@@ -105,3 +105,4 @@ deploy:
   type: git
   repository: https://github.com/zhangdi2062/zhangdi2062.github.io #本机存在两个git账号，见.ssh/config配置
   branch: master
+

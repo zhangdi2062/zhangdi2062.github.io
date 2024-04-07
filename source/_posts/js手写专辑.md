@@ -258,3 +258,70 @@ function throttle(callback, time) {
   }
 }
 ```
+
+## 手写new
+
+```javascript
+function _new(fn, ...args) {
+  // 创建对象，继承构造函数的原型
+  const obj = Object.create(fn.prototype);
+  // 执行构造函数，改变this指向
+  const result = fn.apply(obj, args);
+  // 如果构造函数返回的是对象，就返回这个对象
+  return result instanceof Object ? result : obj;
+}
+```
+
+## 手写bind
+
+### 硬绑定
+
+把this 强制绑定到指定的对象（除了使用new 时），防止函数调用应用默认绑定规则
+
+```javascript
+if (!Function.prototype.bind) {
+  Function.prototype.bind = function (oThis) {
+    if (typeof this !== "function") {
+      throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+    }
+    var aArgs = Array.prototype.slice.call(arguments, 1), 
+        fToBind = this, 
+        fNOP = function () {},
+        fBound = function () {
+          return fToBind.apply(this instanceof fNOP
+                                 ? this
+                                 : oThis || this,
+                               aArgs.concat(Array.prototype.slice.call(arguments)));
+        };
+
+    fNOP.prototype = this.prototype;
+    fBound.prototype = new fNOP();
+
+    return fBound;
+  };
+}
+
+```
+
+### 软绑定
+
+给默认绑定指定一个全局对象和undefined 以外的值，同时保留隐式绑定或者显式绑定修改this 的能力
+
+```javascript
+if (!Function.prototype.softBind) { 
+    Function.prototype.softBind = function(obj) {
+        var fn = this;
+        // 捕获所有 curried 参数
+        var curried = [].slice.call( arguments, 1 ); 
+        var bound = function() {
+            return fn.apply(
+                (!this || this === (window || global)) ?
+                    obj : this,
+                curried.concat.apply( curried, arguments )
+            ); 
+        };
+        bound.prototype = Object.create( fn.prototype );
+        return bound; 
+    };
+}
+```

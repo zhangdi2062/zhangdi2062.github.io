@@ -87,3 +87,12 @@ export default defineConfig({
   }
 })
 ```
+
+## 动画库
+
+- [animate.css](https://animate.style/)
+- [tweenmax](https://greensock.com/tweenmax/)
+- [velocity](https://velocityjs.org/)
+- [animejs](https://animejs.com/)
+- [gsap](https://greensock.com/gsap/)
+- [movejs](https://visionmedia.github.io/move.js/)

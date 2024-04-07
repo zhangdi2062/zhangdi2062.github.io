@@ -55,3 +55,17 @@ tags:
 ```
 
 修改`scaffolds\post.md`中的内容即可
+
+# hexo博客中添加图片
+
+安装`npm install https://github.com/CodeFalling/hexo-asset-image --save`
+
+在`_config.yml`中添加或修改`post_asset_folder: true`
+
+在博客中添加图片时，将图片放在博客同名的文件夹中，然后在博客中使用`![图片说明](图片名称.png)`
+
+# 报错
+
+1. 'hexo' 不是内部或外部命令，也不是可运行的程序或批处理文件。| hexo : 无法将“hexo”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。
+
+解决：删除package-lock.json，重新npm i;确认node版本是否有切换，切换回来
