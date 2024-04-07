@@ -15,7 +15,7 @@
 <meta property="og:description" content="安装npm install -g typescript 新建hello.ts 编译tsc hello.ts 报错不编译tsc --noEmitOnError hello.ts     编译成es5的版本(默认是es3)tsc --target es2015 hello.ts 初始化&amp;运行ts项目tsc init npx tsc 联合类型表示值可能是这些类型中的任意一个 类型别名type1t">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-28T03:44:41.000Z">
-<meta property="article:modified_time" content="2024-03-13T01:50:01.380Z">
+<meta property="article:modified_time" content="2024-03-20T05:14:48.513Z">
 <meta property="article:author" content="Zhang Di">
 <meta property="article:tag" content="ts">
 <meta name="twitter:card" content="summary">
@@ -25,10 +25,10 @@
 
 <!-- Favicon -->
 
-    <link href='/img/favicon.svg?v=2.1.10' rel='icon' type='image/png' sizes='16x16' ></link>
+    <link href='/img/favicon.svg?v=2.1.13' rel='icon' type='image/png' sizes='16x16' ></link>
 
 
-    <link href='/img/favicon.svg?v=2.1.10' rel='icon' type='image/png' sizes='32x32' ></link>
+    <link href='/img/favicon.svg?v=2.1.13' rel='icon' type='image/png' sizes='32x32' ></link>
 
 
 
@@ -59,11 +59,11 @@
 
 
 <!-- Variable -->
-<script>window.ASYNC_CONFIG = {"hostname":"zhangdi2062.github.io","author":"Zhang Di","root":"/","typed_text":["我想去看看","攒到500万就退休","路在脚下"],"theme_version":"2.1.10","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":false},"live_time":{"start_time":"","prefix":"博客已萌萌哒运行 undefined 天"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-13 09:50:01"};</script>
+<script>window.ASYNC_CONFIG = {"hostname":"zhangdi2062.github.io","author":"Zhang Di","root":"/","typed_text":["我想去看看","攒到500万就退休","路在脚下"],"theme_version":"2.1.13","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":false},"live_time":{"start_time":"","prefix":"博客已萌萌哒运行 undefined 天"},"danmu":{"enable":false,"el":".trm-banner"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-20 13:14:48"};</script>
 
 <!-- Theme mode css -->
-<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.10" id="trm-switch-style">
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.13" id="trm-switch-style">
 <script>
     let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
     let catchMode = localStorage.getItem('theme-mode') || defaultMode;
@@ -81,7 +81,7 @@
 
 <!-- Site Analytics -->
  
-<meta name="generator" content="Hexo 6.0.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <body>
 
@@ -372,7 +372,9 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> fn&lt;T&gt;(<span class="attr">a</span>: T, <span class="attr">b</span>: T):<span class="title class_">Array</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> [a, b];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">fn</span>(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"><span class="title function_">fn</span>(<span class="string">&#x27;x&#x27;</span>, <span class="string">&#x27;y&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <h1 id="定义默认值-withDefaults"><a href="#定义默认值-withDefaults" class="headerlink" title="定义默认值 withDefaults"></a>定义默认值 withDefaults</h1><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">withDefaults</span>(defineProps&lt;&#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="title class_">String</span>,</span><br><span class="line">  <span class="attr">arr</span>:<span class="title class_">Number</span>[],</span><br><span class="line">&#125;&gt;(), &#123;</span><br><span class="line">  <span class="attr">arr</span>: <span class="function">() =&gt;</span> [<span class="number">666</span>]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <h1 id="函数重载"><a href="#函数重载" class="headerlink" title="函数重载"></a>函数重载</h1><p>类似<code>new Date()</code>会提示不同的参数类型<br>而普通函数如果可以接收不同的参数，可以用ts的函数重载来实现<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">message</span>(<span class="params">option: <span class="built_in">Object</span></span>): <span class="built_in">void</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">message</span>(<span class="params">text: <span class="built_in">string</span></span>): <span class="built_in">void</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">message</span>(<span class="params">text: <span class="built_in">string</span>, duration: <span class="built_in">number</span></span>): <span class="built_in">void</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">message</span>(<span class="params"></span></span><br><span class="line"><span class="params">    param1: <span class="built_in">String</span> | <span class="built_in">Object</span>,</span></span><br><span class="line"><span class="params">    param2?: <span class="built_in">number</span></span></span><br><span class="line"><span class="params">    </span>): <span class="built_in">void</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">message</span>(&#123;</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;mode&#x27;</span>,</span><br><span class="line">    <span class="attr">duration</span>: <span class="number">3000</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="title function_">message</span>(<span class="string">&#x27;text&#x27;</span>);</span><br><span class="line"><span class="title function_">message</span>(<span class="string">&#x27;text&#x27;</span>, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure></p>
-
+<h1 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h1><h2 id="类型“ImportMeta”上不存在属性“glob”"><a href="#类型“ImportMeta”上不存在属性“glob”" class="headerlink" title="类型“ImportMeta”上不存在属性“glob”"></a>类型“ImportMeta”上不存在属性“glob”</h2><p>在vite项目中使用<code>import.meta.glob</code>报错  </p>
+<p>解决：tsconfig.json加入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;types&quot;</span>: [<span class="string">&quot;vite/client&quot;</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </article>
     
     
@@ -446,13 +448,13 @@
     
         <div class="trm-footer-item">
             <span>
-                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.0.0
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.3.0
             </span>
             <span class="footer-separator" data-separator=" | "></span>
             <span> 
                 主题 - 
                 <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
-                v2.1.10
+                v2.1.13
             </span>
         </div>
       
@@ -480,7 +482,7 @@
 				</span>
       </div>
       <div class="trm-post-toc-content">
-        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-1" title="安装"><a rel="nofollow" class="trm-toc-link" href="#安装"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">安装</span></a></li><li class="trm-toc-item trm-toc-level-1" title="新建"><a rel="nofollow" class="trm-toc-link" href="#新建"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">新建</span></a></li><li class="trm-toc-item trm-toc-level-1" title="编译"><a rel="nofollow" class="trm-toc-link" href="#编译"><span class="trm-toc-number">3.</span> <span class="trm-toc-text">编译</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title="报错不编译"><a rel="nofollow" class="trm-toc-link" href="#报错不编译"><span class="trm-toc-number">3.1.</span> <span class="trm-toc-text">报错不编译</span></a></li><li class="trm-toc-item trm-toc-level-2" title="编译成es5的版本(默认是es3)"><a rel="nofollow" class="trm-toc-link" href="#编译成es5的版本-默认是es3"><span class="trm-toc-number">3.2.</span> <span class="trm-toc-text">编译成es5的版本(默认是es3)</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-1" title="初始化&amp;运行ts项目"><a rel="nofollow" class="trm-toc-link" href="#初始化-amp-运行ts项目"><span class="trm-toc-number">4.</span> <span class="trm-toc-text">初始化&amp;运行ts项目</span></a></li><li class="trm-toc-item trm-toc-level-1" title="联合类型"><a rel="nofollow" class="trm-toc-link" href="#联合类型"><span class="trm-toc-number">5.</span> <span class="trm-toc-text">联合类型</span></a></li><li class="trm-toc-item trm-toc-level-1" title="类型别名type"><a rel="nofollow" class="trm-toc-link" href="#类型别名type"><span class="trm-toc-number">6.</span> <span class="trm-toc-text">类型别名type</span></a></li><li class="trm-toc-item trm-toc-level-1" title="接口interface"><a rel="nofollow" class="trm-toc-link" href="#接口interface"><span class="trm-toc-number">7.</span> <span class="trm-toc-text">接口interface</span></a></li><li class="trm-toc-item trm-toc-level-1" title="类型和接口的相同和不同"><a rel="nofollow" class="trm-toc-link" href="#类型和接口的相同和不同"><span class="trm-toc-number">8.</span> <span class="trm-toc-text">类型和接口的相同和不同</span></a></li><li class="trm-toc-item trm-toc-level-1" title="类型断言"><a rel="nofollow" class="trm-toc-link" href="#类型断言"><span class="trm-toc-number">9.</span> <span class="trm-toc-text">类型断言</span></a></li><li class="trm-toc-item trm-toc-level-1" title="字面量类型"><a rel="nofollow" class="trm-toc-link" href="#字面量类型"><span class="trm-toc-number">10.</span> <span class="trm-toc-text">字面量类型</span></a></li><li class="trm-toc-item trm-toc-level-1" title="非空断言操作符（后缀 !）"><a rel="nofollow" class="trm-toc-link" href="#非空断言操作符（后缀-）"><span class="trm-toc-number">11.</span> <span class="trm-toc-text">非空断言操作符（后缀 !）</span></a></li><li class="trm-toc-item trm-toc-level-1" title="协变和逆变"><a rel="nofollow" class="trm-toc-link" href="#协变和逆变"><span class="trm-toc-number">12.</span> <span class="trm-toc-text">协变和逆变</span></a></li><li class="trm-toc-item trm-toc-level-1" title="实现optional"><a rel="nofollow" class="trm-toc-link" href="#实现optional"><span class="trm-toc-number">13.</span> <span class="trm-toc-text">实现optional</span></a></li><li class="trm-toc-item trm-toc-level-1" title="泛型"><a rel="nofollow" class="trm-toc-link" href="#泛型"><span class="trm-toc-number">14.</span> <span class="trm-toc-text">泛型</span></a></li><li class="trm-toc-item trm-toc-level-1" title="定义默认值 withDefaults"><a rel="nofollow" class="trm-toc-link" href="#定义默认值-withDefaults"><span class="trm-toc-number">15.</span> <span class="trm-toc-text">定义默认值 withDefaults</span></a></li><li class="trm-toc-item trm-toc-level-1" title="函数重载"><a rel="nofollow" class="trm-toc-link" href="#函数重载"><span class="trm-toc-number">16.</span> <span class="trm-toc-text">函数重载</span></a></li></ol>
+        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-1" title="安装"><a rel="nofollow" class="trm-toc-link" href="#安装"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">安装</span></a></li><li class="trm-toc-item trm-toc-level-1" title="新建"><a rel="nofollow" class="trm-toc-link" href="#新建"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">新建</span></a></li><li class="trm-toc-item trm-toc-level-1" title="编译"><a rel="nofollow" class="trm-toc-link" href="#编译"><span class="trm-toc-number">3.</span> <span class="trm-toc-text">编译</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title="报错不编译"><a rel="nofollow" class="trm-toc-link" href="#报错不编译"><span class="trm-toc-number">3.1.</span> <span class="trm-toc-text">报错不编译</span></a></li><li class="trm-toc-item trm-toc-level-2" title="编译成es5的版本(默认是es3)"><a rel="nofollow" class="trm-toc-link" href="#编译成es5的版本-默认是es3"><span class="trm-toc-number">3.2.</span> <span class="trm-toc-text">编译成es5的版本(默认是es3)</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-1" title="初始化&amp;运行ts项目"><a rel="nofollow" class="trm-toc-link" href="#初始化-amp-运行ts项目"><span class="trm-toc-number">4.</span> <span class="trm-toc-text">初始化&amp;运行ts项目</span></a></li><li class="trm-toc-item trm-toc-level-1" title="联合类型"><a rel="nofollow" class="trm-toc-link" href="#联合类型"><span class="trm-toc-number">5.</span> <span class="trm-toc-text">联合类型</span></a></li><li class="trm-toc-item trm-toc-level-1" title="类型别名type"><a rel="nofollow" class="trm-toc-link" href="#类型别名type"><span class="trm-toc-number">6.</span> <span class="trm-toc-text">类型别名type</span></a></li><li class="trm-toc-item trm-toc-level-1" title="接口interface"><a rel="nofollow" class="trm-toc-link" href="#接口interface"><span class="trm-toc-number">7.</span> <span class="trm-toc-text">接口interface</span></a></li><li class="trm-toc-item trm-toc-level-1" title="类型和接口的相同和不同"><a rel="nofollow" class="trm-toc-link" href="#类型和接口的相同和不同"><span class="trm-toc-number">8.</span> <span class="trm-toc-text">类型和接口的相同和不同</span></a></li><li class="trm-toc-item trm-toc-level-1" title="类型断言"><a rel="nofollow" class="trm-toc-link" href="#类型断言"><span class="trm-toc-number">9.</span> <span class="trm-toc-text">类型断言</span></a></li><li class="trm-toc-item trm-toc-level-1" title="字面量类型"><a rel="nofollow" class="trm-toc-link" href="#字面量类型"><span class="trm-toc-number">10.</span> <span class="trm-toc-text">字面量类型</span></a></li><li class="trm-toc-item trm-toc-level-1" title="非空断言操作符（后缀 !）"><a rel="nofollow" class="trm-toc-link" href="#非空断言操作符（后缀-）"><span class="trm-toc-number">11.</span> <span class="trm-toc-text">非空断言操作符（后缀 !）</span></a></li><li class="trm-toc-item trm-toc-level-1" title="协变和逆变"><a rel="nofollow" class="trm-toc-link" href="#协变和逆变"><span class="trm-toc-number">12.</span> <span class="trm-toc-text">协变和逆变</span></a></li><li class="trm-toc-item trm-toc-level-1" title="实现optional"><a rel="nofollow" class="trm-toc-link" href="#实现optional"><span class="trm-toc-number">13.</span> <span class="trm-toc-text">实现optional</span></a></li><li class="trm-toc-item trm-toc-level-1" title="泛型"><a rel="nofollow" class="trm-toc-link" href="#泛型"><span class="trm-toc-number">14.</span> <span class="trm-toc-text">泛型</span></a></li><li class="trm-toc-item trm-toc-level-1" title="定义默认值 withDefaults"><a rel="nofollow" class="trm-toc-link" href="#定义默认值-withDefaults"><span class="trm-toc-number">15.</span> <span class="trm-toc-text">定义默认值 withDefaults</span></a></li><li class="trm-toc-item trm-toc-level-1" title="函数重载"><a rel="nofollow" class="trm-toc-link" href="#函数重载"><span class="trm-toc-number">16.</span> <span class="trm-toc-text">函数重载</span></a></li><li class="trm-toc-item trm-toc-level-1" title="报错"><a rel="nofollow" class="trm-toc-link" href="#报错"><span class="trm-toc-number">17.</span> <span class="trm-toc-text">报错</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title="类型“ImportMeta”上不存在属性“glob”"><a rel="nofollow" class="trm-toc-link" href="#类型“ImportMeta”上不存在属性“glob”"><span class="trm-toc-number">17.1.</span> <span class="trm-toc-text">类型“ImportMeta”上不存在属性“glob”</span></a></li></ol></li></ol>
       </div>
     </div>
 
@@ -520,7 +522,7 @@
     
 
     
-        <script src="/js/plugins/typing.js?v=2.1.10"></script>
+        <script src="/js/plugins/typing.js?v=2.1.13"></script>
     
 
     
@@ -535,7 +537,18 @@
         
     
 
+		
 
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.1.13"></script>
 
 <!-- CDN -->
 
@@ -547,15 +560,6 @@
     
 
 
-
-
-    <!-- Service Worker -->
-    
-    <!-- baidu push -->
-    
-
-
-<script id="async-script" src="/js/main.js?v=2.1.10"></script>
 
 </body>
 

@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="webSocket前端事件： 1234opencloseerrormessage 使用方式: 1234567891011const ws &#x3D; new WebSocket(&amp;#x27;ws:&#x2F;&#x2F;localhost:8080&amp;#x27;);ws.addEventListener(&amp;#x27;open&amp;#x27;, function () &amp;#123;&amp;#125;)&#x2F;&#x2F; 当点击按钮时，发送一条消息doc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络">
+<meta property="og:url" content="https://zhangdi2062.github.io/2024/03/20/%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="收集一杯雾">
+<meta property="og:description" content="webSocket前端事件： 1234opencloseerrormessage 使用方式: 1234567891011const ws &#x3D; new WebSocket(&amp;#x27;ws:&#x2F;&#x2F;localhost:8080&amp;#x27;);ws.addEventListener(&amp;#x27;open&amp;#x27;, function () &amp;#123;&amp;#125;)&#x2F;&#x2F; 当点击按钮时，发送一条消息doc">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhangdi2062.github.io/img/404.jpg">
+<meta property="og:image" content="https://zhangdi2062.github.io/img/404.jpg">
+<meta property="og:image" content="https://zhangdi2062.github.io/img/404.jpg">
+<meta property="article:published_time" content="2024-03-20T13:04:54.000Z">
+<meta property="article:modified_time" content="2024-03-26T09:19:23.737Z">
+<meta property="article:author" content="Zhang Di">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="node">
+<meta property="article:tag" content="webSocket">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhangdi2062.github.io/img/404.jpg">
+
+
+<title >网络</title>
+
+<!-- Favicon -->
+
+    <link href='/img/favicon.svg?v=2.1.13' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/favicon.svg?v=2.1.13' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"zhangdi2062.github.io","author":"Zhang Di","root":"/","typed_text":["我想去看看","攒到500万就退休","路在脚下"],"theme_version":"2.1.13","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":false},"live_time":{"start_time":"","prefix":"博客已萌萌哒运行 undefined 天"},"danmu":{"enable":false,"el":".trm-banner"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-26 17:19:23"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.13" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/favicon.svg">
+    
+    
+        <div class="trm-logo-text">
+            收集<span>一杯雾</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    首页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    列表
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/tags/" target="">
+                    标签
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            网络
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2024
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card"> 
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        Zhdy
+    </h5>
+    
+        <div class="trm-label">
+            世界这么大
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                北京
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                而立之时
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            03/20
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            21:04
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Zhang Di
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h2 id="webSocket"><a href="#webSocket" class="headerlink" title="webSocket"></a>webSocket</h2><h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><p>事件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">open</span><br><span class="line">close</span><br><span class="line">error</span><br><span class="line">message</span><br></pre></td></tr></table></figure>
+<p>使用方式:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&#x27;ws://localhost:8080&#x27;</span>);</span><br><span class="line">ws.<span class="title function_">addEventListener</span>(<span class="string">&#x27;open&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;)</span><br><span class="line"><span class="comment">// 当点击按钮时，发送一条消息</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;button&#x27;</span>).<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// send接收字符串</span></span><br><span class="line">  ws.<span class="title function_">send</span>(<span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">ws.<span class="title function_">addEventListener</span>(<span class="string">&#x27;message&#x27;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">  <span class="comment">// 接收后端client.send发送的消息</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(event.<span class="property">data</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h3><p>事件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">open</span><br><span class="line">close</span><br><span class="line">error</span><br><span class="line">message</span><br><span class="line">connection</span><br></pre></td></tr></table></figure>
+<p>使用方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">WebSocket</span> = <span class="built_in">require</span>(<span class="string">&#x27;ws&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> server = <span class="keyword">new</span> <span class="title class_">WebSocket</span>.<span class="title class_">Server</span>(&#123; <span class="attr">port</span>: <span class="number">8080</span> &#125;);</span><br><span class="line">server.<span class="title function_">on</span>(<span class="string">&#x27;connection&#x27;</span>, <span class="keyword">function</span> (<span class="params">ws</span>) &#123;</span><br><span class="line">  ws.<span class="title function_">on</span>(<span class="string">&#x27;message&#x27;</span>, <span class="keyword">function</span> (<span class="params">message</span>) &#123;</span><br><span class="line">    <span class="comment">// 接收前端ws.send发送的消息</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;received: %s&#x27;</span>, message);</span><br><span class="line">    server.<span class="property">clients</span>.<span class="title function_">forEach</span>(<span class="keyword">function</span> <span class="title function_">each</span>(<span class="params">client</span>) &#123;</span><br><span class="line">      <span class="comment">// 广播消息</span></span><br><span class="line">      <span class="keyword">if</span> (client.<span class="property">readyState</span> === <span class="title class_">WebSocket</span>.<span class="property">OPEN</span>) &#123;</span><br><span class="line">        client.<span class="title function_">send</span>(message);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h2><h3 id="OSI七层参考模型-amp-TCP-IP四层模型"><a href="#OSI七层参考模型-amp-TCP-IP四层模型" class="headerlink" title="OSI七层参考模型 &amp; TCP/IP四层模型"></a>OSI七层参考模型 &amp; TCP/IP四层模型</h3><p><img src="/2024/03/20/%E7%BD%91%E7%BB%9C/网络模型.png" alt="网络模型" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h4 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h4><ul>
+<li>信道<ul>
+<li>有线信道，明线，逐渐被电缆取代</li>
+<li>有线信道，对称电缆，由多对双绞线组成</li>
+<li>有线信道，同轴电缆，电视广播、长途电话、局域网</li>
+<li>有线信道，光纤</li>
+<li>无线信道，无线电波，蓝牙、WiFi、蜂窝网络</li>
+</ul>
+</li>
+</ul>
+<p><strong>物理层传输比特流</strong></p>
+<h4 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h4><p>通过Mac地址来识别接收者和发送者，并对物理层传输的比特流进行分组，每个分组称为帧。<br>通过广播的方式来传播，在局域网内所有计算机都能收到消息</p>
+<p>windows下查看Mac地址：<code>ipconfig /all</code><br>Mac下查看Mac地址：<code>ifconfig</code></p>
+<h4 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h4><ul>
+<li><p>寻址：依靠ip</p>
+</li>
+<li><p>路由</p>
+</li>
+</ul>
+<p>ip协议在这一层，分为ipv6和ipv4，ipv4的地址是32位的，ipv6的地址是128位的，ipv4的地址已经不够用了，所以出现了ipv6</p>
+<h4 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h4><ul>
+<li><p>定义端口号，控流和校验</p>
+</li>
+<li><p>TCP：面向连接的协议，可靠，因为有三次握手四次挥手，但会降低效率</p>
+</li>
+<li><p>UDP：无连接的协议，不可靠，但效率高，常用于直播、游戏</p>
+</li>
+</ul>
+<p>这一次叫做数据段</p>
+<h4 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h4><p>这一层经常被叫做报文</p>
+<p>断点下载：会话层包含检查点的机制，可以从断点处继续下载</p>
+<p>会话层是在发送方和接收方之间进行通信时创建、维持、终止或端口连接的地方</p>
+<h4 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h4><p>这一层经常被叫做报文</p>
+<ul>
+<li>在网络中的翻译官，负责数据的格式化，如压缩、加密、解密</li>
+<li>对图片文件等格式进行解码和编码</li>
+</ul>
+<h4 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h4><p>这一层经常被叫做报文</p>
+<ul>
+<li>为应用程序提供服务，如HTTP、FTP、邮件协议SMTP、域名系统DNS、WebSocket长连接、SSH远程登录</li>
+</ul>
+<h3 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h3><p><img src="/2024/03/20/%E7%BD%91%E7%BB%9C/TCP三次握手.png" alt="TCP三次握手" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h3 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h3><p><img src="/2024/03/20/%E7%BD%91%E7%BB%9C/TCP四次挥手.png" alt="TCP四次挥手" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h3 id="浏览器输入url时会发生什么"><a href="#浏览器输入url时会发生什么" class="headerlink" title="浏览器输入url时会发生什么"></a>浏览器输入url时会发生什么</h3><h4 id="DNS解析"><a href="#DNS解析" class="headerlink" title="DNS解析"></a>DNS解析</h4><ol>
+<li>浏览器自身DNS</li>
+<li>操作系统DNS</li>
+<li>本地host文件</li>
+<li>域名服务器<ol>
+<li>根域名服务器</li>
+<li>顶级域名服务器</li>
+<li>权威域名服务器（当有CDN时，不再找权威域名，而是从CDN专用的DNS服务器去解析）</li>
+</ol>
+</li>
+</ol>
+<h4 id="什么时候会发起options请求："><a href="#什么时候会发起options请求：" class="headerlink" title="什么时候会发起options请求："></a>什么时候会发起options请求：</h4><ol>
+<li>跨域时，浏览器会先发起options请求，询问服务器是否允许跨域，服务器返回允许的方法，浏览器再发起真正的请求。</li>
+<li>有自定义请求头</li>
+</ol>
+<h4 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h4><h5 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h5><ul>
+<li>Expires：过期时间，由服务器返回，是一个绝对时间，即使客户端的时间和服务器的时间不一致，也不影响缓存的使用</li>
+<li>Cache-Control：通过指定指令来实现缓存机制<ul>
+<li>max-age=3600，表示缓存的有效时间为3600秒，时间是相对于请求的时间，优先级高于Expires</li>
+<li>no-cache：不使用强缓存，使用协商缓存</li>
+<li>no-store：不使用任何缓存，每次都请求服务器</li>
+<li>public：响应可以被任何对象缓存</li>
+<li>private：响应只能被单个用户缓存，不能作为共享缓存，如用户的本地浏览器缓存</li>
+</ul>
+</li>
+</ul>
+<p>强缓存第一次从disk缓存中读取，第二次从浏览器内存中读取，内存读取速度更快</p>
+<h5 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h5><ul>
+<li>Last-Modified：服务器在响应请求时，告诉浏览器资源的最后修改时间，浏览器下次请求时，会带上If-Modified-Since，服务器会比较这个时间和资源的最后修改时间，如果一致，返回304，浏览器从缓存中读取，如果不一致，返回200，浏览器重新下载</li>
+<li>ETag：服务器响应请求时，返回资源的唯一标识，浏览器下次请求时，会带上If-None-Match，服务器比较这个标识和资源的唯一标识，如果一致，返回304，浏览器从缓存中读取，如果不一致，返回200，浏览器重新下载</li>
+<li>如果同时存在Last-Modified和ETag，浏览器会优先使用ETag</li>
+</ul>
+
+</article>
+    
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2024/03/22/%E5%81%9A%E4%BA%8B/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">zuoshi</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/03/22</li>
+                <li>11:08</li>
+                <li>入世</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2024/03/07/%E7%AE%97%E6%B3%95%E9%9B%86%E9%94%A6/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">算法集锦</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/03/07</li>
+                <li>10:57</li>
+                <li>算法</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.3.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.1.13
+            </span>
+        </div>
+      
+
+     
+
+     
+</footer>
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+    <div id="post-toc" class="trm-post-toc">
+      <div class="trm-post-toc-header">
+        目录导航
+				<span id="post-toc-top">
+					置顶
+				</span>
+      </div>
+      <div class="trm-post-toc-content">
+        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-2" title="webSocket"><a rel="nofollow" class="trm-toc-link" href="#webSocket"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">webSocket</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="前端"><a rel="nofollow" class="trm-toc-link" href="#前端"><span class="trm-toc-number">1.1.</span> <span class="trm-toc-text">前端</span></a></li><li class="trm-toc-item trm-toc-level-3" title="后端"><a rel="nofollow" class="trm-toc-link" href="#后端"><span class="trm-toc-number">1.2.</span> <span class="trm-toc-text">后端</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-2" title="网络模型"><a rel="nofollow" class="trm-toc-link" href="#网络模型"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">网络模型</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="OSI七层参考模型 &amp; TCP&#x2F;IP四层模型"><a rel="nofollow" class="trm-toc-link" href="#OSI七层参考模型-amp-TCP-IP四层模型"><span class="trm-toc-number">2.1.</span> <span class="trm-toc-text">OSI七层参考模型 &amp; TCP&#x2F;IP四层模型</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-4" title="物理层"><a rel="nofollow" class="trm-toc-link" href="#物理层"><span class="trm-toc-number">2.1.1.</span> <span class="trm-toc-text">物理层</span></a></li><li class="trm-toc-item trm-toc-level-4" title="数据链路层"><a rel="nofollow" class="trm-toc-link" href="#数据链路层"><span class="trm-toc-number">2.1.2.</span> <span class="trm-toc-text">数据链路层</span></a></li><li class="trm-toc-item trm-toc-level-4" title="网络层"><a rel="nofollow" class="trm-toc-link" href="#网络层"><span class="trm-toc-number">2.1.3.</span> <span class="trm-toc-text">网络层</span></a></li><li class="trm-toc-item trm-toc-level-4" title="传输层"><a rel="nofollow" class="trm-toc-link" href="#传输层"><span class="trm-toc-number">2.1.4.</span> <span class="trm-toc-text">传输层</span></a></li><li class="trm-toc-item trm-toc-level-4" title="会话层"><a rel="nofollow" class="trm-toc-link" href="#会话层"><span class="trm-toc-number">2.1.5.</span> <span class="trm-toc-text">会话层</span></a></li><li class="trm-toc-item trm-toc-level-4" title="表示层"><a rel="nofollow" class="trm-toc-link" href="#表示层"><span class="trm-toc-number">2.1.6.</span> <span class="trm-toc-text">表示层</span></a></li><li class="trm-toc-item trm-toc-level-4" title="应用层"><a rel="nofollow" class="trm-toc-link" href="#应用层"><span class="trm-toc-number">2.1.7.</span> <span class="trm-toc-text">应用层</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-3" title="TCP三次握手"><a rel="nofollow" class="trm-toc-link" href="#TCP三次握手"><span class="trm-toc-number">2.2.</span> <span class="trm-toc-text">TCP三次握手</span></a></li><li class="trm-toc-item trm-toc-level-3" title="TCP四次挥手"><a rel="nofollow" class="trm-toc-link" href="#TCP四次挥手"><span class="trm-toc-number">2.3.</span> <span class="trm-toc-text">TCP四次挥手</span></a></li><li class="trm-toc-item trm-toc-level-3" title="浏览器输入url时会发生什么"><a rel="nofollow" class="trm-toc-link" href="#浏览器输入url时会发生什么"><span class="trm-toc-number">2.4.</span> <span class="trm-toc-text">浏览器输入url时会发生什么</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-4" title="DNS解析"><a rel="nofollow" class="trm-toc-link" href="#DNS解析"><span class="trm-toc-number">2.4.1.</span> <span class="trm-toc-text">DNS解析</span></a></li><li class="trm-toc-item trm-toc-level-4" title="什么时候会发起options请求："><a rel="nofollow" class="trm-toc-link" href="#什么时候会发起options请求："><span class="trm-toc-number">2.4.2.</span> <span class="trm-toc-text">什么时候会发起options请求：</span></a></li><li class="trm-toc-item trm-toc-level-4" title="缓存"><a rel="nofollow" class="trm-toc-link" href="#缓存"><span class="trm-toc-number">2.4.3.</span> <span class="trm-toc-text">缓存</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-5" title="强缓存"><a rel="nofollow" class="trm-toc-link" href="#强缓存"><span class="trm-toc-number">2.4.3.1.</span> <span class="trm-toc-text">强缓存</span></a></li><li class="trm-toc-item trm-toc-level-5" title="协商缓存"><a rel="nofollow" class="trm-toc-link" href="#协商缓存"><span class="trm-toc-number">2.4.3.2.</span> <span class="trm-toc-text">协商缓存</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    </div>
+
+            
+<div class="trm-fixed-container">
+    
+        <div class="trm-fixed-btn post-toc-btn" data-title="目录">
+            <i class="iconfont fas fa-th-list"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.1.13"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+		
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.1.13"></script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+</body>
+
+</html>

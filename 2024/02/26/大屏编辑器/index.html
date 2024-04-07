@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="大屏标尺实现画长标尺、短标尺、 缩放快捷键 蓝图实现关键词：canvas 数据管理实现定时器管理init 初始化，销毁定时器 start 初始化定时器、开始setInterval，更新组件 stop 时销毁计时器 add 添加 remove 移除 clear 清空 destroy 销毁 数据源类型staticData 静态数据 restData 接口配置 subscribeData 订阅数据 数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大屏编辑器">
+<meta property="og:url" content="https://zhangdi2062.github.io/2024/02/26/%E5%A4%A7%E5%B1%8F%E7%BC%96%E8%BE%91%E5%99%A8/index.html">
+<meta property="og:site_name" content="收集一杯雾">
+<meta property="og:description" content="大屏标尺实现画长标尺、短标尺、 缩放快捷键 蓝图实现关键词：canvas 数据管理实现定时器管理init 初始化，销毁定时器 start 初始化定时器、开始setInterval，更新组件 stop 时销毁计时器 add 添加 remove 移除 clear 清空 destroy 销毁 数据源类型staticData 静态数据 restData 接口配置 subscribeData 订阅数据 数据">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-02-26T07:03:04.000Z">
+<meta property="article:modified_time" content="2024-03-29T11:14:46.687Z">
+<meta property="article:author" content="Zhang Di">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="编辑器">
+<meta name="twitter:card" content="summary">
+
+
+<title >大屏编辑器</title>
+
+<!-- Favicon -->
+
+    <link href='/img/favicon.svg?v=2.1.13' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/favicon.svg?v=2.1.13' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"zhangdi2062.github.io","author":"Zhang Di","root":"/","typed_text":["我想去看看","攒到500万就退休","路在脚下"],"theme_version":"2.1.13","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":false},"live_time":{"start_time":"","prefix":"博客已萌萌哒运行 undefined 天"},"danmu":{"enable":false,"el":".trm-banner"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-03-29 19:14:46"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.13" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/favicon.svg">
+    
+    
+        <div class="trm-logo-text">
+            收集<span>一杯雾</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    首页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    列表
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/tags/" target="">
+                    标签
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            大屏编辑器
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2024
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card"> 
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        Zhdy
+    </h5>
+    
+        <div class="trm-label">
+            世界这么大
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                北京
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                而立之时
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            02/26
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            15:03
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Zhang Di
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h2 id="大屏"><a href="#大屏" class="headerlink" title="大屏"></a>大屏</h2><h3 id="标尺实现"><a href="#标尺实现" class="headerlink" title="标尺实现"></a>标尺实现</h3><h4 id="画"><a href="#画" class="headerlink" title="画"></a>画</h4><p>长标尺、短标尺、</p>
+<h4 id="缩放"><a href="#缩放" class="headerlink" title="缩放"></a>缩放</h4><p>快捷键</p>
+<h3 id="蓝图实现"><a href="#蓝图实现" class="headerlink" title="蓝图实现"></a>蓝图实现</h3><p>关键词：canvas</p>
+<h3 id="数据管理实现"><a href="#数据管理实现" class="headerlink" title="数据管理实现"></a>数据管理实现</h3><h4 id="定时器管理"><a href="#定时器管理" class="headerlink" title="定时器管理"></a>定时器管理</h4><p>init 初始化，销毁定时器</p>
+<p>start 初始化定时器、开始setInterval，更新组件</p>
+<p>stop 时销毁计时器</p>
+<p>add 添加</p>
+<p>remove 移除</p>
+<p>clear 清空</p>
+<p>destroy 销毁</p>
+<h4 id="数据源类型"><a href="#数据源类型" class="headerlink" title="数据源类型"></a>数据源类型</h4><p>staticData 静态数据</p>
+<p>restData 接口配置</p>
+<p>subscribeData 订阅数据</p>
+<h4 id="数据源管理"><a href="#数据源管理" class="headerlink" title="数据源管理"></a>数据源管理</h4><h3 id="适配方案"><a href="#适配方案" class="headerlink" title="适配方案"></a>适配方案</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方案</th>
+<th style="text-align:center">实现方式</th>
+<th style="text-align:right">优点</th>
+<th style="text-align:right">缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">固定尺寸</td>
+<td style="text-align:center">超出部分overflow</td>
+<td style="text-align:right">简单，适合固定分辨率的设备</td>
+<td style="text-align:right">不适用于多种分辨率</td>
+</tr>
+<tr>
+<td style="text-align:left">vh、vw</td>
+<td style="text-align:center">将px按比例转成vw和vh</td>
+<td style="text-align:right">1. 可以动态计算图表的宽高、字体等，灵活性高；2. 当屏幕比例跟ui稿不一致时，不会出现两边留白情况</td>
+<td style="text-align:right">需要编写公共转换函数，为每个图表单独做字体、间距、位移的适配，比较麻烦</td>
+</tr>
+<tr>
+<td style="text-align:left">scale</td>
+<td style="text-align:center">通过scale属性根据屏幕大小进行整体的等比缩放</td>
+<td style="text-align:right">1. 代码量少，适配简单 2. 一次处理后不需要各个图表再单独适配</td>
+<td style="text-align:right">1. 当屏幕比和ui比例不一致时，会出现周边留白情况 2. 当缩放比例过大时，字体和图片会有一点点失真 3. 当缩放比例过大时，事件热区会偏移</td>
+</tr>
+<tr>
+<td style="text-align:left">rem + vw vh</td>
+<td style="text-align:center">1. 获得rem的基准值 2. 动态计算html根元素的font-size 3. 图表通过vw vh动态计算字体、间距、位移等</td>
+<td style="text-align:right">布局的自适应代码量少，适配简单</td>
+<td style="text-align:right">1. 当屏幕比和ui比例不一致时，会出现周边留白情况 2.图表单独做字体、间距、位移的适配</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="图表"><a href="#图表" class="headerlink" title="图表"></a>图表</h3><p>图表配置：图表、标题、坐标轴、图例、提示框</p>
+<h3 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h3><ol>
+<li>监听/取消监听写在一块，返回函数的形式取消监听</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">created</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;mouseenter&#x27;</span>, <span class="variable language_">this</span>.<span class="property">mouseenter</span>)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">events</span> = <span class="variable language_">this</span>.<span class="title function_">initEvent</span>()</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">beforeDestroy</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;mouseenter&#x27;</span>, <span class="variable language_">this</span>.<span class="property">mouseenter</span>)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">events</span> &amp;&amp; <span class="variable language_">this</span>.<span class="title function_">events</span>()</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">methods</span>: &#123;</span><br><span class="line">    <span class="title function_">mouseenter</span>(<span class="params">e</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">$bus</span>.$emit(<span class="string">&#x27;mouseenter&#x27;</span>, e)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 初始化事件</span></span><br><span class="line">    <span class="title function_">initEvent</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">// 信息</span></span><br><span class="line">      <span class="keyword">function</span> <span class="title function_">message</span>(<span class="params">type, msg</span>) &#123;</span><br><span class="line">        msg &amp;&amp; <span class="variable language_">this</span>.<span class="property">$message</span>[type || <span class="string">&#x27;info&#x27;</span>](msg)</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">$bus</span>.$on(<span class="string">&#x27;message&#x27;</span>, message)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$bus</span>.$off(<span class="string">&#x27;message&#x27;</span>, message)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>当findIndex时，<code>index &gt; -1</code> 可以用 <code>~index</code> 替代</li>
+</ol>
+<p><code>~</code>按位取反，<code>~index</code> 为 <code>-(index + 1)</code>，当index为-1时，<code>~index</code>为0，正好可以用来判断是否存在</p>
+<h2 id="图表-1"><a href="#图表-1" class="headerlink" title="图表"></a>图表</h2><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="jsonforms-vue"><a href="#jsonforms-vue" class="headerlink" title="jsonforms/vue"></a>jsonforms/vue</h3><h4 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// schema.json</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;object&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;properties&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;vegetables&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;boolean&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;kindOfVegetables&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;enum&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;All&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;Some&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;Only potatoes&quot;</span></span><br><span class="line">      <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// uischema.json</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;VerticalLayout&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;elements&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Group&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;elements&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Control&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Eats vegetables?&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;scope&quot;</span><span class="punctuation">:</span> <span class="string">&quot;#/properties/vegetables&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Control&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Kind of vegetables&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;scope&quot;</span><span class="punctuation">:</span> <span class="string">&quot;#/properties/kindOfVegetables&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;rule&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;effect&quot;</span><span class="punctuation">:</span> <span class="string">&quot;HIDE&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;condition&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">              <span class="attr">&quot;scope&quot;</span><span class="punctuation">:</span> <span class="string">&quot;#/properties/vegetables&quot;</span><span class="punctuation">,</span></span><br><span class="line">              <span class="attr">&quot;schema&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;const&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span></span><br><span class="line">              <span class="punctuation">&#125;</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">          <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="渲染"><a href="#渲染" class="headerlink" title="渲染"></a>渲染</h4><p>不是form表单</p>
+<h3 id="vue-json-schema-form"><a href="#vue-json-schema-form" class="headerlink" title="vue-json-schema-form"></a>vue-json-schema-form</h3><h4 id="配置-2"><a href="#配置-2" class="headerlink" title="配置"></a>配置</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;测试注册表单&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;A simple form example.&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;object&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;required&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;firstName&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;lastName&quot;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;ui:order&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;lastName&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;firstName&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;*&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;password&quot;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;properties&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;firstName&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;First name&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;default&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Jun&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;lastName&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Last name&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;ui:options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;请输入你的姓&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;err:required&quot;</span><span class="punctuation">:</span> <span class="string">&quot;必须输入Last Name&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;price&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;最多输入两位小数点，最大值 999999.99&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;价格&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;format&quot;</span><span class="punctuation">:</span> <span class="string">&quot;price&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;integer&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Age&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;maximum&quot;</span><span class="punctuation">:</span> <span class="number">80</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;minimum&quot;</span><span class="punctuation">:</span> <span class="number">16</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>分为FormData和Schema两部分，FormData是表单的值，Schema是表单的配置<br>还有一个uiSchema，用来配置表单的样式、error Schema提示报错</p>
+<h4 id="渲染-1"><a href="#渲染-1" class="headerlink" title="渲染"></a>渲染</h4><p>是form表单，anyof切换后不记录值</p>
+<p>特点：可配置列数和label的位置</p>
+<p>缺点：组件类别有点少？</p>
+<h3 id="大屏中的配置"><a href="#大屏中的配置" class="headerlink" title="大屏中的配置"></a>大屏中的配置</h3><h4 id="配置-3"><a href="#配置-3" class="headerlink" title="配置"></a>配置</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;propertyPanel&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;menu&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;menu&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;children&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;chart&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;图表&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;mode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;single&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;children&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;chartCfg&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">              <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;图表设置&quot;</span><span class="punctuation">,</span></span><br><span class="line">              <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;group&quot;</span><span class="punctuation">,</span></span><br><span class="line">              <span class="attr">&quot;fold&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">              <span class="attr">&quot;children&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;lineStroke&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;stroke&quot;</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;描边&quot;</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;components&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;width&quot;</span><span class="punctuation">,</span> <span class="string">&quot;style&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;default&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                    <span class="attr">&quot;width&quot;</span><span class="punctuation">:</span> <span class="number">2</span><span class="punctuation">,</span></span><br><span class="line">                    <span class="attr">&quot;style&quot;</span><span class="punctuation">:</span> <span class="string">&quot;solid&quot;</span></span><br><span class="line">                  <span class="punctuation">&#125;</span></span><br><span class="line">                <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;smooth&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;switch&quot;</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;平滑&quot;</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;default&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span></span><br><span class="line">                <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;smoothNumber&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;slider&quot;</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;平滑张力&quot;</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;min&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;max&quot;</span><span class="punctuation">:</span> <span class="number">1</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;step&quot;</span><span class="punctuation">:</span> <span class="number">0.1</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;default&quot;</span><span class="punctuation">:</span> <span class="number">0.5</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;showInPanel&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">[</span><span class="string">&quot;.smooth&quot;</span><span class="punctuation">,</span> <span class="string">&quot;$eq&quot;</span><span class="punctuation">,</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">]</span><span class="punctuation">]</span></span><br><span class="line">                <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;lineSwitch&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;switch&quot;</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;显示面积&quot;</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;default&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span></span><br><span class="line">                <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;opacity&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;slider&quot;</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;透明&quot;</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;min&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;max&quot;</span><span class="punctuation">:</span> <span class="number">1</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;step&quot;</span><span class="punctuation">:</span> <span class="number">0.1</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;default&quot;</span><span class="punctuation">:</span> <span class="number">0.3</span><span class="punctuation">,</span></span><br><span class="line">                  <span class="attr">&quot;showInPanel&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">[</span><span class="string">&quot;.lineSwitch&quot;</span><span class="punctuation">,</span> <span class="string">&quot;$eq&quot;</span><span class="punctuation">,</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">]</span><span class="punctuation">]</span></span><br><span class="line">                <span class="punctuation">&#125;</span></span><br><span class="line">              <span class="punctuation">&#125;</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">          <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+<h4 id="渲染-2"><a href="#渲染-2" class="headerlink" title="渲染"></a>渲染</h4><p>使用vue component渲染组件，每一次修改配置都会实时渲染</p>
+<p>不是form表单</p>
+<h3 id="森x中的配置"><a href="#森x中的配置" class="headerlink" title="森x中的配置"></a>森x中的配置</h3><h4 id="配置-4"><a href="#配置-4" class="headerlink" title="配置"></a>配置</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">        <span class="attr">key</span>: <span class="string">&#x27;checkbox_8926&#x27;</span>,</span><br><span class="line">        <span class="attr">label</span>: <span class="string">&#x27;多选&#x27;</span>,</span><br><span class="line">        <span class="attr">value</span>: [],</span><br><span class="line">        <span class="attr">placeholder</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        <span class="attr">description</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        <span class="attr">hidden</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">readonly</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">required</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">prefix</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        <span class="attr">suffix</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        <span class="attr">prefix_icon</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        <span class="attr">suffix_icon</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        <span class="attr">dataset</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">value</span>: <span class="string">&#x27;cc&#x27;</span>,</span><br><span class="line">                <span class="attr">label</span>: <span class="string">&#x27;cc&#x27;</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">value</span>: <span class="string">&#x27;dd&#x27;</span>,</span><br><span class="line">                <span class="attr">label</span>: <span class="string">&#x27;dd&#x27;</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;checkbox&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="渲染-3"><a href="#渲染-3" class="headerlink" title="渲染"></a>渲染</h4><p>特点：业务型组件、互斥、联动<br>将value和config传入组件，组件根据config的type渲染不同的组件，使用v-if结合component is渲染组件，点击保存时，先校验，将value传出</p>
+<p>不是form表单</p>
+<p>难点：同时需要保存使用的选择器，避免选择器被删掉</p>
+
+</article>
+    
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2024/03/01/js%E7%9F%A5%E8%AF%86/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">js知识</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/03/01</li>
+                <li>21:00</li>
+                <li>前端</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2024/02/24/nodejs%E7%9B%B8%E5%85%B3/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">NodeJS相关</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/02/24</li>
+                <li>14:52</li>
+                <li>服务器</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.3.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.1.13
+            </span>
+        </div>
+      
+
+     
+
+     
+</footer>
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+    <div id="post-toc" class="trm-post-toc">
+      <div class="trm-post-toc-header">
+        目录导航
+				<span id="post-toc-top">
+					置顶
+				</span>
+      </div>
+      <div class="trm-post-toc-content">
+        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-2" title="大屏"><a rel="nofollow" class="trm-toc-link" href="#大屏"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">大屏</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="标尺实现"><a rel="nofollow" class="trm-toc-link" href="#标尺实现"><span class="trm-toc-number">1.1.</span> <span class="trm-toc-text">标尺实现</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-4" title="画"><a rel="nofollow" class="trm-toc-link" href="#画"><span class="trm-toc-number">1.1.1.</span> <span class="trm-toc-text">画</span></a></li><li class="trm-toc-item trm-toc-level-4" title="缩放"><a rel="nofollow" class="trm-toc-link" href="#缩放"><span class="trm-toc-number">1.1.2.</span> <span class="trm-toc-text">缩放</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-3" title="蓝图实现"><a rel="nofollow" class="trm-toc-link" href="#蓝图实现"><span class="trm-toc-number">1.2.</span> <span class="trm-toc-text">蓝图实现</span></a></li><li class="trm-toc-item trm-toc-level-3" title="数据管理实现"><a rel="nofollow" class="trm-toc-link" href="#数据管理实现"><span class="trm-toc-number">1.3.</span> <span class="trm-toc-text">数据管理实现</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-4" title="定时器管理"><a rel="nofollow" class="trm-toc-link" href="#定时器管理"><span class="trm-toc-number">1.3.1.</span> <span class="trm-toc-text">定时器管理</span></a></li><li class="trm-toc-item trm-toc-level-4" title="数据源类型"><a rel="nofollow" class="trm-toc-link" href="#数据源类型"><span class="trm-toc-number">1.3.2.</span> <span class="trm-toc-text">数据源类型</span></a></li><li class="trm-toc-item trm-toc-level-4" title="数据源管理"><a rel="nofollow" class="trm-toc-link" href="#数据源管理"><span class="trm-toc-number">1.3.3.</span> <span class="trm-toc-text">数据源管理</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-3" title="适配方案"><a rel="nofollow" class="trm-toc-link" href="#适配方案"><span class="trm-toc-number">1.4.</span> <span class="trm-toc-text">适配方案</span></a></li><li class="trm-toc-item trm-toc-level-3" title="图表"><a rel="nofollow" class="trm-toc-link" href="#图表"><span class="trm-toc-number">1.5.</span> <span class="trm-toc-text">图表</span></a></li><li class="trm-toc-item trm-toc-level-3" title="碎碎念"><a rel="nofollow" class="trm-toc-link" href="#碎碎念"><span class="trm-toc-number">1.6.</span> <span class="trm-toc-text">碎碎念</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-2" title="图表"><a rel="nofollow" class="trm-toc-link" href="#图表-1"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">图表</span></a></li><li class="trm-toc-item trm-toc-level-2" title="配置"><a rel="nofollow" class="trm-toc-link" href="#配置"><span class="trm-toc-number">3.</span> <span class="trm-toc-text">配置</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="jsonforms&#x2F;vue"><a rel="nofollow" class="trm-toc-link" href="#jsonforms-vue"><span class="trm-toc-number">3.1.</span> <span class="trm-toc-text">jsonforms&#x2F;vue</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-4" title="配置"><a rel="nofollow" class="trm-toc-link" href="#配置-1"><span class="trm-toc-number">3.1.1.</span> <span class="trm-toc-text">配置</span></a></li><li class="trm-toc-item trm-toc-level-4" title="渲染"><a rel="nofollow" class="trm-toc-link" href="#渲染"><span class="trm-toc-number">3.1.2.</span> <span class="trm-toc-text">渲染</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-3" title="vue-json-schema-form"><a rel="nofollow" class="trm-toc-link" href="#vue-json-schema-form"><span class="trm-toc-number">3.2.</span> <span class="trm-toc-text">vue-json-schema-form</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-4" title="配置"><a rel="nofollow" class="trm-toc-link" href="#配置-2"><span class="trm-toc-number">3.2.1.</span> <span class="trm-toc-text">配置</span></a></li><li class="trm-toc-item trm-toc-level-4" title="渲染"><a rel="nofollow" class="trm-toc-link" href="#渲染-1"><span class="trm-toc-number">3.2.2.</span> <span class="trm-toc-text">渲染</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-3" title="大屏中的配置"><a rel="nofollow" class="trm-toc-link" href="#大屏中的配置"><span class="trm-toc-number">3.3.</span> <span class="trm-toc-text">大屏中的配置</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-4" title="配置"><a rel="nofollow" class="trm-toc-link" href="#配置-3"><span class="trm-toc-number">3.3.1.</span> <span class="trm-toc-text">配置</span></a></li><li class="trm-toc-item trm-toc-level-4" title="渲染"><a rel="nofollow" class="trm-toc-link" href="#渲染-2"><span class="trm-toc-number">3.3.2.</span> <span class="trm-toc-text">渲染</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-3" title="森x中的配置"><a rel="nofollow" class="trm-toc-link" href="#森x中的配置"><span class="trm-toc-number">3.4.</span> <span class="trm-toc-text">森x中的配置</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-4" title="配置"><a rel="nofollow" class="trm-toc-link" href="#配置-4"><span class="trm-toc-number">3.4.1.</span> <span class="trm-toc-text">配置</span></a></li><li class="trm-toc-item trm-toc-level-4" title="渲染"><a rel="nofollow" class="trm-toc-link" href="#渲染-3"><span class="trm-toc-number">3.4.2.</span> <span class="trm-toc-text">渲染</span></a></li></ol></li></ol></li></ol>
+      </div>
+    </div>
+
+            
+<div class="trm-fixed-container">
+    
+        <div class="trm-fixed-btn post-toc-btn" data-title="目录">
+            <i class="iconfont fas fa-th-list"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.1.13"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+		
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.1.13"></script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+</body>
+
+</html>

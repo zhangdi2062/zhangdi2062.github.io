@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="借鉴了微服务，将一个庞大的应用拆分成多个独立的小应用 iframe方案 特点   接入简单 隔离完美   不足   dom割裂严重，弹窗只能在iframe内部，无法覆盖父级，而且有滚动条 应用之间通信困难 通信复杂，刷新iframe后，状态丢失 白屏时间长  qiankun(ali)基于single-spa的微前端方案，通过注册的方式  特点   静态资源预加载 html entry方式引入子应用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微前端">
+<meta property="og:url" content="https://zhangdi2062.github.io/2024/03/26/%E5%BE%AE%E5%89%8D%E7%AB%AF/index.html">
+<meta property="og:site_name" content="收集一杯雾">
+<meta property="og:description" content="借鉴了微服务，将一个庞大的应用拆分成多个独立的小应用 iframe方案 特点   接入简单 隔离完美   不足   dom割裂严重，弹窗只能在iframe内部，无法覆盖父级，而且有滚动条 应用之间通信困难 通信复杂，刷新iframe后，状态丢失 白屏时间长  qiankun(ali)基于single-spa的微前端方案，通过注册的方式  特点   静态资源预加载 html entry方式引入子应用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-26T12:41:27.000Z">
+<meta property="article:modified_time" content="2024-04-03T10:29:29.298Z">
+<meta property="article:author" content="Zhang Di">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="微前端">
+<meta name="twitter:card" content="summary">
+
+
+<title >微前端</title>
+
+<!-- Favicon -->
+
+    <link href='/img/favicon.svg?v=2.1.13' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/favicon.svg?v=2.1.13' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"zhangdi2062.github.io","author":"Zhang Di","root":"/","typed_text":["我想去看看","攒到500万就退休","路在脚下"],"theme_version":"2.1.13","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":false},"live_time":{"start_time":"","prefix":"博客已萌萌哒运行 undefined 天"},"danmu":{"enable":false,"el":".trm-banner"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-04-03 18:29:29"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.13" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/favicon.svg">
+    
+    
+        <div class="trm-logo-text">
+            收集<span>一杯雾</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    首页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    列表
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/tags/" target="">
+                    标签
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            微前端
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2024
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card"> 
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        Zhdy
+    </h5>
+    
+        <div class="trm-label">
+            世界这么大
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                北京
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                而立之时
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            03/26
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            20:41
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Zhang Di
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <p>借鉴了微服务，将一个庞大的应用拆分成多个独立的小应用</p>
+<h3 id="iframe方案"><a href="#iframe方案" class="headerlink" title="iframe方案"></a>iframe方案</h3><ul>
+<li>特点</li>
+</ul>
+<ol>
+<li>接入简单</li>
+<li>隔离完美</li>
+</ol>
+<ul>
+<li>不足</li>
+</ul>
+<ol>
+<li>dom割裂严重，弹窗只能在iframe内部，无法覆盖父级，而且有滚动条</li>
+<li>应用之间通信困难</li>
+<li>通信复杂，刷新iframe后，状态丢失</li>
+<li>白屏时间长</li>
+</ol>
+<h3 id="qiankun-ali"><a href="#qiankun-ali" class="headerlink" title="qiankun(ali)"></a>qiankun(ali)</h3><p>基于single-spa的微前端方案，通过注册的方式</p>
+<ul>
+<li>特点</li>
+</ul>
+<ol>
+<li>静态资源预加载</li>
+<li>html entry方式引入子应用，降低了应用改造成本</li>
+<li>沙箱隔离，解决了iframe的问题</li>
+</ol>
+<ul>
+<li>不足</li>
+</ul>
+<ol>
+<li>无法支持vite等esmodule脚本运行</li>
+</ol>
+<ul>
+<li>原理</li>
+</ul>
+<ol>
+<li>js沙箱，通过proxy拦截window、document等全局变量，使用with改变上下文，实现隔离</li>
+<li>css沙箱，第一种通过shadow dom实现隔离，第二种类似Vue的scoped，通过动态添加属性实现隔离</li>
+</ol>
+<h3 id="micro-app-jd"><a href="#micro-app-jd" class="headerlink" title="micro-app(jd)"></a>micro-app(jd)</h3><p>基于webcomponent + qiankun + sandbox的微前端方案</p>
+<ul>
+<li>特点</li>
+</ul>
+<ol>
+<li>使用web component加载子应用</li>
+</ol>
+<ul>
+<li>不足</li>
+</ul>
+<ol>
+<li>仅支持vite版本&gt;=3.0</li>
+</ol>
+<h3 id="EMP-baidu"><a href="#EMP-baidu" class="headerlink" title="EMP(baidu)"></a>EMP(baidu)</h3><p>基于webpack5 module federation的微前端方案</p>
+<ul>
+<li>特点</li>
+</ul>
+<ol>
+<li>webpack联邦编译可以保证所有子应用依赖解耦</li>
+<li>应用间共享模块</li>
+<li>模块远程ts支持</li>
+</ol>
+<ul>
+<li>不足</li>
+</ul>
+<ol>
+<li>仅支持webpack5</li>
+<li>无法实现沙箱隔离</li>
+<li>子应用保活、多应用激活无法实现</li>
+<li>主、子应用的路由可能发生冲突</li>
+</ol>
+<ul>
+<li>原理<br>类似于拆包(模块共享)</li>
+</ul>
+<h3 id="无界微前端"><a href="#无界微前端" class="headerlink" title="无界微前端"></a>无界微前端</h3><ul>
+<li>特点</li>
+</ul>
+<ol>
+<li>接入简单</li>
+<li>vite不需要单独处理</li>
+<li>预加载</li>
+<li>应用保活机制</li>
+</ol>
+<ul>
+<li>不足</li>
+</ul>
+<ol>
+<li>隔离js使用一个空的iframe进行隔离</li>
+<li>子应用axios需要自行适配</li>
+<li>iframe沙箱的src设置了主应用的host，在等待iframe的location.origin从”about:blank”初始化为主应用的host时，采用计时器等待，不太优雅</li>
+</ol>
+<ul>
+<li>原理<br>子应用的js代码通过iframe加载，实现隔离，<br>页面元素通过劫持iframe中的document.querySelectorAll等到webComponent中，实现隔离</li>
+</ul>
+<h3 id="模块联邦技术"><a href="#模块联邦技术" class="headerlink" title="模块联邦技术"></a>模块联邦技术</h3><ul>
+<li>特点</li>
+</ul>
+<ol>
+<li>跨应用的模块共享</li>
+<li>和webpack强耦合，基于webpack5内置插件实现</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// remote 导出模块的工程</span></span><br><span class="line"><span class="comment">// list.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">addList</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// webpack.config.js</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">ModuleFederationPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;webpack/lib/container/ModuleFederationPlugin&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">      <span class="attr">port</span>: <span class="number">9001</span> <span class="comment">// remote</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">ModuleFederationPlugin</span>(&#123;</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;remote&#x27;</span>, <span class="comment">// 自定义</span></span><br><span class="line">      <span class="attr">filename</span>: <span class="string">&#x27;remoteEntry.js&#x27;</span> <span class="comment">// 导出模块的文件名称</span></span><br><span class="line">      <span class="attr">exposes</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;./addList&#x27;</span>: <span class="string">&#x27;./src/list.js&#x27;</span> <span class="comment">// value为导出模块路径</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// host引用工程</span></span><br><span class="line"><span class="comment">// webpack.config.js</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">ModuleFederationPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;webpack/lib/container/ModuleFederationPlugin&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">ModuleFederationPlugin</span>(&#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;host&#x27;</span>,</span><br><span class="line">        <span class="attr">remotes</span>: &#123;</span><br><span class="line">            <span class="attr">remote</span>: <span class="string">&#x27;remote@http://localhost:9001/remoteEntry.js&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引用的js</span></span><br><span class="line"><span class="keyword">import</span>(<span class="string">&#x27;remote/addList&#x27;</span>).<span class="title function_">then</span>(<span class="function">(<span class="params">&#123;addList&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">addList</span>();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</article>
+    
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2024/03/27/%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">微前端</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/03/27</li>
+                <li>11:33</li>
+                <li>终端</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2024/03/26/python/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">python</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/03/26</li>
+                <li>17:05</li>
+                <li>前端</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.3.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.1.13
+            </span>
+        </div>
+      
+
+     
+
+     
+</footer>
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+    <div id="post-toc" class="trm-post-toc">
+      <div class="trm-post-toc-header">
+        目录导航
+				<span id="post-toc-top">
+					置顶
+				</span>
+      </div>
+      <div class="trm-post-toc-content">
+        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-3" title="iframe方案"><a rel="nofollow" class="trm-toc-link" href="#iframe方案"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">iframe方案</span></a></li><li class="trm-toc-item trm-toc-level-3" title="qiankun(ali)"><a rel="nofollow" class="trm-toc-link" href="#qiankun-ali"><span class="trm-toc-number">2.</span> <span class="trm-toc-text">qiankun(ali)</span></a></li><li class="trm-toc-item trm-toc-level-3" title="micro-app(jd)"><a rel="nofollow" class="trm-toc-link" href="#micro-app-jd"><span class="trm-toc-number">3.</span> <span class="trm-toc-text">micro-app(jd)</span></a></li><li class="trm-toc-item trm-toc-level-3" title="EMP(baidu)"><a rel="nofollow" class="trm-toc-link" href="#EMP-baidu"><span class="trm-toc-number">4.</span> <span class="trm-toc-text">EMP(baidu)</span></a></li><li class="trm-toc-item trm-toc-level-3" title="无界微前端"><a rel="nofollow" class="trm-toc-link" href="#无界微前端"><span class="trm-toc-number">5.</span> <span class="trm-toc-text">无界微前端</span></a></li><li class="trm-toc-item trm-toc-level-3" title="模块联邦技术"><a rel="nofollow" class="trm-toc-link" href="#模块联邦技术"><span class="trm-toc-number">6.</span> <span class="trm-toc-text">模块联邦技术</span></a></li></ol>
+      </div>
+    </div>
+
+            
+<div class="trm-fixed-container">
+    
+        <div class="trm-fixed-btn post-toc-btn" data-title="目录">
+            <i class="iconfont fas fa-th-list"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.1.13"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+		
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.1.13"></script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+</body>
+
+</html>
