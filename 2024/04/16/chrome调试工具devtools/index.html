@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="chrome调试工具DevTools Elements页面-右键-检查 定位到元素位置  DOM Tree 方向 上下键  元素选中移动   方向 左右键  收起 展开   dom右键  添加编辑删除撤销  copy  复制元素多种形态   Hide Element  隐藏元素，visibility  H键隐藏&#x2F;显示    Force state  强制保持在某种状态   Break on  子树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="chrome调试工具devtools">
+<meta property="og:url" content="https://zhangdi2062.github.io/2024/04/16/chrome%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7devtools/index.html">
+<meta property="og:site_name" content="收集一杯雾">
+<meta property="og:description" content="chrome调试工具DevTools Elements页面-右键-检查 定位到元素位置  DOM Tree 方向 上下键  元素选中移动   方向 左右键  收起 展开   dom右键  添加编辑删除撤销  copy  复制元素多种形态   Hide Element  隐藏元素，visibility  H键隐藏&#x2F;显示    Force state  强制保持在某种状态   Break on  子树">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-16T03:49:00.000Z">
+<meta property="article:modified_time" content="2024-04-16T03:49:40.747Z">
+<meta property="article:author" content="Zhang Di">
+<meta property="article:tag" content="devtools">
+<meta name="twitter:card" content="summary">
+
+
+<title >chrome调试工具devtools</title>
+
+<!-- Favicon -->
+
+    <link href='/img/favicon.svg?v=2.1.13' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/favicon.svg?v=2.1.13' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"zhangdi2062.github.io","author":"Zhang Di","root":"/","typed_text":["我想去看看","攒到500万就退休","路在脚下"],"theme_version":"2.1.13","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":false},"live_time":{"start_time":"","prefix":"博客已萌萌哒运行 undefined 天"},"danmu":{"enable":false,"el":".trm-banner"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-04-16 11:49:40"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.1.13" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/favicon.svg">
+    
+    
+        <div class="trm-logo-text">
+            收集<span>一杯雾</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    首页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    列表
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/tags/" target="">
+                    标签
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            chrome调试工具devtools
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2024
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card"> 
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        Zhdy
+    </h5>
+    
+        <div class="trm-label">
+            世界这么大
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                北京
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                而立之时
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            04/16
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            11:49
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Zhang Di
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="chrome调试工具"><a href="#chrome调试工具" class="headerlink" title="chrome调试工具"></a>chrome调试工具</h1><p>DevTools</p>
+<h2 id="Elements"><a href="#Elements" class="headerlink" title="Elements"></a>Elements</h2><h3 id="页面-右键-检查"><a href="#页面-右键-检查" class="headerlink" title="页面-右键-检查"></a>页面-右键-检查</h3><ul>
+<li>定位到元素位置</li>
+</ul>
+<h3 id="DOM-Tree"><a href="#DOM-Tree" class="headerlink" title="DOM Tree"></a>DOM Tree</h3><ul>
+<li><p>方向 上下键</p>
+<ul>
+<li>元素选中移动</li>
+</ul>
+</li>
+<li><p>方向 左右键</p>
+<ul>
+<li>收起 展开</li>
+</ul>
+</li>
+<li><p>dom右键</p>
+<ul>
+<li><p>添加编辑删除撤销</p>
+</li>
+<li><p>copy</p>
+<ul>
+<li>复制元素多种形态</li>
+</ul>
+</li>
+<li><p>Hide Element</p>
+<ul>
+<li><p>隐藏元素，visibility</p>
+</li>
+<li><p>H键隐藏/显示</p>
+</li>
+</ul>
+</li>
+<li><p>Force state</p>
+<ul>
+<li>强制保持在某种状态</li>
+</ul>
+</li>
+<li><p>Break on</p>
+<ul>
+<li><p>子树更新时断点</p>
+</li>
+<li><p>属性更新时断点</p>
+</li>
+<li><p>移除元素时断点</p>
+</li>
+</ul>
+</li>
+<li><p>Scroll into view</p>
+<ul>
+<li>将视图滚动到当前节点</li>
+</ul>
+</li>
+<li><p>Focus</p>
+<ul>
+<li>设置焦点</li>
+</ul>
+</li>
+<li><p>Badge Settings</p>
+<ul>
+<li>设置是否显示flex、grid等布局标志</li>
+</ul>
+</li>
+<li><p>Store as global variable</p>
+<ul>
+<li>保存为全局变量</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>暂停hover状态</p>
+<ul>
+<li>在Sources面板下，按F8或command+\，会执行断点再去选取</li>
+</ul>
+</li>
+</ul>
+<h3 id="面板"><a href="#面板" class="headerlink" title="面板"></a>面板</h3><ul>
+<li><p>Styles</p>
+<ul>
+<li><p>过滤样式</p>
+</li>
+<li><p>添加移除class</p>
+</li>
+</ul>
+</li>
+<li><p>Computed</p>
+<ul>
+<li>计算属性</li>
+</ul>
+</li>
+<li><p>Layout</p>
+<ul>
+<li>grid和flex的布局</li>
+</ul>
+</li>
+<li><p>Event Listener</p>
+<ul>
+<li>该元素的事件</li>
+</ul>
+</li>
+<li><p>DOM Breakpoints</p>
+<ul>
+<li>该元素的断点</li>
+</ul>
+</li>
+</ul>
+<h3 id="截屏"><a href="#截屏" class="headerlink" title="截屏"></a>截屏</h3><ul>
+<li>command/control + shift + P 输入Capture</li>
+</ul>
+<h2 id="Console"><a href="#Console" class="headerlink" title="Console"></a>Console</h2><h3 id="ESC调用或关闭console"><a href="#ESC调用或关闭console" class="headerlink" title="ESC调用或关闭console"></a>ESC调用或关闭console</h3><h3 id="console方法"><a href="#console方法" class="headerlink" title="console方法"></a>console方法</h3><ul>
+<li><p>clear</p>
+<ul>
+<li>清空控制台</li>
+</ul>
+</li>
+<li><p>debug</p>
+<ul>
+<li>级别低，默认不显示</li>
+</ul>
+</li>
+<li><p>table</p>
+<ul>
+<li>打印数组</li>
+</ul>
+</li>
+<li><p>assert</p>
+<ul>
+<li>错的执行，不错不执行</li>
+</ul>
+</li>
+<li><p>dir</p>
+<ul>
+<li>对象的JSON属性，例如dom、函数</li>
+</ul>
+</li>
+<li><p>time/timeEnd</p>
+<ul>
+<li>计时</li>
+</ul>
+</li>
+<li><p>group/groupEnd</p>
+<ul>
+<li>分组</li>
+</ul>
+</li>
+<li><p>trace</p>
+<ul>
+<li>调用队列</li>
+</ul>
+</li>
+</ul>
+<h3 id="内置方法"><a href="#内置方法" class="headerlink" title="内置方法"></a>内置方法</h3><ul>
+<li><p>$0 - $4</p>
+<ul>
+<li>前5个选中的dom</li>
+</ul>
+</li>
+<li><p>$_</p>
+<ul>
+<li>上一个结果</li>
+</ul>
+</li>
+<li><p>$</p>
+<ul>
+<li>document.querySelector</li>
+</ul>
+</li>
+<li><p>$$</p>
+<ul>
+<li>document.querySelectorAll</li>
+</ul>
+</li>
+<li><p>getEventListeners</p>
+<ul>
+<li>获取dom注册的事件</li>
+</ul>
+</li>
+<li><p>copy(anything)</p>
+<ul>
+<li>拷贝anything到剪贴板上，并json格式化，再也不怕没有notepad++了</li>
+</ul>
+</li>
+<li><p>debug(fn)/undebug(fn)</p>
+<ul>
+<li>相当于在函数的第一行打断点</li>
+</ul>
+</li>
+</ul>
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><ul>
+<li><p>上下文</p>
+</li>
+<li><p>监听对象实时表达</p>
+<ul>
+<li>例如：监听层级、dom</li>
+</ul>
+</li>
+<li><p>筛选</p>
+<ul>
+<li>支持正则</li>
+</ul>
+</li>
+<li><p>settings</p>
+<ul>
+<li><p>Hide network </p>
+<ul>
+<li>隐藏http请求</li>
+</ul>
+</li>
+<li><p>Preserve log</p>
+<ul>
+<li>页面重载时不清除打印</li>
+</ul>
+</li>
+<li><p>Selected context only</p>
+<ul>
+<li>只显示当前上下文中的信息</li>
+</ul>
+</li>
+<li><p>Group similar messages in console </p>
+<ul>
+<li>将相同信息打组</li>
+</ul>
+</li>
+<li><p>Log XMLHttpRequests</p>
+<ul>
+<li>打印XMLHttpRequest和Fetch的请求结果</li>
+</ul>
+</li>
+<li><p>Eager evaluation</p>
+<ul>
+<li>立即求值</li>
+</ul>
+</li>
+<li><p>Autocomplete from history</p>
+<ul>
+<li>记录历史输入</li>
+</ul>
+</li>
+<li><p>Evaluate triggers user activation</p>
+<ul>
+<li><p>手动触发弹窗、自动播放、下载档案等</p>
+<ul>
+<li>window.open()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Sources"><a href="#Sources" class="headerlink" title="Sources"></a>Sources</h2><h3 id="设置-Experiments-Auto-pretty-print"><a href="#设置-Experiments-Auto-pretty-print" class="headerlink" title="设置-Experiments-Auto pretty print"></a>设置-Experiments-Auto pretty print</h3><ul>
+<li>自动美化代码</li>
+</ul>
+<h3 id="文件导航"><a href="#文件导航" class="headerlink" title="文件导航"></a>文件导航</h3><ul>
+<li><p>Page</p>
+</li>
+<li><p>Filesystem</p>
+<ul>
+<li>拖入一个文件夹，自动映射对应关系，同步更改</li>
+</ul>
+</li>
+<li><p>Overrides</p>
+<ul>
+<li>本地覆盖</li>
+</ul>
+</li>
+<li><p>Content scripts</p>
+<ul>
+<li>注入的代码，一般指扩展插件</li>
+</ul>
+</li>
+<li><p>Snippets</p>
+<ul>
+<li><p>建立代码片段，可以将常用的代码保存起来</p>
+<ul>
+<li>命令行运行：command+O，输入!和片段的名字</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="代码编辑"><a href="#代码编辑" class="headerlink" title="代码编辑"></a>代码编辑</h3><ul>
+<li><p>ctrl + P找文件</p>
+</li>
+<li><p>打断点</p>
+</li>
+<li><p>Edit Breakpoint</p>
+<ul>
+<li>满足条件执行断点</li>
+</ul>
+</li>
+</ul>
+<h3 id="代码调试"><a href="#代码调试" class="headerlink" title="代码调试"></a>代码调试</h3><ul>
+<li><p>Pause on exception</p>
+<ul>
+<li>在异常时中断，例如：console.error</li>
+</ul>
+</li>
+<li><p>Threads</p>
+<ul>
+<li>主线程和其他上下文</li>
+</ul>
+</li>
+<li><p>Watch</p>
+<ul>
+<li>监听变量，有时需要点击刷新</li>
+</ul>
+</li>
+<li><p>Breakpoints</p>
+<ul>
+<li>断点列表，可一次性移除所有</li>
+</ul>
+</li>
+<li><p>Scope</p>
+<ul>
+<li>作用域链</li>
+</ul>
+</li>
+<li><p>Call Stack</p>
+<ul>
+<li>调用栈，查找问题来源很方便</li>
+</ul>
+</li>
+<li><p>XHR/fetch Breakpoints</p>
+<ul>
+<li>网络断点</li>
+</ul>
+</li>
+<li><p>DOM Breakpoints</p>
+<ul>
+<li>dom断点</li>
+</ul>
+</li>
+<li><p>Global Listeners</p>
+<ul>
+<li>全局监听断点</li>
+</ul>
+</li>
+<li><p>Event Listener Breakpoints</p>
+<ul>
+<li>事件监听断点</li>
+</ul>
+</li>
+<li><p>CSP violation Breakpoints</p>
+<ul>
+<li>启用受信任脚本类型，防止XSS攻击</li>
+</ul>
+</li>
+</ul>
+<h2 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h2><h3 id="停止记录网络请求"><a href="#停止记录网络请求" class="headerlink" title="停止记录网络请求"></a>停止记录网络请求</h3><h3 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h3><ul>
+<li><p>Hide data URLs</p>
+<ul>
+<li>隐藏data:开头的</li>
+</ul>
+</li>
+<li><p>搜索框：is:</p>
+</li>
+</ul>
+<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><ul>
+<li>全局搜索，支持正则</li>
+</ul>
+<h3 id="Preserve-log"><a href="#Preserve-log" class="headerlink" title="Preserve log"></a>Preserve log</h3><ul>
+<li>跨页面跳转，保留网络请求，例如登录页跳转首页</li>
+</ul>
+<h3 id="Disable-cache"><a href="#Disable-cache" class="headerlink" title="Disable cache"></a>Disable cache</h3><ul>
+<li>禁用浏览器缓存</li>
+</ul>
+<h3 id="Throttling"><a href="#Throttling" class="headerlink" title="Throttling"></a>Throttling</h3><ul>
+<li>模拟网络环境</li>
+</ul>
+<h3 id="底部信息"><a href="#底部信息" class="headerlink" title="底部信息"></a>底部信息</h3><h3 id="小贴士"><a href="#小贴士" class="headerlink" title="小贴士"></a>小贴士</h3><ul>
+<li><p>获取图片base64编码</p>
+<ul>
+<li>img类型-preview-右键-copy  image as data url</li>
+</ul>
+</li>
+</ul>
+<h2 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h2><h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><h3 id="storage"><a href="#storage" class="headerlink" title="storage"></a>storage</h3><ul>
+<li>清空站点缓存</li>
+</ul>
+<h2 id="More-tools"><a href="#More-tools" class="headerlink" title="More tools"></a>More tools</h2><h3 id="Rendering"><a href="#Rendering" class="headerlink" title="Rendering"></a>Rendering</h3><ul>
+<li><p>Paint flashing</p>
+<ul>
+<li>页面重绘</li>
+</ul>
+</li>
+<li><p>FPS</p>
+<ul>
+<li>帧率</li>
+</ul>
+</li>
+</ul>
+<h3 id="Coverage"><a href="#Coverage" class="headerlink" title="Coverage"></a>Coverage</h3><ul>
+<li>覆盖范围，监控没有使用到的脚本</li>
+</ul>
+<h3 id="Animations"><a href="#Animations" class="headerlink" title="Animations"></a>Animations</h3><ul>
+<li>调整CSS动画</li>
+</ul>
+<h3 id="Request-blocking"><a href="#Request-blocking" class="headerlink" title="Request blocking"></a>Request blocking</h3><ul>
+<li>阻止请求某些资源</li>
+</ul>
+<h3 id="Search"><a href="#Search" class="headerlink" title="Search"></a>Search</h3><ul>
+<li>所有资源全局搜索</li>
+</ul>
+<h2 id="文档地址https-developer-chrome-com-docs-devtools"><a href="#文档地址https-developer-chrome-com-docs-devtools" class="headerlink" title="文档地址https://developer.chrome.com/docs/devtools/"></a>文档地址<a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/devtools/">https://developer.chrome.com/docs/devtools/</a></h2><h2 id="命令行command-control-shift-P"><a href="#命令行command-control-shift-P" class="headerlink" title="命令行command/control + shift + P"></a>命令行command/control + shift + P</h2>
+</article>
+    
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2024/06/21/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B8%93%E9%A2%98/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">性能优化专题</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/06/21</li>
+                <li>09:48</li>
+                <li>前端</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2024/04/10/docker%E7%9F%A5%E8%AF%86/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">docker知识</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/04/10</li>
+                <li>09:40</li>
+                <li>docker</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.3.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.1.13
+            </span>
+        </div>
+      
+
+     
+
+     
+</footer>
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+    <div id="post-toc" class="trm-post-toc">
+      <div class="trm-post-toc-header">
+        目录导航
+				<span id="post-toc-top">
+					置顶
+				</span>
+      </div>
+      <div class="trm-post-toc-content">
+        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-1" title="chrome调试工具"><a rel="nofollow" class="trm-toc-link" href="#chrome调试工具"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">chrome调试工具</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title="Elements"><a rel="nofollow" class="trm-toc-link" href="#Elements"><span class="trm-toc-number">1.1.</span> <span class="trm-toc-text">Elements</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="页面-右键-检查"><a rel="nofollow" class="trm-toc-link" href="#页面-右键-检查"><span class="trm-toc-number">1.1.1.</span> <span class="trm-toc-text">页面-右键-检查</span></a></li><li class="trm-toc-item trm-toc-level-3" title="DOM Tree"><a rel="nofollow" class="trm-toc-link" href="#DOM-Tree"><span class="trm-toc-number">1.1.2.</span> <span class="trm-toc-text">DOM Tree</span></a></li><li class="trm-toc-item trm-toc-level-3" title="面板"><a rel="nofollow" class="trm-toc-link" href="#面板"><span class="trm-toc-number">1.1.3.</span> <span class="trm-toc-text">面板</span></a></li><li class="trm-toc-item trm-toc-level-3" title="截屏"><a rel="nofollow" class="trm-toc-link" href="#截屏"><span class="trm-toc-number">1.1.4.</span> <span class="trm-toc-text">截屏</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-2" title="Console"><a rel="nofollow" class="trm-toc-link" href="#Console"><span class="trm-toc-number">1.2.</span> <span class="trm-toc-text">Console</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="ESC调用或关闭console"><a rel="nofollow" class="trm-toc-link" href="#ESC调用或关闭console"><span class="trm-toc-number">1.2.1.</span> <span class="trm-toc-text">ESC调用或关闭console</span></a></li><li class="trm-toc-item trm-toc-level-3" title="console方法"><a rel="nofollow" class="trm-toc-link" href="#console方法"><span class="trm-toc-number">1.2.2.</span> <span class="trm-toc-text">console方法</span></a></li><li class="trm-toc-item trm-toc-level-3" title="内置方法"><a rel="nofollow" class="trm-toc-link" href="#内置方法"><span class="trm-toc-number">1.2.3.</span> <span class="trm-toc-text">内置方法</span></a></li><li class="trm-toc-item trm-toc-level-3" title="功能"><a rel="nofollow" class="trm-toc-link" href="#功能"><span class="trm-toc-number">1.2.4.</span> <span class="trm-toc-text">功能</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-2" title="Sources"><a rel="nofollow" class="trm-toc-link" href="#Sources"><span class="trm-toc-number">1.3.</span> <span class="trm-toc-text">Sources</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="设置-Experiments-Auto pretty print"><a rel="nofollow" class="trm-toc-link" href="#设置-Experiments-Auto-pretty-print"><span class="trm-toc-number">1.3.1.</span> <span class="trm-toc-text">设置-Experiments-Auto pretty print</span></a></li><li class="trm-toc-item trm-toc-level-3" title="文件导航"><a rel="nofollow" class="trm-toc-link" href="#文件导航"><span class="trm-toc-number">1.3.2.</span> <span class="trm-toc-text">文件导航</span></a></li><li class="trm-toc-item trm-toc-level-3" title="代码编辑"><a rel="nofollow" class="trm-toc-link" href="#代码编辑"><span class="trm-toc-number">1.3.3.</span> <span class="trm-toc-text">代码编辑</span></a></li><li class="trm-toc-item trm-toc-level-3" title="代码调试"><a rel="nofollow" class="trm-toc-link" href="#代码调试"><span class="trm-toc-number">1.3.4.</span> <span class="trm-toc-text">代码调试</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-2" title="Network"><a rel="nofollow" class="trm-toc-link" href="#Network"><span class="trm-toc-number">1.4.</span> <span class="trm-toc-text">Network</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="停止记录网络请求"><a rel="nofollow" class="trm-toc-link" href="#停止记录网络请求"><span class="trm-toc-number">1.4.1.</span> <span class="trm-toc-text">停止记录网络请求</span></a></li><li class="trm-toc-item trm-toc-level-3" title="过滤"><a rel="nofollow" class="trm-toc-link" href="#过滤"><span class="trm-toc-number">1.4.2.</span> <span class="trm-toc-text">过滤</span></a></li><li class="trm-toc-item trm-toc-level-3" title="搜索"><a rel="nofollow" class="trm-toc-link" href="#搜索"><span class="trm-toc-number">1.4.3.</span> <span class="trm-toc-text">搜索</span></a></li><li class="trm-toc-item trm-toc-level-3" title="Preserve log"><a rel="nofollow" class="trm-toc-link" href="#Preserve-log"><span class="trm-toc-number">1.4.4.</span> <span class="trm-toc-text">Preserve log</span></a></li><li class="trm-toc-item trm-toc-level-3" title="Disable cache"><a rel="nofollow" class="trm-toc-link" href="#Disable-cache"><span class="trm-toc-number">1.4.5.</span> <span class="trm-toc-text">Disable cache</span></a></li><li class="trm-toc-item trm-toc-level-3" title="Throttling"><a rel="nofollow" class="trm-toc-link" href="#Throttling"><span class="trm-toc-number">1.4.6.</span> <span class="trm-toc-text">Throttling</span></a></li><li class="trm-toc-item trm-toc-level-3" title="底部信息"><a rel="nofollow" class="trm-toc-link" href="#底部信息"><span class="trm-toc-number">1.4.7.</span> <span class="trm-toc-text">底部信息</span></a></li><li class="trm-toc-item trm-toc-level-3" title="小贴士"><a rel="nofollow" class="trm-toc-link" href="#小贴士"><span class="trm-toc-number">1.4.8.</span> <span class="trm-toc-text">小贴士</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-2" title="Performance"><a rel="nofollow" class="trm-toc-link" href="#Performance"><span class="trm-toc-number">1.5.</span> <span class="trm-toc-text">Performance</span></a></li><li class="trm-toc-item trm-toc-level-2" title="Application"><a rel="nofollow" class="trm-toc-link" href="#Application"><span class="trm-toc-number">1.6.</span> <span class="trm-toc-text">Application</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="storage"><a rel="nofollow" class="trm-toc-link" href="#storage"><span class="trm-toc-number">1.6.1.</span> <span class="trm-toc-text">storage</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-2" title="More tools"><a rel="nofollow" class="trm-toc-link" href="#More-tools"><span class="trm-toc-number">1.7.</span> <span class="trm-toc-text">More tools</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="Rendering"><a rel="nofollow" class="trm-toc-link" href="#Rendering"><span class="trm-toc-number">1.7.1.</span> <span class="trm-toc-text">Rendering</span></a></li><li class="trm-toc-item trm-toc-level-3" title="Coverage"><a rel="nofollow" class="trm-toc-link" href="#Coverage"><span class="trm-toc-number">1.7.2.</span> <span class="trm-toc-text">Coverage</span></a></li><li class="trm-toc-item trm-toc-level-3" title="Animations"><a rel="nofollow" class="trm-toc-link" href="#Animations"><span class="trm-toc-number">1.7.3.</span> <span class="trm-toc-text">Animations</span></a></li><li class="trm-toc-item trm-toc-level-3" title="Request blocking"><a rel="nofollow" class="trm-toc-link" href="#Request-blocking"><span class="trm-toc-number">1.7.4.</span> <span class="trm-toc-text">Request blocking</span></a></li><li class="trm-toc-item trm-toc-level-3" title="Search"><a rel="nofollow" class="trm-toc-link" href="#Search"><span class="trm-toc-number">1.7.5.</span> <span class="trm-toc-text">Search</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-2" title="文档地址https:&#x2F;&#x2F;developer.chrome.com&#x2F;docs&#x2F;devtools&#x2F;"><a rel="nofollow" class="trm-toc-link" href="#文档地址https-developer-chrome-com-docs-devtools"><span class="trm-toc-number">1.8.</span> <span class="trm-toc-text">文档地址https:&#x2F;&#x2F;developer.chrome.com&#x2F;docs&#x2F;devtools&#x2F;</span></a></li><li class="trm-toc-item trm-toc-level-2" title="命令行command&#x2F;control + shift + P"><a rel="nofollow" class="trm-toc-link" href="#命令行command-control-shift-P"><span class="trm-toc-number">1.9.</span> <span class="trm-toc-text">命令行command&#x2F;control + shift + P</span></a></li></ol></li></ol>
+      </div>
+    </div>
+
+            
+<div class="trm-fixed-container">
+    
+        <div class="trm-fixed-btn post-toc-btn" data-title="目录">
+            <i class="iconfont fas fa-th-list"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.1.13"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+		
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.1.13"></script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+</body>
+
+</html>
