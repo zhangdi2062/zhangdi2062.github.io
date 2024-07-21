@@ -136,7 +136,17 @@ type Window = {
 
 # 类型断言
 
-使用 `as` 或者 尖括号 语法，强制类型转换会报错，可以双重断言
+使用 `as`(建议) 或者 尖括号`<>` 语法
+
+强制类型转换会报错，可以使用下方双重断言
+```ts
+interface Person {
+  name: string;
+  age: number;
+}
+
+const person = 'randy' as any as Person; // 不会报错
+```
 
 # 字面量类型
 

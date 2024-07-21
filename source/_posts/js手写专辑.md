@@ -9,6 +9,13 @@ date: 2024-03-03 16:32:37
 
 ## 实现instanceof
 
+instanceof运算符用于验证构造函数的prototype属性是否出现在对象的原型链上。
+
+缺点：
+- 不能判断基本类型
+- 原型链如果被修改判断可能不准确
+- 跨iframe和窗口可能会判断失败，因为每个窗口都有各自的构造函数和原型链
+
 内部实现
 
 ```js
@@ -29,7 +36,12 @@ function _instanceof(left, right) {
 
 ```js
 function _instanceof(left, right) {
-    if (typeof right !== function) {
+    // 是对象但不是函数时
+    if (right && typeof right !== 'function' && typeof right === 'object') {
+        throw new TypeError(`Right-hand side of 'instanceof' is not an callable`)
+    }
+    // 既不是对象也不是函数时
+    if (typeof right !== 'function' && typeof right !== 'object') {
         throw new TypeError(`Right-hand side of 'instanceof' is not an object`)
     }
     if (!left || (typeof left !== 'object' && typeof left !== 'function')) return false;
@@ -198,7 +210,9 @@ function flatDepth(arr, dep = 1) {
 
 ## 防抖和节流
 
-防抖
+### 防抖
+
+应用场景：输入框搜索
 
 ```javascript
 function debounce(callback, time) {
@@ -244,12 +258,14 @@ function debounceRef((value, delay = 1000)) {
 
 ```
 
-节流
+### 节流
+
+应用场景：按钮多次点击
 
 ```javascript
 function throttle(callback, time) {
   let lastCall = Date.now();
-  return function() {
+  return function(...args) {
     const curTime = Date.now()
     if (curTime - lastCall > time) {
       lastCall = curTime;
@@ -271,6 +287,34 @@ function _new(fn, ...args) {
   return result instanceof Object ? result : obj;
 }
 ```
+## 手写call
+
+```javascript
+  Function.prototype.myCall = function(context, ...args) {
+    if (typeof this !== 'function') {
+      throw new TypeError('not a function');
+    }
+    if (typeof context === 'object' || typeof context === 'function') {
+      context = context || window;
+    } else {
+      // 字符串、数值、布尔等使用Object包装成构造函数
+      context = Object(context);
+    }
+    const fn = Symbol();
+    context[fn] = this;
+    const result = context[fn](...args); // 执行函数
+    delete context[fn]; // 删除临时属性
+    return result; // 返回结果
+  }
+```
+
+## 手写apply
+
+```javascript
+function.prototype.myApply = function(context, args) {
+  // 同上
+}
+```
 
 ## 手写bind
 
@@ -280,18 +324,17 @@ function _new(fn, ...args) {
 
 ```javascript
 if (!Function.prototype.bind) {
-  Function.prototype.bind = function (oThis) {
+  Function.prototype.bind = function (oThis, ...aArgs) {
     if (typeof this !== "function") {
       throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
     }
-    var aArgs = Array.prototype.slice.call(arguments, 1), 
-        fToBind = this, 
+       let fToBind = this, 
         fNOP = function () {},
-        fBound = function () {
+        fBound = function (...newArgs) {
           return fToBind.apply(this instanceof fNOP
                                  ? this
                                  : oThis || this,
-                               aArgs.concat(Array.prototype.slice.call(arguments)));
+                               [...args, ...newArgs]);
         };
 
     fNOP.prototype = this.prototype;
@@ -309,19 +352,51 @@ if (!Function.prototype.bind) {
 
 ```javascript
 if (!Function.prototype.softBind) { 
-    Function.prototype.softBind = function(obj) {
+    Function.prototype.softBind = function(context, ...args) {
         var fn = this;
-        // 捕获所有 curried 参数
-        var curried = [].slice.call( arguments, 1 ); 
-        var bound = function() {
+        var bound = function boundFunction(...newArgs) {
             return fn.apply(
-                (!this || this === (window || global)) ?
-                    obj : this,
-                curried.concat.apply( curried, arguments )
+                this instanceof boundFunction ? this : context,
+                [...args, ...newArgs]
             ); 
         };
         bound.prototype = Object.create( fn.prototype );
         return bound; 
     };
 }
+```
+
+## 函数柯里化
+
+实现：
+- 通过闭包保存参数
+
+优点：
+- 延迟执行
+- 减少代码重复
+- 函数组合
+
+应用：
+- 参数预设
+- 日志记录
+
+```javascript
+function curry(fn) {
+  return function curried(...args) {
+    if (args.length > fn.length) {
+      return fn.apply(this, args);
+    }
+    return function (...restArgs) {
+      return curried.apply(this, [...args, ...restArgs]);
+    }
+  }
+}
+
+// 使用
+function add(a,b,c) {
+  return a+b+c;
+}
+const fn = curry(add);
+fn(1)(2)(3) // 6
+fu(1,2,3) // 6
 ```
